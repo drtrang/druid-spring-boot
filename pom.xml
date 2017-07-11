@@ -218,11 +218,6 @@
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-            </plugin>
-            <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven-dependency-plugin.version}</version>
             </plugin>
