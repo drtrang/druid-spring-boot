@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>druid-spring-boot</name>
+    <name>${project.artifactId}</name>
     <description>Spring Boot Druid Starter</description>
     <url>https://github.com/drtrang/druid-spring-boot</url>
 

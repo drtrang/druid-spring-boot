@@ -1,2 +1,1 @@
-# druid-spring-boot
-Spring Boot Starter for Druid
+# Druid Spring Boot Starter

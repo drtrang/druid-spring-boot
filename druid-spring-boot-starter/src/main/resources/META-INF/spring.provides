@@ -1,1 +1,1 @@
-provides: spring-boot,spring-boot-configuration-processor,druid,druid-spring-boot-autoconfigure
+provides: spring-boot-autoconfigure,spring-boot-configuration-processor,druid,druid-spring-boot-autoconfigure

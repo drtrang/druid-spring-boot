@@ -1,0 +1,66 @@
+debug: false
+
+logging:
+  level:
+    root: info
+    org.springframework: info
+    org.springframework.jdbc: info
+    com.github.trang: debug
+    com.alibaba.druid.pool.DruidDataSourceStatLoggerImpl: debug
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./samples
+    username: root
+    password: root
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 10
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      use-global-data-source-stat: true
+      stat:
+        db-type: h2
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: true
+      slf4j:
+        enabled: true
+        connection-log-enabled: false
+        connection-log-error-enabled: true
+        statement-log-enabled: false
+        statement-log-error-enabled: true
+        statement-sql-pretty-format: true
+        statement-executable-sql-log-enable: true
+        result-set-log-enabled: false
+        result-set-log-error-enabled: true
+      wall:
+        enabled: true
+        db-type: h2
+        log-violation: true
+        throw-exception: false
+      aop:
+        enabled: true
+        patterns:
+          - com.github.trang.mapper.*
+      web:
+        web-stat-filter:
+          enabled: true
+        stat-view-servlet:
+          enabled: true
+    schema: classpath:import.sql
+  aop:
+    auto: true
+    proxy-target-class: true
+
+mybatis:
+  type-aliases-package: com.github.trang.druid.model
