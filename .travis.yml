@@ -1,0 +1,9 @@
+language: java
+jdk: oraclejdk7
+sudo: false
+install: false
+cache:
+  directories:
+    - $HOME/.m2/repository
+after_success:
+  - mvn clean -Pcoveralls cobertura:cobertura coveralls:report
