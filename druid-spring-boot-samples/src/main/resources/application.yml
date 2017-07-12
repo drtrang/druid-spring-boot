@@ -47,7 +47,7 @@ spring:
         db-type: h2
         log-violation: true
         throw-exception: false
-      aopStat:
+      aop-stat:
         enabled: false
         patterns: com.github.trang.*
       web-stat-filter:
@@ -55,7 +55,7 @@ spring:
       stat-view-servlet:
         enabled: true
     schema: classpath:import.sql
-  aopStat:
+  aop:
     auto: true
     proxy-target-class: true
 
