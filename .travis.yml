@@ -6,4 +6,4 @@ cache:
   directories:
     - $HOME/.m2/repository
 after_success:
-  - mvn clean -Pcoveralls cobertura:cobertura coveralls:report
+  - mvn clean -U -T 1C -Pcoveralls -pl druid-spring-boot-starter -am cobertura:cobertura coveralls:report
