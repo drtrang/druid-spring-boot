@@ -50,10 +50,10 @@
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.web-stat-filter.enabled",
+      "name": "spring.datasource.druid.web-stat.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether or not druid web stat are enabled.",
-      "sourceType": "com.github.trang.druid.DruidProperties$WebStatFilter",
+      "sourceType": "com.github.trang.druid.DruidProperties$WebStat",
       "defaultValue": false
     },
     {

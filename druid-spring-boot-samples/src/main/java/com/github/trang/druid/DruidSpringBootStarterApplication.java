@@ -1,6 +1,5 @@
 package com.github.trang.druid;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.mapper.CityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

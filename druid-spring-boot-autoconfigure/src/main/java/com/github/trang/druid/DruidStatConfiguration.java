@@ -2,6 +2,7 @@ package com.github.trang.druid;
 
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import com.github.trang.druid.DruidProperties.WebStat;
 import org.aopalliance.aop.Advice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.util.StringUtils;
 
 import static com.github.trang.druid.DruidProperties.DRUID_AOP_STAT_PREFIX;
-import static com.github.trang.druid.DruidProperties.DRUID_WEB_STATE_FILTER_PREFIX;
+import static com.github.trang.druid.DruidProperties.DRUID_WEB_STATE_PREFIX;
 
 /**
  * Druid 监控配置
@@ -66,12 +67,12 @@ public class DruidStatConfiguration {
 
         private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
-        @ConditionalOnProperty(prefix = DRUID_WEB_STATE_FILTER_PREFIX, name = "enabled", havingValue = "true")
+        @ConditionalOnProperty(prefix = DRUID_WEB_STATE_PREFIX, name = "enabled", havingValue = "true")
         @Bean
         public FilterRegistrationBean filterRegistrationBean(DruidProperties properties) {
             log.debug("druid web-stat-filter init...");
             FilterRegistrationBean registration = new FilterRegistrationBean();
-            DruidProperties.WebStatFilter config = properties.getWebStatFilter();
+            WebStat config = properties.getWebStat();
             WebStatFilter filter = new WebStatFilter();
             registration.setFilter(filter);
             registration.addUrlPatterns(config.getUrlPatterns());

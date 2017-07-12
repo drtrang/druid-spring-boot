@@ -12,7 +12,7 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./samples
     username: root
-    password: root
+    password: 123456
     druid:
       initial-size: 1
       min-idle: 1
@@ -50,7 +50,7 @@ spring:
       aop-stat:
         enabled: true
         patterns: com.github.trang.*
-      web-stat-filter:
+      web-stat:
         enabled: true
       stat-view-servlet:
         enabled: true

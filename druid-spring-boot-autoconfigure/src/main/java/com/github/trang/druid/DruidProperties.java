@@ -21,31 +21,23 @@ public class DruidProperties {
     public static final String DRUID_LOG4J_FILTER_PREFIX = "spring.datasource.druid.log4j";
     public static final String DRUID_LOG4J2_FILTER_PREFIX = "spring.datasource.druid.log4j2";
     public static final String DRUID_COMMONS_LOG_FILTER_PREFIX = "spring.datasource.druid.commons-log";
-    public static final String DRUID_WEB_STATE_FILTER_PREFIX = "spring.datasource.druid.web-stat-filter";
-    public static final String DRUID_STAT_VIEW_SERVLET_PREFIX = "spring.datasource.druid.stat-view-servlet";
+    public static final String DRUID_WEB_STATE_PREFIX = "spring.datasource.druid.web-stat";
     public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
+    public static final String DRUID_STAT_VIEW_SERVLET_PREFIX = "spring.datasource.druid.stat-view-servlet";
 
     @NestedConfigurationProperty
-    private WebStatFilter webStatFilter = new WebStatFilter();
-    @NestedConfigurationProperty
-    private StatViewServlet statViewServlet = new StatViewServlet();
+    private WebStat webStat = new WebStat();
     @NestedConfigurationProperty
     private AopStat aopStat = new AopStat();
+    @NestedConfigurationProperty
+    private StatViewServlet statViewServlet = new StatViewServlet();
 
-    public WebStatFilter getWebStatFilter() {
-        return webStatFilter;
+    public WebStat getWebStat() {
+        return webStat;
     }
 
-    public void setWebStatFilter(WebStatFilter webStatFilter) {
-        this.webStatFilter = webStatFilter;
-    }
-
-    public StatViewServlet getStatViewServlet() {
-        return statViewServlet;
-    }
-
-    public void setStatViewServlet(StatViewServlet statViewServlet) {
-        this.statViewServlet = statViewServlet;
+    public void setWebStat(WebStat webStat) {
+        this.webStat = webStat;
     }
 
     public AopStat getAopStat() {
@@ -56,12 +48,20 @@ public class DruidProperties {
         this.aopStat = aopStat;
     }
 
+    public StatViewServlet getStatViewServlet() {
+        return statViewServlet;
+    }
+
+    public void setStatViewServlet(StatViewServlet statViewServlet) {
+        this.statViewServlet = statViewServlet;
+    }
+
     /**
-     * WebStatFilter 自定义配置
+     * WebStat 自定义配置
      *
      * @author trang
      */
-    public static class WebStatFilter {
+    public static class WebStat {
         // 是否开启 web-jdbc 监控，默认否
         private boolean enabled;
         // 过滤器 url 的映射规则
@@ -146,6 +146,33 @@ public class DruidProperties {
     }
 
     /**
+     * Aop 监控自定义配置
+     */
+    public static class AopStat {
+        // 是否开启基于 aop 的监控，默认否
+        private boolean enabled;
+        // aop 拦截规则
+        private String[] patterns;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String[] getPatterns() {
+            return patterns;
+        }
+
+        public void setPatterns(String[] patterns) {
+            this.patterns = patterns;
+        }
+
+    }
+
+    /**
      * StatViewServlet 自定义配置
      *
      * @author trang
@@ -154,7 +181,7 @@ public class DruidProperties {
         // 是否开启 Druid 的数据统计页面，默认否
         private boolean enabled= false;
         // Servlet 的映射规则，默认访问 "http://xxx/druid/"
-        private String urlPattern = "/druid/*";
+        private String urlMappings = "/druid/*";
         // Druid 统计页面的登陆用户名
         private String loginUsername;
         // Druid 统计页面的登陆密码
@@ -174,12 +201,12 @@ public class DruidProperties {
             this.enabled = enabled;
         }
 
-        public String getUrlPattern() {
-            return urlPattern;
+        public String getUrlMappings() {
+            return urlMappings;
         }
 
-        public void setUrlPattern(String urlPattern) {
-            this.urlPattern = urlPattern;
+        public void setUrlMappings(String urlMappings) {
+            this.urlMappings = urlMappings;
         }
 
         public String getLoginUsername() {
@@ -220,33 +247,6 @@ public class DruidProperties {
 
         public void setResetEnable(boolean resetEnable) {
             this.resetEnable = resetEnable;
-        }
-
-    }
-
-    /**
-     * Aop 监控自定义配置
-     */
-    public static class AopStat {
-        // 是否开启基于 aop 的监控，默认否
-        private boolean enabled;
-        // aop 拦截规则
-        private String[] patterns;
-
-        public boolean isEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public String[] getPatterns() {
-            return patterns;
-        }
-
-        public void setPatterns(String[] patterns) {
-            this.patterns = patterns;
         }
 
     }

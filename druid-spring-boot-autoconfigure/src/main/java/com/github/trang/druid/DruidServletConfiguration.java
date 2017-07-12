@@ -35,7 +35,7 @@ public class DruidServletConfiguration {
         DruidProperties.StatViewServlet config = properties.getStatViewServlet();
         StatViewServlet statViewServlet = new StatViewServlet();
         registration.setServlet(statViewServlet);
-        registration.addUrlMappings(config.getUrlPattern());
+        registration.addUrlMappings(config.getUrlMappings());
         if (!StringUtils.isEmpty(config.getLoginUsername())) {
             registration.addInitParameter("loginUsername", config.getLoginUsername());
         }
