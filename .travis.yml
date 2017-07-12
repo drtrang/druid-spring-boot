@@ -2,7 +2,7 @@ language: java
 jdk: oraclejdk8
 sudo: false
 install: false
-before_install:
+before_script:
  - chmod +x mvnw
 cache:
   directories:
