@@ -1,9 +1,11 @@
 language: java
 jdk: oraclejdk8
-sudo: true
-install: true
+sudo: false
+install: false
+before_install:
+ - chmod +x mvnw
 cache:
   directories:
     - $HOME/.m2/repository
 after_success:
-  - mvn clean -U -T 1C -Pcoveralls cobertura:cobertura coveralls:report
+  - mvn clean -Pcoveralls cobertura:cobertura coveralls:report
