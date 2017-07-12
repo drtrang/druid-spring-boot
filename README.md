@@ -7,7 +7,8 @@
 
 Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
-## Maven 依赖
+
+## 依赖
 ```xml
 <dependency>
     <groupId>com.github.drtrang</groupId>
@@ -16,12 +17,12 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 </dependency>
 ```
 
-## 配置
-Druid Spring Boot Starter 添加了 Druid 几乎所有的特性，如 WallFilter、ConfigFilter、StatViewServlet 
-等等，且仅需少量配置即可开启。
 
-在引入依赖的情况下，只需以下配置即可使用 Druid:
-```
+## 配置
+### 简单配置
+在引入依赖的情况下，只需如下配置即可使用 Druid：
+
+```yaml
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -30,10 +31,52 @@ spring:
     password: 123456
 ```
 
+### Druid 连接池
+Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置注入到 DruidDataSource，且 DruidDataSource 中的所有参数均可自定义，没有配置的将使用 DruidDataSource 的缺省值。
 
+```yaml
+spring:
+  datasource:
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 10
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      use-global-data-source-stat: true
+```
 
-使用 DruidDataSource 的默认值
+### Druid 高级特性
+Druid Spring Boot Starter 添加了 Druid 的大部分特性，如 StatFilter、WallFilter、ConfigFilter、WebStatFilter 等，其中 StatFilter 默认打开，其它特性默认关闭，需要手动开启。
+
+同样，每个特性的参数均可自定义，具体参数可以用 IDE 的自动提示功能或者阅读 Druid 的 [Wiki](https://github.com/alibaba/druid/wiki/%E9%A6%96%E9%A1%B5) 查看。
+
+```yaml
+spring:
+  datasource:
+    druid:
+      slf4j:
+        # 开启 Slf4jFilter
+        enabled: true
+      wall:
+        # 开启 WallFilter
+        enabled: true
+      web-stat:
+        # 开启 Web 监控
+        enabled: true
+      stat-view-servlet:
+        # 开启监控展示
+        enabled: true
+```
+
+### 配置示例
+[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
+
 
 ## 作者信息
-QQ：349096849
+QQ：349096849<br>
 Email：donghao.l@hotmail.com
