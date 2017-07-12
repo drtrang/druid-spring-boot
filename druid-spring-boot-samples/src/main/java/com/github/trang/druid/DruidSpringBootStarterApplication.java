@@ -21,8 +21,6 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private DruidDataSource dataSource;
-    @Autowired
     private CityMapper cityMapper;
 
     @Override

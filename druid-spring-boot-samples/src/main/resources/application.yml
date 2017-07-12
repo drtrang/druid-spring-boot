@@ -48,10 +48,10 @@ spring:
         log-violation: true
         throw-exception: false
       aop-stat:
-        enabled: false
+        enabled: true
         patterns: com.github.trang.*
       web-stat-filter:
-        enabled: false
+        enabled: true
       stat-view-servlet:
         enabled: true
     schema: classpath:import.sql

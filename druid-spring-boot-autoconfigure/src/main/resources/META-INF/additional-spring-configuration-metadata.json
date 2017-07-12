@@ -64,139 +64,130 @@
       "defaultValue": false
     }
   ],
-  "hints": [{
-    "name": "spring.datasource.druid.stat.db-type",
-    "values": [{
-      "value": "db2",
-      "description": "db2."
-    },{
-      "value": "postgresql",
-      "description": "postgresql."
-    },{
-      "value": "sqlserver",
-      "description": "sqlserver."
-    },{
-      "value": "oracle",
-      "description": "oracle."
-    },{
-      "value": "AliOracle",
-      "description": "AliOracle."
-    },{
-      "value": "mysql",
-      "description": "mysql."
-    },{
-      "value": "mariadb",
-      "description": "mariadb."
-    },{
-      "value": "hive",
-      "description": "hive."
-    },{
-      "value": "h2",
-      "description": "h2."
-    },{
-      "value": "dm",
-      "description": "dm."
-    },{
-      "value": "kingbase",
-      "description": "kingbase."
-    },{
-      "value": "oceanbase",
-      "description": "oceanbase."
-    },{
-      "value": "odps",
-      "description": "odps."
-    },{
-      "value": "teradata",
-      "description": "teradata."
-    },{
-      "value": "log4jdbc",
-      "description": "log4jdbc."
-    },{
-      "value": "phoenix",
-      "description": "phoenix."
-    },{
-      "value": "edb",
-      "description": "edb."
-    },{
-      "value": "kylin",
-      "description": "kylin."
-    },{
-      "value": "sqlite",
-      "description": "sqlite."
-    }]
-  },{
-    "name": "spring.datasource.druid.wall.db-type",
-    "values": [{
-      "value": "db2",
-      "description": "db2."
-    },{
-      "value": "postgresql",
-      "description": "postgresql."
-    },{
-      "value": "sqlserver",
-      "description": "sqlserver."
-    },{
-      "value": "oracle",
-      "description": "oracle."
-    },{
-      "value": "AliOracle",
-      "description": "AliOracle."
-    },{
-      "value": "mysql",
-      "description": "mysql."
-    },{
-      "value": "mariadb",
-      "description": "mariadb."
-    },{
-      "value": "hive",
-      "description": "hive."
-    },{
-      "value": "h2",
-      "description": "h2."
-    },{
-      "value": "dm",
-      "description": "dm."
-    },{
-      "value": "kingbase",
-      "description": "kingbase."
-    },{
-      "value": "oceanbase",
-      "description": "oceanbase."
-    },{
-      "value": "odps",
-      "description": "odps."
-    },{
-      "value": "teradata",
-      "description": "teradata."
-    },{
-      "value": "log4jdbc",
-      "description": "log4jdbc."
-    },{
-      "value": "phoenix",
-      "description": "phoenix."
-    },{
-      "value": "edb",
-      "description": "edb."
-    },{
-      "value": "kylin",
-      "description": "kylin."
-    },{
-      "value": "sqlite",
-      "description": "sqlite."
-    }]
-  }]
+  "hints": [
+    {
+      "name": "spring.datasource.druid.stat.db-type",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    },
+    {
+      "name": "spring.datasource.druid.wall.db-type",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    }
+  ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
