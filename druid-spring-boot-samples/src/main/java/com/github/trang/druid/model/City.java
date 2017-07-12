@@ -2,11 +2,6 @@ package com.github.trang.druid.model;
 
 import java.io.Serializable;
 
-/**
- * City
- *
- * @author trang
- */
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;

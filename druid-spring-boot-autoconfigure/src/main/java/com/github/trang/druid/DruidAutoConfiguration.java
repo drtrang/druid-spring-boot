@@ -12,23 +12,25 @@ import com.alibaba.druid.wall.WallFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import static com.github.trang.druid.DruidProperties.*;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -39,92 +41,74 @@ import static java.util.stream.Collectors.toList;
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties(DruidStatProperties.class)
-@Import({DruidAopStatConfiguration.class, DruidWebStatConfiguration.class, DruidStatViewServletConfiguration.class})
+@EnableConfigurationProperties(DruidProperties.class)
+@Import({DruidStatConfiguration.class, DruidServletConfiguration.class})
 public class DruidAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DruidAutoConfiguration.class);
 
-    private static final String DRUID_DATA_SOURCE_PREFIX = "spring.datasource.druid";
-    private static final String DRUID_WALL_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.wall";
-    private static final String DRUID_STAT_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.stat";
-    private static final String DRUID_CONFIG_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.config";
-    private static final String DRUID_SLF4J_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.slf4j";
-    private static final String DRUID_LOG4J_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.log4j";
-    private static final String DRUID_LOG4J2_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.log4j2";
-    private static final String DRUID_COMMONS_LOGGING_FILTER_PROPERTIES_PREFIX = "spring.datasource.druid.commonlogging";
-
-    @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true",
+            matchIfMissing = true)
     @Bean
-    @ConfigurationProperties(DRUID_STAT_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_STAT_FILTER_PREFIX)
     public StatFilter statFilter() {
-        log.debug("------ 初始化 Druid 状态监控 ------");
+        log.debug("druid stat-filter init...");
         return new StatFilter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_WALL_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_WALL_FILTER_PREFIX)
     public WallFilter wallFilter() {
-        log.debug("------ 初始化 Druid 防火墙 ------");
+        log.debug("druid wall-filter init...");
         return new WallFilter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_CONFIG_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_CONFIG_FILTER_PREFIX)
     public ConfigFilter configFilter() {
-        log.debug("------ 初始化 Druid ConfigFilter ------");
+        log.debug("druid config-filter init...");
         return new ConfigFilter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_SLF4J_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_SLF4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_SLF4J_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_SLF4J_FILTER_PREFIX)
     public Slf4jLogFilter slf4jLogFilter() {
-        log.debug("------ 初始化 Druid Slf4j 日志输出 ------");
+        log.debug("druid slf4j-filter init...");
         return new Slf4jLogFilter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_LOG4J_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_LOG4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_LOG4J_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_LOG4J_FILTER_PREFIX)
     public Log4jFilter log4jFilter() {
-        log.debug("------ 初始化 Druid Log4j 日志输出 ------");
+        log.debug("druid log4j-filter init...");
         return new Log4jFilter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_LOG4J2_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_LOG4J2_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_LOG4J2_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_LOG4J2_FILTER_PREFIX)
     public Log4j2Filter log4j2Filter() {
-        log.debug("------ 初始化 Druid Log4j2 日志输出 ------");
+        log.debug("druid log4j2-filter init...");
         return new Log4j2Filter();
     }
 
-    @ConditionalOnProperty(prefix = DRUID_COMMONS_LOGGING_FILTER_PROPERTIES_PREFIX, name = "enabled",
-            havingValue = "true")
+    @ConditionalOnProperty(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_COMMONS_LOGGING_FILTER_PROPERTIES_PREFIX)
+    @ConfigurationProperties(DRUID_COMMONS_LOG_FILTER_PREFIX)
     public CommonsLogFilter commonsLogFilter() {
-        log.debug("------ 初始化 Druid CommonsLog 日志输出 ------");
+        log.debug("druid commons-log-filter init...");
         return new CommonsLogFilter();
     }
 
-    @Value("${spring.datasource.druid.driver-class-name:${spring.datasource.driver-class-name:com.mysql.jdbc.Driver}}")
-    private String driverClassName;
-    @Value("${spring.datasource.druid.url:${spring.datasource.url}}")
-    private String url;
-    @Value("${spring.datasource.druid.username:${spring.datasource.username}}")
-    private String username;
-    @Value("${spring.datasource.druid.password:${spring.datasource.password}}")
-    private String password;
+    /*
+     * 不使用 @Value 注入，避免因为找不到值抛出 NPE
+     */
+    @Autowired
+    private DataSourceProperties dataSourceProperties;
 
     @ConditionalOnMissingBean(DataSource.class)
     @Bean(initMethod = "init", destroyMethod = "close")
@@ -136,19 +120,19 @@ public class DruidAutoConfiguration {
                                       @Autowired(required = false) Log4jFilter log4jFilter,
                                       @Autowired(required = false) Log4j2Filter log4j2Filter,
                                       @Autowired(required = false) CommonsLogFilter commonsLogFilter) {
-        log.debug("------ 初始化 Druid 数据源 ------");
+        log.debug("druid data-source init...");
         DruidDataSource dataSource = new DruidDataSource();
-        if (driverClassName != null && !driverClassName.isEmpty()) {
-            dataSource.setDriverClassName(driverClassName);
+        if (!StringUtils.isEmpty(dataSourceProperties.getDriverClassName())) {
+            dataSource.setDriverClassName(dataSourceProperties.getDriverClassName());
         }
-        if (url != null && !url.isEmpty()) {
-            dataSource.setUrl(url);
+        if (!StringUtils.isEmpty(dataSourceProperties.getUrl())) {
+            dataSource.setUrl(dataSourceProperties.getUrl());
         }
-        if (username != null && !username.isEmpty()) {
-            dataSource.setUsername(username);
+        if (!StringUtils.isEmpty(dataSourceProperties.getUsername())) {
+            dataSource.setUsername(dataSourceProperties.getUsername());
         }
-        if (password != null && !password.isEmpty()) {
-            dataSource.setPassword(password);
+        if (!StringUtils.isEmpty(dataSourceProperties.getPassword())) {
+            dataSource.setPassword(dataSourceProperties.getPassword());
         }
         List<Filter> filters = Stream.of(statFilter, wallFilter, configFilter, slf4jLogFilter, log4jFilter,
                 log4j2Filter, commonsLogFilter)

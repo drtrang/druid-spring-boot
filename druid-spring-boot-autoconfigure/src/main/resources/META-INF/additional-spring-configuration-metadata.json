@@ -1,0 +1,202 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.druid.stat.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid stat filter are enabled.",
+      "defaultValue": true
+    },
+    {
+      "name": "spring.datasource.druid.wall.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid wall filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.config.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid config filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.slf4j.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid slf4j filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.log4j.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid log4j filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.log4j2.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid log4j2 filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.commons-log.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid commons logging filter are enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.aop-stat.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid aop stat are enabled.",
+      "sourceType": "com.github.trang.druid.DruidProperties$AopStat",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.web-stat-filter.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid web stat are enabled.",
+      "sourceType": "com.github.trang.druid.DruidProperties$WebStatFilter",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.stat-view-servlet.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid stat view servlet are enabled.",
+      "sourceType": "com.github.trang.druid.DruidProperties$StatViewServlet",
+      "defaultValue": false
+    }
+  ],
+  "hints": [{
+    "name": "spring.datasource.druid.stat.db-type",
+    "values": [{
+      "value": "db2",
+      "description": "db2."
+    },{
+      "value": "postgresql",
+      "description": "postgresql."
+    },{
+      "value": "sqlserver",
+      "description": "sqlserver."
+    },{
+      "value": "oracle",
+      "description": "oracle."
+    },{
+      "value": "AliOracle",
+      "description": "AliOracle."
+    },{
+      "value": "mysql",
+      "description": "mysql."
+    },{
+      "value": "mariadb",
+      "description": "mariadb."
+    },{
+      "value": "hive",
+      "description": "hive."
+    },{
+      "value": "h2",
+      "description": "h2."
+    },{
+      "value": "dm",
+      "description": "dm."
+    },{
+      "value": "kingbase",
+      "description": "kingbase."
+    },{
+      "value": "oceanbase",
+      "description": "oceanbase."
+    },{
+      "value": "odps",
+      "description": "odps."
+    },{
+      "value": "teradata",
+      "description": "teradata."
+    },{
+      "value": "log4jdbc",
+      "description": "log4jdbc."
+    },{
+      "value": "phoenix",
+      "description": "phoenix."
+    },{
+      "value": "edb",
+      "description": "edb."
+    },{
+      "value": "kylin",
+      "description": "kylin."
+    },{
+      "value": "sqlite",
+      "description": "sqlite."
+    }]
+  },{
+    "name": "spring.datasource.druid.wall.db-type",
+    "values": [{
+      "value": "db2",
+      "description": "db2."
+    },{
+      "value": "postgresql",
+      "description": "postgresql."
+    },{
+      "value": "sqlserver",
+      "description": "sqlserver."
+    },{
+      "value": "oracle",
+      "description": "oracle."
+    },{
+      "value": "AliOracle",
+      "description": "AliOracle."
+    },{
+      "value": "mysql",
+      "description": "mysql."
+    },{
+      "value": "mariadb",
+      "description": "mariadb."
+    },{
+      "value": "hive",
+      "description": "hive."
+    },{
+      "value": "h2",
+      "description": "h2."
+    },{
+      "value": "dm",
+      "description": "dm."
+    },{
+      "value": "kingbase",
+      "description": "kingbase."
+    },{
+      "value": "oceanbase",
+      "description": "oceanbase."
+    },{
+      "value": "odps",
+      "description": "odps."
+    },{
+      "value": "teradata",
+      "description": "teradata."
+    },{
+      "value": "log4jdbc",
+      "description": "log4jdbc."
+    },{
+      "value": "phoenix",
+      "description": "phoenix."
+    },{
+      "value": "edb",
+      "description": "edb."
+    },{
+      "value": "kylin",
+      "description": "kylin."
+    },{
+      "value": "sqlite",
+      "description": "sqlite."
+    }]
+  }]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
