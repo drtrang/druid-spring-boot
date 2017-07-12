@@ -77,6 +77,10 @@ spring:
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
 
 
+## 演示
+[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。   
+
+
 ## 作者信息
 QQ：349096849<br>
 Email：donghao.l@hotmail.com
