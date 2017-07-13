@@ -1,11 +1,7 @@
 language: java
-jdk: oraclejdk8
-sudo: false
-install: false
+jdk:
+  - oraclejdk8
 before_script:
- - chmod +x mvnw
-cache:
-  directories:
-    - $HOME/.m2/repository
+  - chmod +x mvnw
 after_success:
   - mvn clean -Pcoveralls cobertura:cobertura coveralls:report
