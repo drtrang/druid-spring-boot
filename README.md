@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/drtrang/druid-spring-boot/master.svg?style=flat-square)](https://coveralls.io/github/drtrang/druid-spring-boot?branch=master)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.drtrang/druid-spring-boot.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.github.drtrang/druid-spring-boot)
 [![GitHub Release](https://img.shields.io/github/release/drtrang/druid-spring-boot.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/releases)
-[![License](http://img.shields.io/badge/license-apache%202-green.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/blob/master/LICENSE)
+[![License](http://img.shields.io/badge/license-apache%202-blue.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/blob/master/LICENSE)
 
 Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
