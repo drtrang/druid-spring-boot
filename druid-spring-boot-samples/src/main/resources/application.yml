@@ -33,7 +33,7 @@ spring:
         slow-sql-millis: 1000
         merge-sql: true
       slf4j:
-        enabled: false
+        enabled: true
         connection-log-enabled: false
         connection-log-error-enabled: true
         statement-log-enabled: false
@@ -43,12 +43,12 @@ spring:
         result-set-log-enabled: false
         result-set-log-error-enabled: true
       wall:
-        enabled: false
+        enabled: true
         db-type: h2
         log-violation: true
         throw-exception: false
       aop-stat:
-        enabled: true
+        enabled: false
         patterns:
           - com.github.trang.*
       web-stat:
