@@ -1,11 +1,9 @@
 language: java
+jdk: oraclejdk7
 sudo: false
-
-jdk:
-  - oraclejdk8
-
-before_script:
-  - chmod -R 777 ./mvnw
-
+install: false
+cache:
+  directories:
+    - $HOME/.m2/repository
 after_success:
-  - ./mvnw clean -Pcoveralls cobertura:cobertura coveralls:report
+  - mvn clean -Pcoveralls cobertura:cobertura coveralls:report
