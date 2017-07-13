@@ -81,11 +81,11 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 该功能会持续优化，致力打造最方便、最友好的 Starter。
 
-自定义参数：
-![druid-configuration](https://user-images.githubusercontent.com/13851701/28148516-b6642dd0-67b9-11e7-845e-40043e0922b2.png)
+自定义参数：<br>
+![druid-configuration](https://user-images.githubusercontent.com/13851701/28149522-c1a3fc96-67c0-11e7-8ea7-630a8b3e5bfb.png)
 
 参数说明：
-![enabled](https://user-images.githubusercontent.com/13851701/28149039-2d000592-67bd-11e7-9e21-0272129bab43.png)
+![enabled](https://user-images.githubusercontent.com/13851701/28149525-d08955bc-67c0-11e7-916c-c8c5acd30b4a.png)
 
 参数枚举值：
 ![db-type](https://user-images.githubusercontent.com/13851701/28148904-3bb9b07a-67bc-11e7-9912-c7043c2d7de7.png)
