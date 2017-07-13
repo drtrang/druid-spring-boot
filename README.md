@@ -32,7 +32,7 @@ spring:
 ```
 
 ### Druid 连接池
-Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置注入到 DruidDataSource，且 DruidDataSource 中的所有参数均可自定义，没有配置的将使用 DruidDataSource 的缺省值。
+Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置注入到 DruidDataSource，且 DruidDataSource 中的所有参数均可自定义。
 
 ```yaml
 spring:
@@ -76,9 +76,30 @@ spring:
 ### 配置示例
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
 
+## 自动提示
+Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，支持 IDE 的自动提示。
+
+该功能会持续优化，致力打造最方便、最友好的 Starter。
+
+自定义参数：
+![druid-configuration](https://user-images.githubusercontent.com/13851701/28148516-b6642dd0-67b9-11e7-845e-40043e0922b2.png)
+
+参数说明：
+![enabled](https://user-images.githubusercontent.com/13851701/28149039-2d000592-67bd-11e7-9e21-0272129bab43.png)
+
+参数枚举值：
+![db-type](https://user-images.githubusercontent.com/13851701/28148904-3bb9b07a-67bc-11e7-9912-c7043c2d7de7.png)
+
 
 ## 演示
 [druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。   
+
+
+## 更新记录
+[Changelog.md](https://github.com/drtrang/druid-spring-boot/blob/master/Changelog.md)
+
+## TODO
+任何意见和建议可以提 [Issue](https://github.com/drtrang/druid-spring-boot/issues)，我会酌情加到 [Todo List](https://github.com/drtrang/druid-spring-boot/blob/master/TODO.md)，一般情况一周内迭代完毕。
 
 
 ## 作者信息
