@@ -1,6 +1,8 @@
 package com.github.trang.druid.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.wall.WallFilter;
+import com.github.trang.druid.mapper.CityMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class DruidTests {
 
     @Autowired
     private DruidDataSource dataSource;
+    @Autowired
+    private WallFilter wallFilter;
+    @Autowired
+    private CityMapper cityMapper;
 
     @Test
     public void testDataSource() {
@@ -34,6 +40,11 @@ public class DruidTests {
         assertEquals(dataSource.isTestOnReturn(), false);
         assertEquals(dataSource.getMaxPoolPreparedStatementPerConnectionSize(), 20);
         assertEquals(dataSource.isUseGlobalDataSourceStat(), true);
+    }
+
+    @Test
+    public void testMybatis() {
+        System.out.println(cityMapper.findById(1L));
     }
 
 }

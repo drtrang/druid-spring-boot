@@ -8,6 +8,7 @@ import com.alibaba.druid.filter.logging.Log4jFilter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,15 +59,23 @@ public class DruidAutoConfiguration {
 
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
+    @ConfigurationProperties(DRUID_WALL_CONFIG_PREFIX)
+    public WallConfig wallConfig() {
+        return new WallConfig();
+    }
+
+    @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
+    @Bean
     @ConfigurationProperties(DRUID_WALL_FILTER_PREFIX)
-    public WallFilter wallFilter() {
+    public WallFilter wallFilter(WallConfig wallConfig) {
         log.debug("druid wall-filter init...");
-        return new WallFilter();
+        WallFilter filter = new WallFilter();
+        filter.setConfig(wallConfig);
+        return filter;
     }
 
     @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_CONFIG_FILTER_PREFIX)
     public ConfigFilter configFilter() {
         log.debug("druid config-filter init...");
         return new ConfigFilter();

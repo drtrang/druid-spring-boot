@@ -47,6 +47,8 @@ spring:
         db-type: h2
         log-violation: true
         throw-exception: false
+        config:
+          select-all-column-allow: false
       aop-stat:
         enabled: false
         patterns:
