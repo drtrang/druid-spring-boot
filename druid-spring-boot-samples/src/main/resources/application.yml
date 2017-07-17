@@ -4,7 +4,8 @@ logging:
   level:
     root: info
     org.springframework: info
-    org.springframework.jdbc: info
+    org.springframework.jdbc: debug
+    org.mybatis: debug
     com.github.trang: debug
 
 spring:
@@ -58,6 +59,8 @@ spring:
       stat-view-servlet:
         enabled: true
     schema: classpath:import.sql
+  transaction:
+    rollback-on-commit-failure: true
   aop:
     auto: true
     proxy-target-class: true
