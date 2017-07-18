@@ -25,17 +25,26 @@ public class SpringDataSourceConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SpringDataSourceConfig.class);
 
+    /**
+     * 第一个数据源，注意数据源类型为 #{@link com.github.trang.druid.datasource.DruidMultiDataSource}
+     *
+     * `spring.datasource.druid.one` 前缀的配置会注入到该 Bean，同时会继承 `spring.datasource.druid`
+     * 前缀的配置，若名称相同则会被 `spring.datasource.druid.one` 覆盖
+     */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.one")
     public DruidDataSource firstDataSource() {
-        log.debug("druid master-data-source init...");
+        log.debug("druid first-data-source init...");
         return new DruidMultiDataSource();
     }
 
+    /**
+     * 第二个数据源，若还有其它数据源可以继续增加
+     */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.two")
     public DruidDataSource secondDataSource() {
-        log.debug("druid slave-data-source init...");
+        log.debug("druid second-data-source init...");
         return new DruidMultiDataSource();
     }
 

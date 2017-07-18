@@ -53,6 +53,8 @@ spring:
         throw-exception: false
         config:
           select-all-column-allow: false
+      config:
+        enabled: false
       aop-stat:
         enabled: false
         patterns:
@@ -72,14 +74,14 @@ mybatis:
 
 ---
 
-debug: true
+debug: false
 
 spring:
   profiles: single
 
 ---
 
-debug: true
+debug: false
 
 spring:
   profiles: dynamic
