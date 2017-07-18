@@ -22,7 +22,7 @@ public class DataSourceInitializerConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DataSourceInitializer.class)
-    public com.github.trang.druid.datasource.init.DataSourceInitializer dataSourceInitializer
+    public com.github.trang.druid.datasource.init.DataSourceInitializer customDataSourceInitializer
             (DataSourceProperties properties, ApplicationContext applicationContext) {
         return new DataSourceInitializer(properties, applicationContext);
     }

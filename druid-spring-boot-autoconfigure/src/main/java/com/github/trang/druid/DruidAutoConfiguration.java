@@ -10,7 +10,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.github.trang.druid.datasource.DruidParentDataSource;
-import com.github.trang.druid.properties.DruidProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -18,6 +17,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +36,8 @@ import static com.github.trang.druid.properties.DruidProperties.*;
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties(DruidProperties.class)
-@Import({DruidStatConfiguration.class, DruidServletConfiguration.class})
+@EnableConfigurationProperties(DataSourceProperties.class)
+@Import({DruidStatConfiguration.class, DruidServletConfiguration.class, DataSourceInitializerConfiguration.class})
 public class DruidAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DruidAutoConfiguration.class);
