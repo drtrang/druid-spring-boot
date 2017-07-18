@@ -19,7 +19,7 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 ```
 
 ## NEW !
-1. 完美支持多数据源 [#2](https://github.com/drtrang/druid-spring-boot/issues/2)
+1. 完美支持多数据源 [ISSUE #2](https://github.com/drtrang/druid-spring-boot/issues/2)
 
 
 ## 配置
@@ -87,28 +87,7 @@ spring:
 ```
 
 ### 多数据源
-1.0.2 版本中新增多数据源支持，需要手动声明 DataSource，这种情况 Starter 会
-以 `spring.datasource.druid.${name}`，其中 `${name}` 可自定义，与声明 Bean 的前缀相同即可
-其中以 `spring.datasource.druid` 为前缀的配置可以作为公共参数注入到子数据源
-
-```yaml
-spring:
-  datasource:
-    druid:
-      driver-class-name: org.h2.Driver
-      initial-size: 1
-      min-idle: 1
-      max-active: 10
-      one:
-        # 继承 spring.datasource.druid 前缀的所有配置，名称相同的配置会覆盖
-        url: jdbc:h2:file:./one
-        username: root
-        password: 123456
-      two:
-        url: jdbc:h2:file:./two
-        username: root
-        password: 123456
-```
+1.0.2 版本新增多数据源支持，使用方式请查看 [DynamicDataSource.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/DynamicDataSource.md)。
 
 ### 配置示例
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
