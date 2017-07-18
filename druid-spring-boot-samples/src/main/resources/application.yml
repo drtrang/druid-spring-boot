@@ -9,11 +9,14 @@ logging:
     com.github.trang: debug
 
 spring:
+  profiles:
+    active: single
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./samples
     username: root
     password: 123456
+    schema: classpath:/import.sql
     druid:
       initial-size: 1
       min-idle: 1
@@ -55,10 +58,9 @@ spring:
         patterns:
           - com.github.trang.*
       web-stat:
-        enabled: true
+        enabled: false
       stat-view-servlet:
         enabled: true
-    schema: classpath:import.sql
   transaction:
     rollback-on-commit-failure: true
   aop:
@@ -67,3 +69,30 @@ spring:
 
 mybatis:
   type-aliases-package: com.github.trang.druid.model
+
+---
+
+debug: true
+
+spring:
+  profiles: single
+
+---
+
+debug: true
+
+spring:
+  profiles: dynamic
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    druid:
+      one:
+        name: one
+        max-active: 50
+        max-open-prepared-statements: 50
+      two:
+        name: two
+        max-active: 25
+        max-open-prepared-statements: 25

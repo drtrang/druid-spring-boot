@@ -1,6 +1,7 @@
 package com.github.trang.druid;
 
 import com.github.trang.druid.mapper.CityMapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author trang
  */
 @SpringBootApplication
+@MapperScan("com.github.trang.druid.mapper")
 public class DruidSpringBootStarterApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(cityMapper.findByState("CA"));
+        System.out.println(cityMapper.findAll());
     }
 
 }

@@ -1,1 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.trang.druid.DruidAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.trang.druid.DruidAutoConfiguration

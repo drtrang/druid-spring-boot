@@ -1,6 +1,5 @@
 package com.github.trang.druid;
 
-import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.filter.logging.CommonsLogFilter;
 import com.alibaba.druid.filter.logging.Log4j2Filter;
@@ -10,29 +9,24 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
+import com.github.trang.druid.datasource.DruidParentDataSource;
+import com.github.trang.druid.properties.DruidProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
-import static com.github.trang.druid.DruidProperties.*;
-import static java.util.stream.Collectors.toList;
+import static com.github.trang.druid.properties.DruidProperties.*;
 
 /**
  * Druid 自动配置
@@ -76,6 +70,7 @@ public class DruidAutoConfiguration {
 
     @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
+    @ConfigurationProperties(DRUID_CONFIG_FILTER_PREFIX)
     public ConfigFilter configFilter() {
         log.debug("druid config-filter init...");
         return new ConfigFilter();
@@ -113,42 +108,11 @@ public class DruidAutoConfiguration {
         return new CommonsLogFilter();
     }
 
-    /*
-     * 不使用 @Value 注入，避免因为找不到值抛出 NPE
-     */
-    @Autowired
-    private DataSourceProperties dataSourceProperties;
-
     @ConditionalOnMissingBean(DataSource.class)
     @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties(DRUID_DATA_SOURCE_PREFIX)
-    public DruidDataSource dataSource(@Autowired(required = false) StatFilter statFilter,
-                                      @Autowired(required = false) WallFilter wallFilter,
-                                      @Autowired(required = false) ConfigFilter configFilter,
-                                      @Autowired(required = false) Slf4jLogFilter slf4jLogFilter,
-                                      @Autowired(required = false) Log4jFilter log4jFilter,
-                                      @Autowired(required = false) Log4j2Filter log4j2Filter,
-                                      @Autowired(required = false) CommonsLogFilter commonsLogFilter) {
+    public DruidDataSource dataSource() {
         log.debug("druid data-source init...");
-        DruidDataSource dataSource = new DruidDataSource();
-        if (!StringUtils.isEmpty(dataSourceProperties.getDriverClassName())) {
-            dataSource.setDriverClassName(dataSourceProperties.getDriverClassName());
-        }
-        if (!StringUtils.isEmpty(dataSourceProperties.getUrl())) {
-            dataSource.setUrl(dataSourceProperties.getUrl());
-        }
-        if (!StringUtils.isEmpty(dataSourceProperties.getUsername())) {
-            dataSource.setUsername(dataSourceProperties.getUsername());
-        }
-        if (!StringUtils.isEmpty(dataSourceProperties.getPassword())) {
-            dataSource.setPassword(dataSourceProperties.getPassword());
-        }
-        List<Filter> filters = Stream.of(statFilter, wallFilter, configFilter, slf4jLogFilter, log4jFilter,
-                log4j2Filter, commonsLogFilter)
-                .filter(Objects::nonNull)
-                .collect(toList());
-        dataSource.setProxyFilters(filters);
-        return dataSource;
+        return new DruidParentDataSource() {};
     }
 
 }

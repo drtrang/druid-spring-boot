@@ -1,33 +1,25 @@
 package com.github.trang.druid.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.wall.WallFilter;
-import com.github.trang.druid.mapper.CityMapper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.Assert.assertEquals;
 
 /**
+ * 单数据源测试
+ *
  * @author trang
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.NONE)
-public class DruidTests {
+@ActiveProfiles("single")
+public class SingleDataSourceTests extends BaseTest {
 
     @Autowired
     private DruidDataSource dataSource;
-    @Autowired
-    private WallFilter wallFilter;
-    @Autowired
-    private CityMapper cityMapper;
 
     @Test
-    public void testDataSource() {
+    public void testSingleDataSource() {
         assertEquals(dataSource.getInitialSize(), 1);
         assertEquals(dataSource.getMinIdle(), 1);
         assertEquals(dataSource.getMaxActive(), 10);
@@ -40,11 +32,6 @@ public class DruidTests {
         assertEquals(dataSource.isTestOnReturn(), false);
         assertEquals(dataSource.getMaxPoolPreparedStatementPerConnectionSize(), 20);
         assertEquals(dataSource.isUseGlobalDataSourceStat(), true);
-    }
-
-    @Test
-    public void testMybatis() {
-        System.out.println(cityMapper.findById(1L));
     }
 
 }

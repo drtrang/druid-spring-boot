@@ -3,64 +3,64 @@
     {
       "name": "spring.datasource.druid.stat.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid stat filter are enabled.",
+      "description": "Whether or not druid stat-filter are enabled.",
       "defaultValue": true
     },
     {
       "name": "spring.datasource.druid.wall.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid wall filter are enabled.",
+      "description": "Whether or not druid wall-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.config.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid config filter are enabled.",
+      "description": "Whether or not druid config-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.slf4j.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid slf4j filter are enabled.",
+      "description": "Whether or not druid slf4j-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.log4j.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid log4j filter are enabled.",
+      "description": "Whether or not druid log4j-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.log4j2.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid log4j2 filter are enabled.",
+      "description": "Whether or not druid log4j2-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.commons-log.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid commons logging filter are enabled.",
+      "description": "Whether or not druid commons-log-filter are enabled.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.aop-stat.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid aop stat are enabled.",
-      "sourceType": "com.github.trang.druid.DruidProperties$AopStat",
+      "description": "Whether or not druid aop-stat are enabled.",
+      "sourceType": "com.github.trang.druid.properties.DruidStatProperties$DruidAopStatProperties",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.web-stat.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid web stat are enabled.",
-      "sourceType": "com.github.trang.druid.DruidProperties$WebStat",
+      "description": "Whether or not druid web-stat are enabled.",
+      "sourceType": "com.github.trang.druid.properties.DruidStatProperties$DruidWebStatProperties",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.stat-view-servlet.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid stat view servlet are enabled.",
-      "sourceType": "com.github.trang.druid.DruidProperties$StatViewServlet",
+      "description": "Whether or not druid stat-view-servlet are enabled.",
+      "sourceType": "com.github.trang.druid.properties.DruidServletProperties$DruidStatViewServletProperties",
       "defaultValue": false
     }
   ],

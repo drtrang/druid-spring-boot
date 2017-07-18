@@ -45,10 +45,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <!-- 基础依赖 -->
+        <spring.version>4.3.9.RELEASE</spring.version>
         <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
         <slf4j.version>1.7.25</slf4j.version>
         <servlet-api.version>3.1.0</servlet-api.version>
-        <druid.version>1.1.0</druid.version>
+        <druid.version>1.1.1</druid.version>
         <!-- Maven 插件 -->
         <maven-dependency-plugin.version>3.0.1</maven-dependency-plugin.version>
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
@@ -78,6 +79,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -126,6 +132,7 @@
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
+                        <inherited>true</inherited>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -141,11 +148,13 @@
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
                         <version>${coveralls-maven-plugin.version}</version>
+                        <inherited>true</inherited>
                     </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>cobertura-maven-plugin</artifactId>
                         <version>${cobertura-maven-plugin.version}</version>
+                        <inherited>true</inherited>
                         <configuration>
                             <format>xml</format>
                             <maxmem>256m</maxmem>
@@ -165,6 +174,7 @@
                     <plugin>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${maven-javadoc-plugin.version}</version>
+                        <inherited>true</inherited>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -181,6 +191,7 @@
                     <plugin>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>${maven-gpg-plugin.version}</version>
+                        <inherited>true</inherited>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
@@ -193,6 +204,7 @@
                     <plugin>
                         <artifactId>maven-deploy-plugin</artifactId>
                         <version>${maven-deploy-plugin.version}</version>
+                        <inherited>true</inherited>
                         <configuration>
                             <updateReleaseInfo>true</updateReleaseInfo>
                         </configuration>
@@ -200,6 +212,7 @@
                     <plugin>
                         <artifactId>maven-release-plugin</artifactId>
                         <version>${maven-release-plugin.version}</version>
+                        <inherited>true</inherited>
                         <configuration>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
                             <useReleaseProfile>true</useReleaseProfile>
@@ -219,10 +232,12 @@
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven-dependency-plugin.version}</version>
+                <inherited>true</inherited>
             </plugin>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${maven-enforcer-plugin.version}</version>
+                <inherited>true</inherited>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -242,10 +257,12 @@
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>${maven-clean-plugin.version}</version>
+                <inherited>true</inherited>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven-resources-plugin.version}</version>
+                <inherited>true</inherited>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
@@ -253,6 +270,7 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
+                <inherited>true</inherited>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <source>${java.version}</source>
@@ -262,6 +280,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+                <inherited>true</inherited>
                 <configuration>
                     <includes>
                         <include>**/com/github/trang/**/test/junit/**Test.java</include>
@@ -271,10 +290,12 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
+                <inherited>true</inherited>
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
+                <inherited>true</inherited>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -287,6 +308,7 @@
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>${maven-install-plugin.version}</version>
+                <inherited>true</inherited>
             </plugin>
         </plugins>
     </build>
