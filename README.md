@@ -57,7 +57,7 @@ spring:
 ### Druid 高级特性
 Druid Spring Boot Starter 添加了 Druid 的大部分特性，如 StatFilter、WallFilter、ConfigFilter、WebStatFilter 等，其中 StatFilter 默认打开，其它特性默认关闭，需要手动开启。
 
-同样，每个特性的参数均可自定义，具体参数可以用 IDE 的自动提示功能或者阅读 Druid 的 [Wiki](https://github.com/alibaba/druid/wiki/%E9%A6%96%E9%A1%B5) 查看。
+同样，每个特性的参数均可自定义，具体配置可以用 IDE 的自动提示功能或者阅读 Druid 的 [Wiki](https://github.com/alibaba/druid/wiki/%E9%A6%96%E9%A1%B5) 查看。
 
 ```yaml
 spring:
@@ -87,7 +87,7 @@ spring:
 ```
 
 ### 多数据源
-1.0.2 版本新增多数据源支持，使用方式请查看 [DynamicDataSource.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/DynamicDataSource.md)。
+1.0.2 版本新增多数据源支持，使用方式请查看 [DruidMultiDataSource.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/DruidMultiDataSource.md)。
 
 ### 配置示例
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
