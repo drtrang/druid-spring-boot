@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 import static com.github.trang.druid.properties.DruidProperties.DRUID_DATA_SOURCE_PREFIX;
 
 /**
- * Druid 多数据源支持，支持共用公共参数
+ * Druid 多数据源支持，会自动注入 `spring.datasource.druid` 配置
  *
  * @author trang
  */
