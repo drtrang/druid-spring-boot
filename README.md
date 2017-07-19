@@ -123,5 +123,5 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 ## 作者信息
 QQ：349096849<br>
-Email：donghao.l@hotmail.com
+Email：donghao.l@hotmail.com<br>
 Blog：[blog.trang.space](http://blog.trang.space)
