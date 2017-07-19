@@ -27,6 +27,6 @@
         ```
 
 
-## 示例
+## 演示
 将 [druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 中 
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。

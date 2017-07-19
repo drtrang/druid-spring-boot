@@ -10,7 +10,7 @@ logging:
 
 spring:
   profiles:
-    # 默认环境为 default，多数据源示例改为 dynamic
+    # 默认环境为 default，多数据源演示请改为 dynamic
     active: default
   datasource:
     driver-class-name: org.h2.Driver
