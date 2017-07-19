@@ -1,10 +1,11 @@
 # Druid 多数据源支持
 
-1.0.2 版本新增支持多数据源的 `DruidMultiDataSource`，开启该特性需要手动声明数据源，并指定注入的前缀 `spring.datasource.druid.${name}`，其中 `${name}` 可根据实际情况自定义。
+1.0.2 版本新增支持多数据源的 **DruidMultiDataSource**，开启该特性需要手动声明数据源，并指定注入的前缀 `spring.datasource.druid.${name}`，其中 `${name}` 可根据实际情况自定义。
 
 
 ## 使用方式
-1. 声明各个 DataSource，类型为 `com.github.trang.druid.datasource.DruidMultiDataSource`，该 Bean 会注入 `spring.datasource.druid.one` 前缀的配置，并继承 `spring.datasource.druid` 的配置。
+
+1. 声明各个 DataSource，类型为 `com.github.trang.druid.datasource.DruidMultiDataSource`，该 Bean 会自动注入 `spring.datasource.druid.one` 的配置，并继承 `spring.datasource.druid`。
     ```java
     @Bean
     @ConfigurationProperties("spring.datasource.druid.one")
@@ -28,5 +29,4 @@
 
 
 ## 演示
-将 [druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 中 
-[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。
+将 [druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 中 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。
