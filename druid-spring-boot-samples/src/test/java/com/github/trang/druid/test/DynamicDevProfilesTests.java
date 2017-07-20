@@ -31,8 +31,8 @@ public class DynamicDevProfilesTests extends BaseTest {
 
     @Test
     public void testSecondDataSource() {
-        assertEquals(100000, secondDataSource.getMinEvictableIdleTimeMillis());
-        assertEquals(200000, secondDataSource.getMaxEvictableIdleTimeMillis());
+        assertEquals(100001, secondDataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(200002, secondDataSource.getMaxEvictableIdleTimeMillis());
     }
 
 }
