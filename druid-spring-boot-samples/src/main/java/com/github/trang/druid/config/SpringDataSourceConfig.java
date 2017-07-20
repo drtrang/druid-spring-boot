@@ -20,7 +20,7 @@ import java.util.Map;
  * @author trang
  */
 @Configuration
-@Profile("dynamic")
+@Profile({"dynamic", "dynamic-dev"})
 public class SpringDataSourceConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SpringDataSourceConfig.class);

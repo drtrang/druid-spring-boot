@@ -25,7 +25,8 @@ spring:
       max-active: 10
       max-wait: 30000
       time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 25200000
       validation-query: SELECT 1
       test-while-idle: true
       test-on-borrow: false
@@ -108,3 +109,28 @@ spring:
         name: two
         max-active: 25
         max-open-prepared-statements: 25
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    druid:
+      min-evictable-idle-time-millis: 100000
+      max-evictable-idle-time-millis: 200000
+
+---
+
+spring:
+  profiles: dynamic-dev
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    druid:
+      min-evictable-idle-time-millis: 100000
+      max-evictable-idle-time-millis: 200000
+      one:
+        name: one
+      two:
+        name: two

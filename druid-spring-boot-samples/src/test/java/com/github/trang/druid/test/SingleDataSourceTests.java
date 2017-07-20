@@ -18,18 +18,19 @@ public class SingleDataSourceTests extends BaseTest {
 
     @Test
     public void testSingleDataSource() {
-        assertEquals(dataSource.getInitialSize(), 1);
-        assertEquals(dataSource.getMinIdle(), 1);
-        assertEquals(dataSource.getMaxActive(), 10);
-        assertEquals(dataSource.getMaxWait(), 30000);
-        assertEquals(dataSource.getTimeBetweenEvictionRunsMillis(), 60000);
-        assertEquals(dataSource.getMinEvictableIdleTimeMillis(), 300000);
-        assertEquals(dataSource.getValidationQuery(), "SELECT 1");
-        assertEquals(dataSource.isTestWhileIdle(), true);
-        assertEquals(dataSource.isTestOnBorrow(), false);
-        assertEquals(dataSource.isTestOnReturn(), false);
-        assertEquals(dataSource.getMaxPoolPreparedStatementPerConnectionSize(), 20);
-        assertEquals(dataSource.isUseGlobalDataSourceStat(), true);
+        assertEquals(1, dataSource.getInitialSize());
+        assertEquals(1, dataSource.getMinIdle());
+        assertEquals(10, dataSource.getMaxActive());
+        assertEquals(30000, dataSource.getMaxWait());
+        assertEquals(60000, dataSource.getTimeBetweenEvictionRunsMillis());
+        assertEquals(1800000, dataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(25200000, dataSource.getMaxEvictableIdleTimeMillis());
+        assertEquals("SELECT 1", dataSource.getValidationQuery());
+        assertEquals(true, dataSource.isTestWhileIdle());
+        assertEquals(false, dataSource.isTestOnBorrow());
+        assertEquals(false, dataSource.isTestOnReturn());
+        assertEquals(20, dataSource.getMaxPoolPreparedStatementPerConnectionSize());
+        assertEquals(true, dataSource.isUseGlobalDataSourceStat());
     }
 
 }
