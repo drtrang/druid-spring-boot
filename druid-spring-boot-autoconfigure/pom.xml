@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.github.drtrang</groupId>
         <artifactId>druid-spring-boot</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
 
     <artifactId>druid-spring-boot-autoconfigure</artifactId>

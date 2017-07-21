@@ -1,7 +1,7 @@
 # TODO
 
 ## Add
-* ~~新增 ConfigFilter 配置，替换默认的 `connectProperties` 方式~~
+* ~~新增 ConfigFilter 配置，替换默认的 `connectionProperties` 方式~~
 * 新增 `@EnableDynamicDruidDataSource`，自动配置动态数据源
 
 ## Bug
