@@ -5,7 +5,7 @@
 
 ## 使用方式
 
-1. 声明各个 DataSource，类型为 `com.github.trang.druid.datasource.DruidMultiDataSource`，该 Bean 会自动注入 `spring.datasource.druid.one` 的配置，并继承 `spring.datasource.druid`。
+1. 声明各个 DataSource，类型为 `com.github.trang.druid.datasource.DruidMultiDataSource`。
     ```java
     @Bean
     @ConfigurationProperties("spring.datasource.druid.one")
@@ -27,6 +27,48 @@
               - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
         ```
 
+## 原理
+
+DruidParentDataSource 类存在的目的是为了注入 `spring.datasource.druid` 的配置。
+基于 Spring4 的特性，DruidMultiDataSource 在继承 DruidParentDataSource 的同时，也会继承这些配置，由此解决多数据源场景下相同配置重复定义的问题。
+
+也就是说，以下两种方式是等价的：
+```yaml
+spring:
+  datasource:
+    druid:
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 25200000
+      one:
+        name: one
+      two:
+        name: two
+---
+spring:
+  datasource:
+    druid:
+      one:
+        name: one
+        min-evictable-idle-time-millis: 1800000
+        max-evictable-idle-time-millis: 25200000
+      two:
+        name: two
+        min-evictable-idle-time-millis: 1800000
+        max-evictable-idle-time-millis: 25200000
+```
+
+若子数据源有相同的配置时，则会覆盖掉父数据源的值：
+```yaml
+spring:
+  datasource:
+    druid:
+      max-active: 20
+      one:
+        name: one
+        max-active: 50
+      two:
+        name: two
+```
 
 ## 演示
 将 [druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 中 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。
