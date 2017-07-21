@@ -1,4 +1,11 @@
 # TODO
 
-1. 新增 `ConfigFilter` 的配置，替换默认的 ConnectProperties 方式
-2. 新增 `@EnableDynamicDruidDataSource`，自动配置动态数据源
+## Add
+* ~~新增 ConfigFilter 配置，替换默认的 `connectProperties` 方式~~
+* 新增 `@EnableDynamicDruidDataSource`，自动配置动态数据源
+
+## Bug
+* ~~`spring.datasource.schema` 会执行两次~~
+
+## Optimize:
+* `DataSourceCustomizer` 方式自定义数据源

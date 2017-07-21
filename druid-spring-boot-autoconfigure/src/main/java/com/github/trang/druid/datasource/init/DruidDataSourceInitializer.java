@@ -31,11 +31,11 @@ import java.util.List;
  * @author Stephane Nicoll
  * @author Kazuki Shimizu
  * @since 1.1.0
- * @see com.github.trang.druid.DataSourceInitializerConfiguration
+ * @see com.github.trang.druid.DruidDataSourceInitializerAutoConfiguration
  */
-public class DataSourceInitializer implements ApplicationListener<DataSourceInitializedEvent> {
+public class DruidDataSourceInitializer implements ApplicationListener<DataSourceInitializedEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(DataSourceInitializer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DruidDataSourceInitializer.class);
 
     private final DataSourceProperties properties;
 
@@ -45,8 +45,8 @@ public class DataSourceInitializer implements ApplicationListener<DataSourceInit
 
     private boolean initialized = false;
 
-    public DataSourceInitializer(DataSourceProperties properties,
-                                 ApplicationContext applicationContext) {
+    public DruidDataSourceInitializer(DataSourceProperties properties,
+                                      ApplicationContext applicationContext) {
         this.properties = properties;
         this.applicationContext = applicationContext;
     }

@@ -10,6 +10,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.github.trang.druid.datasource.DruidParentDataSource;
+import com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
+import static com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties.*;
 import static com.github.trang.druid.properties.DruidProperties.*;
 
 /**
@@ -36,8 +38,8 @@ import static com.github.trang.druid.properties.DruidProperties.*;
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties(DataSourceProperties.class)
-@Import({DruidStatConfiguration.class, DruidServletConfiguration.class, DataSourceInitializerConfiguration.class})
+@EnableConfigurationProperties({DataSourceProperties.class, DruidConfigFilterProperties.class})
+@Import({DruidStatConfiguration.class, DruidServletConfiguration.class})
 public class DruidAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DruidAutoConfiguration.class);
@@ -70,7 +72,6 @@ public class DruidAutoConfiguration {
 
     @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @Bean
-    @ConfigurationProperties(DRUID_CONFIG_FILTER_PREFIX)
     public ConfigFilter configFilter() {
         log.debug("druid config-filter init...");
         return new ConfigFilter();

@@ -9,6 +9,7 @@ import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallFilter;
+import com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,9 +47,40 @@ public abstract class DruidParentDataSource extends DruidDataSource {
     // 不使用 @Value 注入，避免因为找不到值抛出 NPE
     @Autowired
     private DataSourceProperties dataSourceProperties;
+    @Autowired
+    private DruidConfigFilterProperties druidConfigFilterProperties;
 
     @PostConstruct
-    public void initCommonParams() {
+    public void initDruidParentProperties() {
+        initDataSourceProperties();
+        initConfigFilterProperties();
+        initFilters();
+    }
+
+    private void initFilters() {
+        List<Filter> filters = super.getProxyFilters();
+        Stream.of(statFilter, wallFilter, configFilter, slf4jLogFilter, log4jFilter, log4j2Filter, commonsLogFilter)
+                .filter(Objects::nonNull)
+                .filter(filter -> !filters.contains(filter))
+                .forEach(filters::add);
+    }
+
+    private void initConfigFilterProperties() {
+        if (druidConfigFilterProperties.isEnabled()) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(ConfigFilter.CONFIG_DECRYPT).append("=").append("true").append(";");
+            if (!StringUtils.isEmpty(druidConfigFilterProperties.getKey())) {
+                builder.append(ConfigFilter.CONFIG_KEY).append("=").append(druidConfigFilterProperties.getKey());
+                builder.append(";");
+            }
+            if (!StringUtils.isEmpty(druidConfigFilterProperties.getFile())) {
+                builder.append(ConfigFilter.CONFIG_FILE).append("=").append(druidConfigFilterProperties.getFile());
+            }
+            super.setConnectionProperties(builder.toString());
+        }
+    }
+
+    private void initDataSourceProperties() {
         if (!StringUtils.isEmpty(dataSourceProperties.getDriverClassName())) {
             super.setDriverClassName(dataSourceProperties.getDriverClassName());
         }
@@ -61,12 +93,6 @@ public abstract class DruidParentDataSource extends DruidDataSource {
         if (!StringUtils.isEmpty(dataSourceProperties.getPassword())) {
             super.setPassword(dataSourceProperties.getPassword());
         }
-        List<Filter> filters = super.getProxyFilters();
-        Stream.of(statFilter, wallFilter, configFilter, slf4jLogFilter, log4jFilter, log4j2Filter,
-                commonsLogFilter)
-                .filter(Objects::nonNull)
-                .filter(filter -> !filters.contains(filter))
-                .forEach(filters::add);
     }
 
 }
