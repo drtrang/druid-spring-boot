@@ -12,7 +12,8 @@ import static org.junit.Assert.assertEquals;
  *
  * @author trang
  */
-@ActiveProfiles("dev")
+@ActiveProfiles("dev-yaml")
+//@ActiveProfiles("dev-props")
 public class DevProfilesTests extends BaseTest {
 
     @Autowired

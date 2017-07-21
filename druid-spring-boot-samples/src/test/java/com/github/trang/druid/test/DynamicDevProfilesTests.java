@@ -13,7 +13,8 @@ import static org.junit.Assert.assertEquals;
  *
  * @author trang
  */
-@ActiveProfiles("dynamic-dev")
+@ActiveProfiles("dynamic-dev-yaml")
+//@ActiveProfiles("dynamic-dev-props")
 public class DynamicDevProfilesTests extends BaseTest {
 
     @Autowired
@@ -25,13 +26,13 @@ public class DynamicDevProfilesTests extends BaseTest {
 
     @Test
     public void testFirstDataSource() {
-        assertEquals(100000, firstDataSource.getMinEvictableIdleTimeMillis());
-        assertEquals(200000, firstDataSource.getMaxEvictableIdleTimeMillis());
+        assertEquals(100001, firstDataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(200001, firstDataSource.getMaxEvictableIdleTimeMillis());
     }
 
     @Test
     public void testSecondDataSource() {
-        assertEquals(100001, secondDataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(100002, secondDataSource.getMinEvictableIdleTimeMillis());
         assertEquals(200002, secondDataSource.getMaxEvictableIdleTimeMillis());
     }
 

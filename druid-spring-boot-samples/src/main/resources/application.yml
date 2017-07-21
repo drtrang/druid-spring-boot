@@ -113,7 +113,7 @@ spring:
 ---
 
 spring:
-  profiles: dev
+  profiles: dev-yaml
   datasource:
     druid:
       min-evictable-idle-time-millis: 100000
@@ -122,7 +122,7 @@ spring:
 ---
 
 spring:
-  profiles: dynamic-dev
+  profiles: dynamic-dev-yaml
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -130,9 +130,9 @@ spring:
     druid:
       one:
         name: one
-        min-evictable-idle-time-millis: 100000
-        max-evictable-idle-time-millis: 200000
+        min-evictable-idle-time-millis: 100001
+        max-evictable-idle-time-millis: 200001
       two:
         name: two
-        min-evictable-idle-time-millis: 100001
+        min-evictable-idle-time-millis: 100002
         max-evictable-idle-time-millis: 200002

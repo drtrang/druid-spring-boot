@@ -20,7 +20,7 @@ import java.util.Map;
  * @author trang
  */
 @Configuration
-@Profile({"dynamic", "dynamic-dev"})
+@Profile({"dynamic", "dynamic-dev-yaml", "dynamic-dev-props"})
 public class SpringDataSourceConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SpringDataSourceConfig.class);
@@ -31,7 +31,7 @@ public class SpringDataSourceConfig {
      * `spring.datasource.druid.one` 前缀的配置会注入到该 Bean，同时会继承 `spring.datasource.druid`
      * 前缀的配置，若名称相同则会被 `spring.datasource.druid.one` 覆盖
      */
-    @Bean
+    @Bean(initMethod = "init", destroyMethod = "close")
     @ConfigurationProperties("spring.datasource.druid.one")
     public DruidDataSource firstDataSource() {
         log.debug("druid first-data-source init...");
@@ -41,7 +41,7 @@ public class SpringDataSourceConfig {
     /**
      * 第二个数据源，若还有其它数据源可以继续增加
      */
-    @Bean
+    @Bean(initMethod = "init", destroyMethod = "close")
     @ConfigurationProperties("spring.datasource.druid.two")
     public DruidDataSource secondDataSource() {
         log.debug("druid second-data-source init...");
