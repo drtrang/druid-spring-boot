@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Optional;
+
 /**
  * DruidSpringBootStarterApplication
  *
@@ -22,11 +24,12 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private CityMapper cityMapper;
+    private Optional<CityMapper> cityMapper;
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(cityMapper.findAll());
+        cityMapper.map(CityMapper::findAll)
+                .ifPresent(cities -> cities.forEach(System.out::println));
     }
 
 }
