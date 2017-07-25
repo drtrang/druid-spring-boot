@@ -12,6 +12,9 @@ spring:
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
     active: default
+  output:
+    ansi:
+      enabled: always
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./samples
