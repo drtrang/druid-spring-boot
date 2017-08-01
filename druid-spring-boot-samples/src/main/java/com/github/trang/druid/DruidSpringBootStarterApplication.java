@@ -1,13 +1,12 @@
 package com.github.trang.druid;
 
 import com.github.trang.druid.mapper.CityMapper;
+import com.google.gson.Gson;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Optional;
 
 /**
  * DruidSpringBootStarterApplication
@@ -24,12 +23,13 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private Optional<CityMapper> cityMapper;
+    private CityMapper cityMapper;
 
     @Override
     public void run(String... args) throws Exception {
-        cityMapper.map(CityMapper::findAll)
-                .ifPresent(cities -> cities.forEach(System.out::println));
+        Gson gson = new Gson();
+        cityMapper.findAll().stream()
+                .map(gson::toJson).forEach(System.out::println);
     }
 
 }
