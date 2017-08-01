@@ -52,8 +52,8 @@ public class SpringDataSourceConfig {
     @Primary
     public DynamicDataSource dataSource(DruidDataSource firstDataSource, DruidDataSource secondDataSource) {
         Map<String, DataSource> targetDataSources = new HashMap<>();
-        targetDataSources.put("one", firstDataSource);
-        targetDataSources.put("two", secondDataSource);
+        targetDataSources.put(firstDataSource.getName(), firstDataSource);
+        targetDataSources.put(secondDataSource.getName(), secondDataSource);
         return new DynamicDataSource(firstDataSource, targetDataSources);
     }
 
