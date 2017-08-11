@@ -6,6 +6,8 @@
 [![GitHub Release](https://img.shields.io/github/release/drtrang/druid-spring-boot.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/releases)
 [![License](http://img.shields.io/badge/license-apache%202-blue.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/blob/master/LICENSE)
 
+Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
+
 
 ## 依赖
 ```xml
