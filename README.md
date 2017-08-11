@@ -114,7 +114,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 可以作为参考。 
 
 
-## 更新记录
+## Change Log
 [Release Notes](https://github.com/drtrang/druid-spring-boot/releases)
 
 
@@ -122,7 +122,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 任何意见和建议可以提 [Issue](https://github.com/drtrang/druid-spring-boot/issues)，我会酌情加到 [Todo List](https://github.com/drtrang/druid-spring-boot/blob/master/TODO.md)，一般情况一周内迭代完毕。
 
 
-## 作者信息
+## About Me
 QQ：349096849<br>
 Email：donghao.l@hotmail.com<br>
 Blog：[blog.trang.space](http://blog.trang.space)
