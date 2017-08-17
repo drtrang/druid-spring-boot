@@ -97,8 +97,6 @@ spring:
 ## 自动提示
 Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，支持 IDE 的自动提示。
 
-该功能会持续优化，致力打造最方便、最友好的 Starter。
-
 自定义参数：<br>
 ![druid-configuration](https://user-images.githubusercontent.com/13851701/28149522-c1a3fc96-67c0-11e7-8ea7-630a8b3e5bfb.png)
 
@@ -110,8 +108,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 
 ## 演示
-[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Starter 的使用方式，
-可以作为参考。 
+[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Starter 的使用方式，可以作为参考。 
 
 
 ## Change Log
@@ -119,10 +116,10 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 
 ## TODO
-任何意见和建议可以提 [Issue](https://github.com/drtrang/druid-spring-boot/issues)，我会酌情加到 [Todo List](https://github.com/drtrang/druid-spring-boot/blob/master/TODO.md)，一般情况一周内迭代完毕。
+任何意见和建议可以提 [ISSUE](https://github.com/drtrang/druid-spring-boot/issues)，我会酌情加到 [TODO List](https://github.com/drtrang/druid-spring-boot/blob/master/TODO.md)，一般情况一周内迭代完毕。
 
 
 ## About Me
 QQ：349096849<br>
 Email：donghao.l@hotmail.com<br>
-Blog：[blog.trang.space](http://blog.trang.space)
+Blog：[Trang's Blog](http://blog.trang.space)
