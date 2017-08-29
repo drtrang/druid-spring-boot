@@ -108,7 +108,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 
 ## 演示
-[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Starter 的使用方式，可以作为参考。 
+[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。 
 
 
 ## Change Log
