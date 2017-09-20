@@ -1,8 +1,11 @@
 # TODO
 
-## Add
+## Feature
 * ~~新增 ConfigFilter 配置，替换默认的 `connectionProperties` 方式~~
-* 新增 `@EnableDynamicDruidDataSource`，自动配置动态数据源
+* 新增 `Health Indicator`
+* 新增 `Faliure Analyzer`
+* 新增 `Endpoints`
+
 
 ## Bug
 * ~~`spring.datasource.schema` 会执行两次~~

@@ -37,6 +37,7 @@
         <module>druid-spring-boot-starter</module>
         <module>druid-spring-boot-autoconfigure</module>
         <module>druid-spring-boot-samples</module>
+        <module>druid-spring-boot-actuator</module>
     </modules>
 
     <properties>
@@ -73,6 +74,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>

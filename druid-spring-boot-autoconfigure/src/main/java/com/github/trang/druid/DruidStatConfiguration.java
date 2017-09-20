@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 import static com.github.trang.druid.properties.DruidStatProperties.DRUID_AOP_STAT_PREFIX;
@@ -32,6 +33,7 @@ public class DruidStatConfiguration {
     /**
      * 用于采集 Spring 和 JDBC 关联监控的数据
      */
+    @Configuration
     @ConditionalOnClass(Advice.class)
     @ConditionalOnProperty(prefix = DRUID_AOP_STAT_PREFIX, name = "enabled", havingValue = "true")
     public static class DruidAopStatConfiguration {
@@ -65,12 +67,13 @@ public class DruidStatConfiguration {
     /**
      * 用于采集 Web 和 JDBC 关联监控的数据
      */
+    @Configuration
     @ConditionalOnWebApplication
+    @ConditionalOnProperty(prefix = DRUID_WEB_STAT_PREFIX, name = "enabled", havingValue = "true")
     public static class DruidWebStatConfiguration {
 
         private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
-        @ConditionalOnProperty(prefix = DRUID_WEB_STAT_PREFIX, name = "enabled", havingValue = "true")
         @Bean
         public FilterRegistrationBean filterRegistrationBean(DruidWebStatProperties properties) {
             log.debug("druid web-stat-filter init...");

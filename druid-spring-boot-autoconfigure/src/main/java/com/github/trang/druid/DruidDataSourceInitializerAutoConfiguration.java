@@ -2,6 +2,7 @@ package com.github.trang.druid;
 
 import com.github.trang.druid.datasource.init.DruidDataSourceInitializer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -24,7 +25,8 @@ import javax.sql.DataSource;
  * @author trang
  */
 @Configuration
-@AutoConfigureAfter(DataSourceAutoConfiguration.class)
+@AutoConfigureBefore(DataSourceAutoConfiguration.class)
+@AutoConfigureAfter(DruidAutoConfiguration.class)
 @ConditionalOnBean(DataSource.class)
 public class DruidDataSourceInitializerAutoConfiguration {
 

@@ -19,6 +19,7 @@ import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STA
  * @author trang
  */
 @ConditionalOnWebApplication
+@ConditionalOnProperty(prefix = DRUID_STAT_VIEW_SERVLET_PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(DruidStatViewServletProperties.class)
 public class DruidServletConfiguration {
 
@@ -30,7 +31,6 @@ public class DruidServletConfiguration {
      *   1. 提供监控信息展示的 HTML 页面
      *   2. 提供监控信息的 JSON API
      */
-    @ConditionalOnProperty(prefix = DRUID_STAT_VIEW_SERVLET_PREFIX, name = "enabled", havingValue = "true")
     @Bean
     public ServletRegistrationBean servletRegistrationBean(DruidStatViewServletProperties properties) {
         log.debug("druid stat-view-servlet init...");
