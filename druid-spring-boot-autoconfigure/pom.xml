@@ -11,7 +11,6 @@
     </parent>
 
     <artifactId>druid-spring-boot-autoconfigure</artifactId>
-    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
@@ -21,6 +20,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -29,6 +29,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
