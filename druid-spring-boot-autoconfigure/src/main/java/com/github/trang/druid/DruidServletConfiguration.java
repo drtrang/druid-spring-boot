@@ -4,12 +4,15 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.github.trang.druid.properties.DruidServletProperties.DruidStatViewServletProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.StringUtils;
+
+import javax.servlet.Servlet;
 
 import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STAT_VIEW_SERVLET_PREFIX;
 
@@ -19,6 +22,7 @@ import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STA
  * @author trang
  */
 @ConditionalOnWebApplication
+@ConditionalOnClass(Servlet.class)
 @ConditionalOnProperty(prefix = DRUID_STAT_VIEW_SERVLET_PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(DruidStatViewServletProperties.class)
 public class DruidServletConfiguration {

@@ -30,21 +30,10 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.tomcat</groupId>
-                    <artifactId>tomcat-jdbc</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

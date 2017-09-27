@@ -19,6 +19,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.Filter;
+
 import static com.github.trang.druid.properties.DruidStatProperties.DRUID_AOP_STAT_PREFIX;
 import static com.github.trang.druid.properties.DruidStatProperties.DRUID_WEB_STAT_PREFIX;
 
@@ -69,6 +71,7 @@ public class DruidStatConfiguration {
      */
     @Configuration
     @ConditionalOnWebApplication
+    @ConditionalOnClass(Filter.class)
     @ConditionalOnProperty(prefix = DRUID_WEB_STAT_PREFIX, name = "enabled", havingValue = "true")
     public static class DruidWebStatConfiguration {
 

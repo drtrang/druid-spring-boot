@@ -1,1 +1,1 @@
-provides: spring-boot-autoconfigure,spring-jdbc,druid,druid-spring-boot-autoconfigure
+provides: spring-boot-autoconfigure,spring-jdbc,druid,druid-spring-boot-autoconfigure,slf4j-api
