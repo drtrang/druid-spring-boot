@@ -29,8 +29,10 @@ import static com.github.trang.druid.properties.DruidStatProperties.DRUID_WEB_ST
  *
  * @author trang
  */
-@EnableConfigurationProperties({DruidWebStatProperties.class, DruidAopStatProperties.class})
+@Configuration
 public class DruidStatConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
     /**
      * 用于采集 Spring 和 JDBC 关联监控的数据
@@ -38,9 +40,8 @@ public class DruidStatConfiguration {
     @Configuration
     @ConditionalOnClass(Advice.class)
     @ConditionalOnProperty(prefix = DRUID_AOP_STAT_PREFIX, name = "enabled", havingValue = "true")
+    @EnableConfigurationProperties(DruidWebStatProperties.class)
     public static class DruidAopStatConfiguration {
-
-        private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
         @Value("${spring.aop.proxy-target-class:false}")
         private boolean proxyTargetClass;
@@ -73,9 +74,8 @@ public class DruidStatConfiguration {
     @ConditionalOnWebApplication
     @ConditionalOnClass(Filter.class)
     @ConditionalOnProperty(prefix = DRUID_WEB_STAT_PREFIX, name = "enabled", havingValue = "true")
+    @EnableConfigurationProperties(DruidAopStatProperties.class)
     public static class DruidWebStatConfiguration {
-
-        private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
         @Bean
         public FilterRegistrationBean filterRegistrationBean(DruidWebStatProperties properties) {

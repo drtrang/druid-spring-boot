@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.Servlet;
@@ -21,6 +22,7 @@ import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STA
  *
  * @author trang
  */
+@Configuration
 @ConditionalOnWebApplication
 @ConditionalOnClass(Servlet.class)
 @ConditionalOnProperty(prefix = DRUID_STAT_VIEW_SERVLET_PREFIX, name = "enabled", havingValue = "true")

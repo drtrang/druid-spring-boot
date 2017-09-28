@@ -8,8 +8,8 @@
     <version>1.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>${project.artifactId}</name>
-    <description>Spring Boot Druid Starter</description>
+    <name>Druid Spring Boot Starter</name>
+    <description>Spring Boot Starter for Druid</description>
     <url>https://github.com/drtrang/druid-spring-boot</url>
 
     <licenses>
@@ -34,9 +34,11 @@
     </scm>
 
     <modules>
-        <module>druid-spring-boot-starter</module>
         <module>druid-spring-boot-autoconfigure</module>
+        <module>druid-spring-boot-starter</module>
         <module>druid-spring-boot-actuator</module>
+        <module>druid-spring-boot-actuator-autoconfigure</module>
+        <module>druid-spring-boot-actuator-starter</module>
         <module>druid-spring-boot-samples</module>
     </modules>
 
@@ -82,6 +84,16 @@
             <dependency>
                 <groupId>com.github.drtrang</groupId>
                 <artifactId>druid-spring-boot-actuator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>druid-spring-boot-actuator-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>druid-spring-boot-actuator-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

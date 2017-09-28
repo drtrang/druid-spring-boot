@@ -9,6 +9,7 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
+import com.github.trang.druid.DruidStatConfiguration.DruidAopStatConfiguration;
 import com.github.trang.druid.datasource.DruidParentDataSource;
 import com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties;
 import org.slf4j.Logger;
@@ -27,11 +28,11 @@ import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
-import static com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties.*;
+import static com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties.DRUID_CONFIG_FILTER_PREFIX;
 import static com.github.trang.druid.properties.DruidProperties.*;
 
 /**
- * Druid 自动配置
+ * Druid 连接池的自动配置
  *
  * @author trang
  */
@@ -39,7 +40,7 @@ import static com.github.trang.druid.properties.DruidProperties.*;
 @ConditionalOnClass(DruidDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @EnableConfigurationProperties({DataSourceProperties.class, DruidConfigFilterProperties.class})
-@Import({DruidStatConfiguration.class, DruidServletConfiguration.class})
+@Import({DruidServletConfiguration.class, DruidAopStatConfiguration.class})
 public class DruidAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DruidAutoConfiguration.class);
