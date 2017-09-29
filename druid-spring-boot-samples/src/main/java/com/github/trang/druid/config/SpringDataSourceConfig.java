@@ -1,9 +1,8 @@
 package com.github.trang.druid.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.datasource.DruidMultiDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +20,11 @@ import java.util.Map;
  */
 @Configuration
 @Profile({"dynamic", "dynamic-dev-yaml", "dynamic-dev-props"})
+@Slf4j
 public class SpringDataSourceConfig {
 
-    private static final Logger log = LoggerFactory.getLogger(SpringDataSourceConfig.class);
-
     /**
-     * 第一个数据源，注意数据源类型为 #{@link com.github.trang.druid.datasource.DruidMultiDataSource}
+     * 第一个数据源，注意数据源类型为 #{@link DruidDataSource2}
      *
      * `spring.datasource.druid.one` 前缀的配置会注入到该 Bean，同时会继承 `spring.datasource.druid`
      * 前缀的配置，若名称相同则会被 `spring.datasource.druid.one` 覆盖
@@ -35,7 +33,7 @@ public class SpringDataSourceConfig {
     @ConfigurationProperties("spring.datasource.druid.one")
     public DruidDataSource firstDataSource() {
         log.debug("druid first-data-source init...");
-        return new DruidMultiDataSource();
+        return new DruidDataSource2();
     }
 
     /**
@@ -45,7 +43,7 @@ public class SpringDataSourceConfig {
     @ConfigurationProperties("spring.datasource.druid.two")
     public DruidDataSource secondDataSource() {
         log.debug("druid second-data-source init...");
-        return new DruidMultiDataSource();
+        return new DruidDataSource2();
     }
 
     @Bean

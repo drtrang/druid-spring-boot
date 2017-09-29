@@ -1,5 +1,6 @@
-package com.github.trang.druid.datasource.init;
+package com.github.trang.druid.autoconfigure.datasource.init;
 
+import com.github.trang.druid.autoconfigure.DruidDataSourceInitializerAutoConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -31,7 +32,7 @@ import java.util.List;
  * @author Stephane Nicoll
  * @author Kazuki Shimizu
  * @since 1.1.0
- * @see com.github.trang.druid.DruidDataSourceInitializerAutoConfiguration
+ * @see DruidDataSourceInitializerAutoConfiguration
  */
 public class DruidDataSourceInitializer implements ApplicationListener<DataSourceInitializedEvent> {
 

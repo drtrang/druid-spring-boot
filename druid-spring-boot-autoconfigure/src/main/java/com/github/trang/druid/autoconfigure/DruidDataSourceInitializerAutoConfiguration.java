@@ -1,6 +1,6 @@
-package com.github.trang.druid;
+package com.github.trang.druid.autoconfigure;
 
-import com.github.trang.druid.datasource.init.DruidDataSourceInitializer;
+import com.github.trang.druid.autoconfigure.datasource.init.DruidDataSourceInitializer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

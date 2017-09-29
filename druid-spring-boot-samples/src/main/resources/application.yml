@@ -22,7 +22,7 @@ spring:
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:/import.sql
     druid:
-      # spring.datasource.druid 前缀的配置将注入到 DruidParentDataSource，作为公共参数
+      # spring.datasource.druid 前缀的配置将注入到 DruidDataSource2Support，作为公共参数
       initial-size: 1
       min-idle: 1
       max-active: 10
@@ -78,10 +78,27 @@ spring:
     encoding:
       force: true
     converters:
-      preferred-json-mapper: gson
+      preferred-json-mapper: jackson
 
 mybatis:
   type-aliases-package: com.github.trang.druid.model
+
+---
+
+debug: false
+
+spring:
+  profiles: actuator
+
+management:
+  security:
+    enabled: false
+
+endpoints:
+  actuator:
+    enabled: true
+  druid:
+    enabled: true
 
 ---
 

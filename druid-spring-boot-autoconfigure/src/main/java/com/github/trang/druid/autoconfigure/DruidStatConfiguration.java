@@ -1,19 +1,18 @@
-package com.github.trang.druid;
+package com.github.trang.druid.autoconfigure;
 
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
-import com.github.trang.druid.properties.DruidStatProperties.DruidAopStatProperties;
-import com.github.trang.druid.properties.DruidStatProperties.DruidWebStatProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidAopStatProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidWebStatProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.aop.Advice;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.aop.support.RegexpMethodPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +20,8 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
 
-import static com.github.trang.druid.properties.DruidStatProperties.DRUID_AOP_STAT_PREFIX;
-import static com.github.trang.druid.properties.DruidStatProperties.DRUID_WEB_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_AOP_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_WEB_STAT_PREFIX;
 
 /**
  * Druid 监控配置
@@ -30,9 +29,8 @@ import static com.github.trang.druid.properties.DruidStatProperties.DRUID_WEB_ST
  * @author trang
  */
 @Configuration
+@Slf4j
 public class DruidStatConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(DruidStatConfiguration.class);
 
     /**
      * 用于采集 Spring 和 JDBC 关联监控的数据
@@ -40,7 +38,6 @@ public class DruidStatConfiguration {
     @Configuration
     @ConditionalOnClass(Advice.class)
     @ConditionalOnProperty(prefix = DRUID_AOP_STAT_PREFIX, name = "enabled", havingValue = "true")
-    @EnableConfigurationProperties(DruidWebStatProperties.class)
     public static class DruidAopStatConfiguration {
 
         @Value("${spring.aop.proxy-target-class:false}")
@@ -52,8 +49,9 @@ public class DruidStatConfiguration {
         }
 
         @Bean
-        public RegexpMethodPointcutAdvisor druidStatAdvisor(DruidAopStatProperties properties,
+        public RegexpMethodPointcutAdvisor druidStatAdvisor(DruidDataSourceProperties druidDataSourceProperties,
                                                             DruidStatInterceptor druidStatInterceptor) {
+            DruidAopStatProperties properties = druidDataSourceProperties.getAopStat();
             return new RegexpMethodPointcutAdvisor(properties.getPatterns(), druidStatInterceptor);
         }
 
@@ -74,12 +72,12 @@ public class DruidStatConfiguration {
     @ConditionalOnWebApplication
     @ConditionalOnClass(Filter.class)
     @ConditionalOnProperty(prefix = DRUID_WEB_STAT_PREFIX, name = "enabled", havingValue = "true")
-    @EnableConfigurationProperties(DruidAopStatProperties.class)
     public static class DruidWebStatConfiguration {
 
         @Bean
-        public FilterRegistrationBean filterRegistrationBean(DruidWebStatProperties properties) {
+        public FilterRegistrationBean filterRegistrationBean(DruidDataSourceProperties druidDataSourceProperties) {
             log.debug("druid web-stat-filter init...");
+            DruidWebStatProperties properties = druidDataSourceProperties.getWebStat();
             FilterRegistrationBean registration = new FilterRegistrationBean();
             WebStatFilter filter = new WebStatFilter();
             registration.setFilter(filter);

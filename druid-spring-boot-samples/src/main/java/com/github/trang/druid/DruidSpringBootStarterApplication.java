@@ -29,7 +29,8 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Gson gson = new Gson();
         cityMapper.findAll().stream()
-                .map(gson::toJson).forEach(System.out::println);
+                .map(gson::toJson)
+                .forEach(System.out::println);
     }
 
 }

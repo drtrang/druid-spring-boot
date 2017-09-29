@@ -1,4 +1,4 @@
-package com.github.trang.druid;
+package com.github.trang.druid.autoconfigure;
 
 import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.filter.logging.CommonsLogFilter;
@@ -9,11 +9,9 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import com.github.trang.druid.DruidStatConfiguration.DruidAopStatConfiguration;
-import com.github.trang.druid.datasource.DruidParentDataSource;
-import com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -28,8 +26,7 @@ import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
-import static com.github.trang.druid.properties.DruidFilterProperties.DruidConfigFilterProperties.DRUID_CONFIG_FILTER_PREFIX;
-import static com.github.trang.druid.properties.DruidProperties.*;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.*;
 
 /**
  * Druid 连接池的自动配置
@@ -39,11 +36,10 @@ import static com.github.trang.druid.properties.DruidProperties.*;
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties({DataSourceProperties.class, DruidConfigFilterProperties.class})
-@Import({DruidServletConfiguration.class, DruidAopStatConfiguration.class})
+@EnableConfigurationProperties({DataSourceProperties.class, DruidDataSourceProperties.class})
+@Import({DruidServletConfiguration.class, DruidStatConfiguration.class})
+@Slf4j
 public class DruidAutoConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(DruidAutoConfiguration.class);
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -113,7 +109,7 @@ public class DruidAutoConfiguration {
     @ConditionalOnMissingBean(DataSource.class)
     public DruidDataSource dataSource() {
         log.debug("druid data-source init...");
-        return new DruidParentDataSource() {};
+        return new DruidDataSource2();
     }
 
 }

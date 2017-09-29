@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "management.druid"
+    },
+    {
+      "name": "endpoints.druid"
+    }
+  ],
+  "properties": [
+    {
+      "name": "management.druid.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid actuator are enabled.",
+      "defaultValue": true
+    },
+    {
+      "name": "endpoints.druid.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not druid endpoint are enabled.",
+      "defaultValue": false
+    }
+  ]
+}

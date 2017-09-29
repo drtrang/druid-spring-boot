@@ -1,13 +1,13 @@
-package com.github.trang.druid;
+package com.github.trang.druid.autoconfigure;
 
 import com.alibaba.druid.support.http.StatViewServlet;
-import com.github.trang.druid.properties.DruidServletProperties.DruidStatViewServletProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidStatViewServletProperties;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,8 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.Servlet;
 
-import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STAT_VIEW_SERVLET_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_STAT_VIEW_SERVLET_PREFIX;
+
 
 /**
  * Druid Servlet 配置
@@ -26,10 +27,8 @@ import static com.github.trang.druid.properties.DruidServletProperties.DRUID_STA
 @ConditionalOnWebApplication
 @ConditionalOnClass(Servlet.class)
 @ConditionalOnProperty(prefix = DRUID_STAT_VIEW_SERVLET_PREFIX, name = "enabled", havingValue = "true")
-@EnableConfigurationProperties(DruidStatViewServletProperties.class)
+@Slf4j
 public class DruidServletConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(DruidServletConfiguration.class);
 
     /**
      * Druid 提供了一个 StatViewServlet 用于展示 Druid 的统计信息
@@ -38,8 +37,9 @@ public class DruidServletConfiguration {
      *   2. 提供监控信息的 JSON API
      */
     @Bean
-    public ServletRegistrationBean servletRegistrationBean(DruidStatViewServletProperties properties) {
+    public ServletRegistrationBean servletRegistrationBean(DruidDataSourceProperties druidDataSourceProperties) {
         log.debug("druid stat-view-servlet init...");
+        DruidStatViewServletProperties properties = druidDataSourceProperties.getStatViewServlet();
         ServletRegistrationBean registration = new ServletRegistrationBean();
         StatViewServlet statViewServlet = new StatViewServlet();
         registration.setServlet(statViewServlet);

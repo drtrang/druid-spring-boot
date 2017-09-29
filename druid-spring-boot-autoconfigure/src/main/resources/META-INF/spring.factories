@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.trang.druid.DruidAutoConfiguration,\
-com.github.trang.druid.DruidDataSourceInitializerAutoConfiguration
+com.github.trang.druid.autoconfigure.DruidAutoConfiguration,\
+com.github.trang.druid.autoconfigure.DruidDataSourceInitializerAutoConfiguration

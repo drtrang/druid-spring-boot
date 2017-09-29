@@ -4,15 +4,12 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.autoconfigure.jdbc.metadata.AbstractDataSourcePoolMetadata;
 
 /**
+ * Druid 的基础元数据
+ *
  * @author trang
  */
 public class DruidDataSourcePoolMetadata extends AbstractDataSourcePoolMetadata<DruidDataSource> {
 
-    /**
-     * Create an instance with the data source to use.
-     *
-     * @param dataSource the data source
-     */
     public DruidDataSourcePoolMetadata(DruidDataSource dataSource) {
         super(dataSource);
     }

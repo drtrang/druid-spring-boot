@@ -46,21 +46,21 @@
       "name": "spring.datasource.druid.aop-stat.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether or not druid aop-stat are enabled.",
-      "sourceType": "com.github.trang.druid.properties.DruidStatProperties$DruidAopStatProperties",
+      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidAopStatProperties",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.web-stat.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether or not druid web-stat are enabled.",
-      "sourceType": "com.github.trang.druid.properties.DruidStatProperties$DruidWebStatProperties",
+      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidWebStatProperties",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.stat-view-servlet.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether or not druid stat-view-servlet are enabled.",
-      "sourceType": "com.github.trang.druid.properties.DruidServletProperties$DruidStatViewServletProperties",
+      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidStatViewServletProperties",
       "defaultValue": false
     }
   ],
