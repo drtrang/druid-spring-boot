@@ -14,11 +14,12 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 <dependency>
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot-starter</artifactId>
-    <version>1.0.3</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 ## NEW !
+1. 新增 `druid-spring-boot-actuator-starter`
 1. 新增 ConfigFilter 的自动配置，替换 Druid 默认的 `connectionProperties` 方式
 2. 完美支持多数据源 [ISSUE #2](https://github.com/drtrang/druid-spring-boot/issues/2)
 
@@ -89,6 +90,8 @@ spring:
 
 ### 多数据源
 1.0.2 版本新增多数据源支持，使用方式请查看 [DruidMultiDataSource.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/DruidMultiDataSource.md)。
+
+### Actuator 监控
 
 ### 配置示例
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)

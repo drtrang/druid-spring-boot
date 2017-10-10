@@ -5,7 +5,7 @@
 
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot</artifactId>
-    <version>1.0.4</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <name>Druid Spring Boot Starter</name>
@@ -290,6 +290,7 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <compilerArgument>-parameters</compilerArgument>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
                 </configuration>
             </plugin>
             <plugin>
