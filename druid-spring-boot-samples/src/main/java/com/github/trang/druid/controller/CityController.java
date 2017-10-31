@@ -5,6 +5,11 @@ import com.github.trang.druid.model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * CityController
+ *
+ * @author trang
+ */
 @RestController
 @RequestMapping("/city")
 public class CityController {

@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * CityMapper
+ *
+ * @author trang
+ */
 @Mapper
 public interface CityMapper {
 

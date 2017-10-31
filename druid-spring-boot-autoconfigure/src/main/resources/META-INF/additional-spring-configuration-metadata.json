@@ -62,6 +62,30 @@
       "description": "Whether or not druid stat-view-servlet are enabled.",
       "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidStatViewServletProperties",
       "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.slf4j.statement-sql-format-option.upp-case",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.slf4j.statement-sql-format-option.pretty-format",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "defaultValue": true
+    },
+    {
+      "name": "spring.datasource.druid.slf4j.statement-sql-format-option.desensitize",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.datasource.druid.slf4j.statement-sql-format-option.parameterized",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "defaultValue": false
     }
   ],
   "hints": [

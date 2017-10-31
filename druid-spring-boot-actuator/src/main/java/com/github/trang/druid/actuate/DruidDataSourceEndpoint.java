@@ -19,11 +19,11 @@ public class DruidDataSourceEndpoint extends AbstractEndpoint<List<Map<String, O
         super("druid");
     }
 
-    private static final DruidStatManagerFacade statManager = DruidStatManagerFacade.getInstance();
+    private static final DruidStatManagerFacade STAT_MANAGER = DruidStatManagerFacade.getInstance();
 
     @Override
     public List<Map<String, Object>> invoke() {
-        return statManager.getDataSourceStatDataList();
+        return STAT_MANAGER.getDataSourceStatDataList();
     }
 
 }

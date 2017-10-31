@@ -46,9 +46,12 @@ spring:
         enabled: true
         connection-log-enabled: false
         connection-log-error-enabled: true
-        statement-log-enabled: false
+        statement-log-enabled: true
         statement-log-error-enabled: true
-        statement-sql-pretty-format: true
+        statement-sql-format-option:
+          upp-case: true
+          pretty-format: false
+        statement-sql-pretty-format: false
         statement-executable-sql-log-enable: true
         result-set-log-enabled: false
         result-set-log-error-enabled: true
@@ -58,7 +61,7 @@ spring:
         log-violation: true
         throw-exception: false
         config:
-          select-all-column-allow: false
+          delete-where-none-check: true
       config:
         enabled: true
       aop-stat:

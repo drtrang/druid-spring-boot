@@ -49,7 +49,7 @@ public class SpringDataSourceConfig {
     @Bean
     @Primary
     public DynamicDataSource dataSource(DruidDataSource firstDataSource, DruidDataSource secondDataSource) {
-        Map<String, DataSource> targetDataSources = new HashMap<>();
+        Map<String, DataSource> targetDataSources = new HashMap<>(8);
         targetDataSources.put(firstDataSource.getName(), firstDataSource);
         targetDataSources.put(secondDataSource.getName(), secondDataSource);
         return new DynamicDataSource(firstDataSource, targetDataSources);

@@ -31,7 +31,7 @@ public abstract class DruidDataSource2Support extends DruidDataSource {
     @Autowired
     private DruidDataSourceProperties druidDataSourceProperties;
     @Autowired
-    private Optional<List<FilterAdapter>> druidFilters;
+    private List<FilterAdapter> druidFilters;
 
     @PostConstruct
     public void initDruidParentProperties() {
@@ -72,11 +72,14 @@ public abstract class DruidDataSource2Support extends DruidDataSource {
     }
 
     private void initFilters() {
-        List<Filter> filters = super.getProxyFilters();
-        druidFilters.ifPresent(dfs -> dfs.stream()
-                .filter(Objects::nonNull)
-                .filter(filter -> !filters.contains(filter))
-                .forEach(filters::add));
+        List<Filter> proxyFilters = super.getProxyFilters();
+        Optional.ofNullable(druidFilters)
+                .filter(filters -> !filters.isEmpty())
+                .ifPresent(dfs -> dfs.stream()
+                        .filter(Objects::nonNull)
+                        .filter(filter -> !proxyFilters.contains(filter))
+                        .forEach(proxyFilters::add)
+                );
     }
 
 }
