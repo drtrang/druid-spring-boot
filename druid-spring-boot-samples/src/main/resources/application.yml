@@ -14,7 +14,7 @@ spring:
     active: default
   output:
     ansi:
-      enabled: always
+      enabled: detect
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./samples
@@ -45,16 +45,11 @@ spring:
       slf4j:
         enabled: true
         connection-log-enabled: false
-        connection-log-error-enabled: true
-        statement-log-enabled: true
-        statement-log-error-enabled: true
         statement-sql-format-option:
           upp-case: true
           pretty-format: false
-        statement-sql-pretty-format: false
         statement-executable-sql-log-enable: true
         result-set-log-enabled: false
-        result-set-log-error-enabled: true
       wall:
         enabled: true
         db-type: h2
@@ -64,12 +59,6 @@ spring:
           delete-where-none-check: true
       config:
         enabled: true
-      aop-stat:
-        enabled: false
-        patterns:
-          - com.github.trang.*
-      web-stat:
-        enabled: false
       stat-view-servlet:
         enabled: true
   transaction:

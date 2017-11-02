@@ -1,0 +1,163 @@
+# 单数据源，多数据源的配置请看下方
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./samples
+    username: root
+    password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+    schema: classpath:/import.sql
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 10
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 25200000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      use-global-data-source-stat: true
+      stat:
+        ## 是否开启 StatFilter，默认 true，可以不写（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter）
+        enabled: true
+        ## 数据库类型
+        db-type: h2
+        ## 是否开启慢查询统计
+        log-slow-sql: true
+        ## 慢查询的定义
+        slow-sql-millis: 1000
+        ## 是否开启合并参数化 SQL
+        merge-sql: true
+      slf4j:
+        ## 是否开启 StatFilter，默认 false（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter）
+        enabled: true
+        ## datasource log 的总开关
+        ## 无调用者，Slf4jLogFilter#isDataSourceLogEnabled
+        data-source-log-enabled: true
+        ## connection log 的总开关
+        connection-log-enabled: false
+        ### 无调用者，LogFilter#isConnectionConnectBeforeLogEnabled
+        connection-connect-before-log-enabled: false
+        ### {conn-410001} connected
+        ### {conn-410001} pool-connect
+        connection-connect-after-log-enabled: false
+        ### 无调用者，LogFilter#isConnectionCommitAfterLogEnabled
+        connection-commit-after-log-enabled: false
+        ### 无调用者，LogFilter#isConnectionRollbackAfterLogEnabled
+        connection-rollback-after-log-enabled: false
+        ### {conn-410001} pool-recycle
+        connection-close-after-log-enabled: false
+        ## statement log 的总开关
+        statement-log-enabled: true
+        ## statement sql 输出选项，可以开启多个
+        statement-sql-format-option:
+          ### 关键字大写
+          upp-case: true
+          ### 表名不敏感
+          desensitize: false
+          ### 格式化
+          pretty-format: false
+          ### 参数化，column=?
+          parameterized: false
+        ## statement sql 格式化选项
+        statement-sql-pretty-format: false
+        ### {conn-410001, pstmt-420002} created.
+        statement-create-after-log-enabled: false
+        ### 无调用者，LogFilter#isStatementPrepareAfterLogEnabled
+        statement-prepare-after-log-enabled: false
+        ### 无调用者，LogFilter#isStatementPrepareCallAfterLogEnabled
+        statement-prepare-call-after-log-enabled: false
+        ### {conn-410001, pstmt-420002} executed.
+        statement-execute-after-log-enabled: false
+        ### 无调用者，LogFilter#isStatementExecuteQueryAfterLogEnabled
+        statement-execute-query-after-log-enabled: false
+        ### 无调用者，LogFilter#isStatementExecuteUpdateAfterLogEnabled
+        statement-execute-update-after-log-enabled: false
+        ### 无调用者，LogFilter#isStatementExecuteBatchAfterLogEnabled
+        statement-execute-batch-after-log-enabled: false
+        ### {conn-410001, pstmt-420002} executed. $sql
+        statement-executable-sql-log-enable: false
+        ### {conn-410001, pstmt-420002} closed
+        statement-close-after-log-enabled: false
+        ### {conn-410001, pstmt-420002} clearParameters.
+        statement-parameter-clear-log-enable: false
+        ### {conn-410001, pstmt-420002} Parameters :
+        ### {conn-410001, pstmt-420002} Types :
+        statement-parameter-set-log-enabled: false
+        ## result-set log 的总开关
+        result-set-log-enabled: false
+        ### {conn-410001, pstmt-420000, rs-450000} open
+        ### {conn-410001, pstmt-420000, rs-450000} Header:
+        result-set-open-after-log-enabled: false
+        ### {conn-410001, pstmt-420000, rs-450000} Result:
+        result-set-next-after-log-enabled: false
+        ### {conn-410001, pstmt-420000, rs-450000} closed
+        result-set-close-after-log-enabled: false
+        ## connection error log 的总开关
+        ## 无调用者，Slf4jLogFilter#isConnectionLogErrorEnabled
+        connection-log-error-enabled: true
+        ## statement error log 的总开关
+        ## {conn-410001, pstmt-420002} executed error.
+        statement-log-error-enabled: true
+        ## result-set error log 的总开关
+        ## 无调用者，LogFilter#isResultSetLogErrorEnabled
+        result-set-log-error-enabled: true
+      wall:
+        ## 是否开启 WallFilter，默认 false（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE-wallfilter）
+        enabled: true
+        ## 数据库类型
+        db-type: h2
+        ## 检测到攻击 SQL 时输出错误日志，默认 false
+        log-violation: true
+        ## 检测到攻击 SQL 时抛出异常，默认 true
+        throw-exception: false
+        ## WallFilter 自定义配置
+        config:
+          ### 检查 delete 语句是否不包含 where 条件
+          delete-where-none-check: true
+      config:
+        ## 是否开启 ConfigFilter，默认 false（https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter）
+        enabled: true
+      aop-stat:
+        ## 是否开启 DruidStatInterceptor，默认 false
+        enabled: false
+        patterns:
+          - com.github.trang.*
+      web-stat:
+        ## 是否开启 WebStatFilter，默认 false（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter）
+        enabled: false
+      stat-view-servlet:
+        ## 是否开启 StatViewServlet，默认 false（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE）
+        enabled: true
+        ## 登陆用户名
+        login-username: druid
+        ## 登陆密码
+        login-password: druid
+
+---
+
+# 多数据源配置方式
+## 各个数据源中相同的配置可以放到 `spring.datasource` 中，`spring.datasource.druid` 会
+## 继承 `spring.datasource` 的配置，如果遇到相同的属性会覆盖掉 `spring.datasource`
+spring:
+  datasource:
+    ### 所有数据源都会继承这些属性
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./samples
+    username: root
+    password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+    schema: classpath:/import.sql
+    druid:
+      ### 子数据源也可以自定义配置，与 `spring.datasource` 相同的属性会覆盖 `spring.datasource` 的配置
+      ### 不同的属性只会注入到当前数据源，不会对其它数据源造成影响
+      ### 最终该数据源的配置为 `spring.datasource` + `spring.datasource.druid`
+      order-master:
+        name: orderMaster
+        ### 会覆盖 `spring.datasource.url`，但是因为二者的值相同，所以可以不写
+        url: jdbc:h2:file:./samples
+      order-slave:
+        name: orderSlave
