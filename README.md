@@ -91,7 +91,7 @@ spring:
 ```
 
 ### 多数据源
-1.0.2 版本新增多数据源支持，使用方式请查看 [DruidMultiDataSource.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/DruidMultiDataSource.md)。
+1.0.2 版本新增多数据源支持，使用方式请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)。
 
 ### 配置示例
 [application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)

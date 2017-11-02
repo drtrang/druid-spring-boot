@@ -1,16 +1,16 @@
 # Druid 多数据源支持
 
-1.0.2 版本新增支持多数据源的 **DruidMultiDataSource**，开启该特性需要手动声明数据源，并指定注入的前缀 `spring.datasource.druid.${name}`，其中 `${name}` 可根据实际情况自定义。
+1.0.2 版本新增支持多数据源的 **DruidDataSource2**，开启该特性需要手动声明数据源，并指定注入的前缀 `spring.datasource.druid.${name}`，其中 `${name}` 可根据实际情况自定义。
 
 
 ## 使用方式
 
-1. 声明各个 DataSource，类型为 `com.github.trang.druid.datasource.DruidMultiDataSource`。
+1. 声明各个 DataSource，类型为 `com.github.trang.druid.autoconfigure.datasource.DruidDataSource2`。
     ```java
     @Bean
     @ConfigurationProperties("spring.datasource.druid.one")
     public DruidDataSource firstDataSource() {
-        return new DruidMultiDataSource();
+        return new DruidDataSource2();
     }
     ```
 
@@ -29,8 +29,8 @@
 
 ## 原理
 
-DruidParentDataSource 类存在的目的是为了注入 `spring.datasource.druid` 的配置。
-基于 Spring4 的特性，DruidMultiDataSource 在继承 DruidParentDataSource 的同时，也会继承这些配置，由此解决多数据源场景下相同配置重复定义的问题。
+DruidDataSourceSupport 类存在的目的是为了注入 `spring.datasource.druid` 的配置。
+基于 Spring4 的特性，DruidDataSource2 在继承 DruidDataSourceSupport 的同时，也会继承这些配置，由此解决多数据源场景下相同配置重复定义的问题。
 
 也就是说，以下两种方式是等价的：
 ```yaml
