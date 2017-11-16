@@ -30,8 +30,8 @@ public class SpringDataSourceConfig {
      * 前缀的配置，若名称相同则会被 `spring.datasource.druid.one` 覆盖
      */
     @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties("spring.datasource.druid.one")
-    public DruidDataSource firstDataSource() {
+    @ConfigurationProperties("spring.datasource.druid.data-sources.one")
+    public DruidDataSource oneDataSource() {
         log.debug("druid first-data-source init...");
         return new DruidDataSource2();
     }
@@ -40,19 +40,19 @@ public class SpringDataSourceConfig {
      * 第二个数据源，若还有其它数据源可以继续增加
      */
     @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties("spring.datasource.druid.two")
-    public DruidDataSource secondDataSource() {
+    @ConfigurationProperties("spring.datasource.druid.data-sources.two")
+    public DruidDataSource twoDataSource() {
         log.debug("druid second-data-source init...");
         return new DruidDataSource2();
     }
 
     @Bean
     @Primary
-    public DynamicDataSource dataSource(DruidDataSource firstDataSource, DruidDataSource secondDataSource) {
+    public DynamicDataSource dataSource(DruidDataSource oneDataSource, DruidDataSource twoDataSource) {
         Map<String, DataSource> targetDataSources = new HashMap<>(8);
-        targetDataSources.put(firstDataSource.getName(), firstDataSource);
-        targetDataSources.put(secondDataSource.getName(), secondDataSource);
-        return new DynamicDataSource(firstDataSource, targetDataSources);
+        targetDataSources.put(oneDataSource.getName(), oneDataSource);
+        targetDataSources.put(twoDataSource.getName(), twoDataSource);
+        return new DynamicDataSource(oneDataSource, targetDataSources);
     }
 
 }

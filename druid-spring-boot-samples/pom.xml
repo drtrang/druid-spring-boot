@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.github.drtrang</groupId>
         <artifactId>druid-spring-boot</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>druid-spring-boot-samples</artifactId>
@@ -35,10 +35,10 @@
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-actuator-starter</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

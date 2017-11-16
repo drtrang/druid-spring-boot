@@ -9,12 +9,13 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
 import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -23,8 +24,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.sql.DataSource;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.*;
 
@@ -39,7 +39,7 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
 @EnableConfigurationProperties({DataSourceProperties.class, DruidDataSourceProperties.class})
 @Import({DruidServletConfiguration.class, DruidStatConfiguration.class})
 @Slf4j
-public class DruidAutoConfiguration {
+public class DruidAutoConfiguration implements InitializingBean {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -105,11 +105,39 @@ public class DruidAutoConfiguration {
         return new CommonsLogFilter();
     }
 
-    @Bean(initMethod = "init", destroyMethod = "close")
-    @ConditionalOnMissingBean(DataSource.class)
-    public DruidDataSource dataSource() {
-        log.debug("druid data-source init...");
-        return new DruidDataSource2();
+    @Autowired
+    private DefaultListableBeanFactory beanFactory;
+    @Autowired
+    private ConfigurableEnvironment environment;
+    @Autowired
+    private DruidDataSourceProperties druidDataSourceProperties;
+
+    private static final String PRIMARY_DATA_SOURCE_NAME = "dataSource";
+    private static final String DATA_SOURCE_NAME_SUFFIX = "DataSource";
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+//        if (druidDataSourceProperties.getDataSources().isEmpty() && !beanFactory.containsBean(PRIMARY_DATA_SOURCE_NAME)) {
+//            BeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource2.class)
+//                    .setInitMethodName("init")
+//                    .setDestroyMethodName("close")
+//                    .getBeanDefinition();
+//            beanFactory.registerBeanDefinition(PRIMARY_DATA_SOURCE_NAME, beanDefinition);
+//            log.debug("druid data-source init...");
+//        } else {
+//            druidDataSourceProperties.getDataSources().forEach((dataSourceName, dataSourceConfig) -> {
+//                BeanDefinition eachBeanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource2.class)
+//                        .setInitMethodName("init")
+//                        .setDestroyMethodName("close")
+//                        .getBeanDefinition();
+//                String beanName = dataSourceName + DATA_SOURCE_NAME_SUFFIX;
+//                beanFactory.registerBeanDefinition(beanName, eachBeanDefinition);
+//                DruidDataSource2 eachDataSource = beanFactory.getBean(beanName, DruidDataSource2.class);
+//                PropertySourcesBinder propertySourcesBinder = new PropertySourcesBinder(environment);
+//                propertySourcesBinder.bindTo("spring.datasource.druid.data-sources." + dataSourceName, eachDataSource);
+//                log.debug("druid {}-data-source init...", dataSourceName);
+//            });
+//        }
     }
 
 }

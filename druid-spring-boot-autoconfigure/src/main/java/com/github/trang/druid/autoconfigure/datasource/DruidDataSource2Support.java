@@ -75,7 +75,7 @@ public abstract class DruidDataSource2Support extends DruidDataSource {
         List<Filter> proxyFilters = super.getProxyFilters();
         Optional.ofNullable(druidFilters)
                 .filter(filters -> !filters.isEmpty())
-                .ifPresent(dfs -> dfs.stream()
+                .ifPresent(filters -> filters.stream()
                         .filter(Objects::nonNull)
                         .filter(filter -> !proxyFilters.contains(filter))
                         .forEach(proxyFilters::add)

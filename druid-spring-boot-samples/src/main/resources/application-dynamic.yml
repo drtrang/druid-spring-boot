@@ -1,0 +1,18 @@
+debug: false
+
+spring:
+  autoconfigure:
+    exclude:
+      # 多数据源场景会导致 `javax.sql.DataSource` 和 `org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`
+      # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    druid:
+      # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
+      data-sources:
+        one:
+          max-active: 50
+          max-open-prepared-statements: 50
+        two:
+          max-active: 25
+          max-open-prepared-statements: 25

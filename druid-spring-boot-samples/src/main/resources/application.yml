@@ -11,7 +11,7 @@ logging:
 spring:
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
-    active: default
+    active: dynamic
   output:
     ansi:
       enabled: detect
@@ -113,14 +113,13 @@ spring:
   datasource:
     druid:
       # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
-      one:
-        name: one
-        max-active: 50
-        max-open-prepared-statements: 50
-      two:
-        name: two
-        max-active: 25
-        max-open-prepared-statements: 25
+      data-sources:
+        one:
+          max-active: 50
+          max-open-prepared-statements: 50
+        two:
+          max-active: 25
+          max-open-prepared-statements: 25
 
 ---
 

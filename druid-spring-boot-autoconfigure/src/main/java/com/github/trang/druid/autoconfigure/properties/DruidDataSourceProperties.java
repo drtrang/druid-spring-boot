@@ -1,9 +1,13 @@
 package com.github.trang.druid.autoconfigure.properties;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_DATA_SOURCE_PREFIX;
 
@@ -40,6 +44,8 @@ public class DruidDataSourceProperties {
     DruidWebStatProperties webStat = new DruidWebStatProperties();
     @NestedConfigurationProperty
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
+    @NestedConfigurationProperty
+    Map<String, DruidDataSource> dataSources = new HashMap<>(16);
 
     @Getter@Setter
     public static class DruidConfigFilterProperties {
