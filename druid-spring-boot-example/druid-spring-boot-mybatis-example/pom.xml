@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>com.github.drtrang</groupId>
-        <artifactId>druid-spring-boot</artifactId>
+        <artifactId>druid-spring-boot-example</artifactId>
         <version>1.1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>druid-spring-boot-samples</artifactId>
+    <artifactId>druid-spring-boot-mybatis-example</artifactId>
 
     <dependencies>
         <dependency>

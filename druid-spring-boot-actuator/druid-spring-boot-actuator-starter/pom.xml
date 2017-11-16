@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.github.drtrang</groupId>
-        <artifactId>druid-spring-boot</artifactId>
+        <artifactId>druid-spring-boot-actuator</artifactId>
         <version>1.1.2-SNAPSHOT</version>
     </parent>
 

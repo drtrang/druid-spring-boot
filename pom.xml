@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.drtrang</groupId>
-    <artifactId>druid-spring-boot</artifactId>
+    <artifactId>druid-spring-boot-parent</artifactId>
     <version>1.1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -34,12 +34,9 @@
     </scm>
 
     <modules>
-        <module>druid-spring-boot-autoconfigure</module>
-        <module>druid-spring-boot-starter</module>
+        <module>druid-spring-boot</module>
         <module>druid-spring-boot-actuator</module>
-        <module>druid-spring-boot-actuator-autoconfigure</module>
-        <module>druid-spring-boot-actuator-starter</module>
-        <module>druid-spring-boot-samples</module>
+        <module>druid-spring-boot-example</module>
     </modules>
 
     <properties>

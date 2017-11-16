@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.github.drtrang</groupId>
-        <artifactId>druid-spring-boot</artifactId>
+        <artifactId>druid-spring-boot-actuator</artifactId>
         <version>1.1.2-SNAPSHOT</version>
     </parent>
 
@@ -14,8 +14,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot-actuator</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -24,6 +28,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
