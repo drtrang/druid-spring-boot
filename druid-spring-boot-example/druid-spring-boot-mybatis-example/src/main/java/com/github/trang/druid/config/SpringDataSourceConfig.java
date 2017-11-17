@@ -9,9 +9,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.Map.Entry;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -26,14 +25,14 @@ import static java.util.stream.Collectors.toMap;
 public class SpringDataSourceConfig {
 
     @Autowired
-    private List<DruidDataSource> dataSourceList;
+    private Map<String, DruidDataSource> druidDataSourceMap;
 
     @Bean
     @Primary
     public DynamicDataSource dataSource() {
-        Map<String, DataSource> dataSourceMap = dataSourceList.stream()
-                .collect(toMap(DruidDataSource::getName, Function.identity()));
-        return new DynamicDataSource(dataSourceMap.get("first"), dataSourceMap);
+        Map<String, DataSource> dataSourceMap = druidDataSourceMap.entrySet().stream()
+                .collect(toMap(Entry::getKey, Entry::getValue));
+        return new DynamicDataSource(dataSourceMap.get("master"), dataSourceMap);
     }
 
 }

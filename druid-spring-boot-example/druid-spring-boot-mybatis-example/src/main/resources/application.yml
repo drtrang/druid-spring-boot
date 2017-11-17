@@ -97,10 +97,10 @@ spring:
     druid:
       # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
       data-sources:
-        first:
+        master:
           max-active: 50
           max-open-prepared-statements: 50
-        second:
+        slave:
           max-active: 25
           max-open-prepared-statements: 25
 

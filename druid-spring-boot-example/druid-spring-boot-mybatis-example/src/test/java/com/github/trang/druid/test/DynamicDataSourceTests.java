@@ -24,44 +24,44 @@ import static org.junit.Assert.assertEquals;
 public class DynamicDataSourceTests extends BaseTest {
 
     @Autowired
-    private DruidDataSource firstDataSource;
+    private DruidDataSource masterDataSource;
     @Autowired
-    private DruidDataSource secondDataSource;
+    private DruidDataSource slaveDataSource;
     @Autowired
     private DynamicDataSource dataSource;
 
     @Test
-    public void testFirstDataSource() {
-        assertEquals(1, firstDataSource.getInitialSize());
-        assertEquals(1, firstDataSource.getMinIdle());
-        assertEquals(50, firstDataSource.getMaxActive());
-        assertEquals(30000, firstDataSource.getMaxWait());
-        assertEquals(60000, firstDataSource.getTimeBetweenEvictionRunsMillis());
-        assertEquals(1800000, firstDataSource.getMinEvictableIdleTimeMillis());
-        assertEquals(25200000, firstDataSource.getMaxEvictableIdleTimeMillis());
-        assertEquals("SELECT 1", firstDataSource.getValidationQuery());
-        assertEquals(true, firstDataSource.isTestWhileIdle());
-        assertEquals(false, firstDataSource.isTestOnBorrow());
-        assertEquals(false, firstDataSource.isTestOnReturn());
-        assertEquals(50, firstDataSource.getMaxPoolPreparedStatementPerConnectionSize());
-        assertEquals(true, firstDataSource.isUseGlobalDataSourceStat());
+    public void testMasterDataSource() {
+        assertEquals(1, masterDataSource.getInitialSize());
+        assertEquals(1, masterDataSource.getMinIdle());
+        assertEquals(50, masterDataSource.getMaxActive());
+        assertEquals(30000, masterDataSource.getMaxWait());
+        assertEquals(60000, masterDataSource.getTimeBetweenEvictionRunsMillis());
+        assertEquals(1800000, masterDataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(25200000, masterDataSource.getMaxEvictableIdleTimeMillis());
+        assertEquals("SELECT 1", masterDataSource.getValidationQuery());
+        assertEquals(true, masterDataSource.isTestWhileIdle());
+        assertEquals(false, masterDataSource.isTestOnBorrow());
+        assertEquals(false, masterDataSource.isTestOnReturn());
+        assertEquals(50, masterDataSource.getMaxPoolPreparedStatementPerConnectionSize());
+        assertEquals(true, masterDataSource.isUseGlobalDataSourceStat());
     }
 
     @Test
-    public void testSecondDataSource() {
-        assertEquals(1, secondDataSource.getInitialSize());
-        assertEquals(1, secondDataSource.getMinIdle());
-        assertEquals(25, secondDataSource.getMaxActive());
-        assertEquals(30000, secondDataSource.getMaxWait());
-        assertEquals(60000, secondDataSource.getTimeBetweenEvictionRunsMillis());
-        assertEquals(1800000, secondDataSource.getMinEvictableIdleTimeMillis());
-        assertEquals(25200000, secondDataSource.getMaxEvictableIdleTimeMillis());
-        assertEquals("SELECT 1", secondDataSource.getValidationQuery());
-        assertEquals(true, secondDataSource.isTestWhileIdle());
-        assertEquals(false, secondDataSource.isTestOnBorrow());
-        assertEquals(false, secondDataSource.isTestOnReturn());
-        assertEquals(25, secondDataSource.getMaxPoolPreparedStatementPerConnectionSize());
-        assertEquals(true, secondDataSource.isUseGlobalDataSourceStat());
+    public void testSlaveDataSource() {
+        assertEquals(1, slaveDataSource.getInitialSize());
+        assertEquals(1, slaveDataSource.getMinIdle());
+        assertEquals(25, slaveDataSource.getMaxActive());
+        assertEquals(30000, slaveDataSource.getMaxWait());
+        assertEquals(60000, slaveDataSource.getTimeBetweenEvictionRunsMillis());
+        assertEquals(1800000, slaveDataSource.getMinEvictableIdleTimeMillis());
+        assertEquals(25200000, slaveDataSource.getMaxEvictableIdleTimeMillis());
+        assertEquals("SELECT 1", slaveDataSource.getValidationQuery());
+        assertEquals(true, slaveDataSource.isTestWhileIdle());
+        assertEquals(false, slaveDataSource.isTestOnBorrow());
+        assertEquals(false, slaveDataSource.isTestOnReturn());
+        assertEquals(25, slaveDataSource.getMaxPoolPreparedStatementPerConnectionSize());
+        assertEquals(true, slaveDataSource.isUseGlobalDataSourceStat());
     }
 
     @Test

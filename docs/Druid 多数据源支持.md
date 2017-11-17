@@ -2,7 +2,7 @@
 
 1.0.2 版本新增了支持多数据源的 DruidDataSource2，Starter 可以自动将 `spring.datasource` 和 `spring.datasource.druid` 开头的属性注入到每一个数据源，用户只需要声明每个数据源单独的属性即可。
 
-1.1.2 版本则更进一步，改进了多数据源的注册方式，无需任何代码，由 Starter 自动发现配置并注册到 Spring Context，旨在简化开发人员的劳动力。
+1.1.2 版本则更进一步，改进了多数据源的注册方式，无需任何代码，由 Starter 自动发现配置并注册到 ApplicationContext，旨在简化开发人员的劳动力。
 
 
 ## 使用方式
