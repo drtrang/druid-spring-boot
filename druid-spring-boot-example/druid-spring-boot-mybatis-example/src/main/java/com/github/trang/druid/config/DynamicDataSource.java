@@ -1,5 +1,6 @@
 package com.github.trang.druid.config;
 
+import lombok.Getter;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
@@ -18,7 +19,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private AtomicInteger count = new AtomicInteger();
     private DataSource defaultTargetDataSource;
-    private Map<String, DataSource> targetDataSources;
+    @Getter private Map<String, DataSource> targetDataSources;
 
     public DynamicDataSource(DataSource defaultTargetDataSource, Map<String, DataSource> targetDataSources) {
         this.defaultTargetDataSource = defaultTargetDataSource;

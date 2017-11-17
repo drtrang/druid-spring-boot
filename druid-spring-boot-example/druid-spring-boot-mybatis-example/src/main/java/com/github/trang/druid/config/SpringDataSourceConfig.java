@@ -1,17 +1,19 @@
 package com.github.trang.druid.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toMap;
 
 /**
  * 多数据源配置，只在 #{@code spring.profiles.active=dynamic} 时生效
@@ -23,36 +25,15 @@ import java.util.Map;
 @Slf4j
 public class SpringDataSourceConfig {
 
-    /**
-     * 第一个数据源，注意数据源类型为 #{@link DruidDataSource2}
-     *
-     * `spring.datasource.druid.one` 前缀的配置会注入到该 Bean，同时会继承 `spring.datasource.druid`
-     * 前缀的配置，若名称相同则会被 `spring.datasource.druid.one` 覆盖
-     */
-    @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties("spring.datasource.druid.data-sources.one")
-    public DruidDataSource oneDataSource() {
-        log.debug("druid first-data-source init...");
-        return new DruidDataSource2();
-    }
-
-    /**
-     * 第二个数据源，若还有其它数据源可以继续增加
-     */
-    @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties("spring.datasource.druid.data-sources.two")
-    public DruidDataSource twoDataSource() {
-        log.debug("druid second-data-source init...");
-        return new DruidDataSource2();
-    }
+    @Autowired
+    private List<DruidDataSource> dataSourceList;
 
     @Bean
     @Primary
-    public DynamicDataSource dataSource(DruidDataSource oneDataSource, DruidDataSource twoDataSource) {
-        Map<String, DataSource> targetDataSources = new HashMap<>(8);
-        targetDataSources.put(oneDataSource.getName(), oneDataSource);
-        targetDataSources.put(twoDataSource.getName(), twoDataSource);
-        return new DynamicDataSource(oneDataSource, targetDataSources);
+    public DynamicDataSource dataSource() {
+        Map<String, DataSource> dataSourceMap = dataSourceList.stream()
+                .collect(toMap(DruidDataSource::getName, Function.identity()));
+        return new DynamicDataSource(dataSourceMap.get("first"), dataSourceMap);
     }
 
 }

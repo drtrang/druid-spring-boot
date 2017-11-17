@@ -19,7 +19,7 @@ import java.util.Optional;
 import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_DATA_SOURCE_PREFIX;
 
 /**
- * Druid 多数据源支持，会自动注入 `spring.datasource.druid` 配置
+ * Druid 多数据源支持，会自动注入 'spring.datasource' 和 'spring.datasource.druid' 配置
  *
  * @author trang
  */
@@ -30,7 +30,7 @@ public abstract class DruidDataSource2Support extends DruidDataSource {
     private DataSourceProperties dataSourceProperties;
     @Autowired
     private DruidDataSourceProperties druidDataSourceProperties;
-    @Autowired
+    @Autowired(required = false)
     private List<FilterAdapter> druidFilters;
 
     @PostConstruct

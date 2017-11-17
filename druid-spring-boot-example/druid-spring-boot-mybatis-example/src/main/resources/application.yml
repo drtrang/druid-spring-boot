@@ -11,7 +11,7 @@ logging:
 spring:
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
-    active: dynamic
+    active: default
   output:
     ansi:
       enabled: detect
@@ -77,6 +77,35 @@ mybatis:
 
 ---
 
+debug: true
+
+spring:
+  profiles: default
+
+---
+
+debug: true
+
+spring:
+  profiles: dynamic
+  autoconfigure:
+    exclude:
+      # 多数据源场景会导致 `javax.sql.DataSource` 和 `org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`
+      # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    druid:
+      # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
+      data-sources:
+        first:
+          max-active: 50
+          max-open-prepared-statements: 50
+        second:
+          max-active: 25
+          max-open-prepared-statements: 25
+
+---
+
 debug: false
 
 spring:
@@ -91,59 +120,3 @@ endpoints:
     enabled: true
   druid:
     enabled: true
-
----
-
-debug: false
-
-spring:
-  profiles: default
-
----
-
-debug: false
-
-spring:
-  profiles: dynamic
-  autoconfigure:
-    exclude:
-      # 多数据源场景会导致 `javax.sql.DataSource` 和 `org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`
-      # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-  datasource:
-    druid:
-      # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
-      data-sources:
-        one:
-          max-active: 50
-          max-open-prepared-statements: 50
-        two:
-          max-active: 25
-          max-open-prepared-statements: 25
-
----
-
-spring:
-  profiles: dev-yaml
-  datasource:
-    druid:
-      min-evictable-idle-time-millis: 100000
-      max-evictable-idle-time-millis: 200000
-
----
-
-spring:
-  profiles: dynamic-dev-yaml
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-  datasource:
-    druid:
-      one:
-        name: one
-        min-evictable-idle-time-millis: 100001
-        max-evictable-idle-time-millis: 200001
-      two:
-        name: two
-        min-evictable-idle-time-millis: 100002
-        max-evictable-idle-time-millis: 200002

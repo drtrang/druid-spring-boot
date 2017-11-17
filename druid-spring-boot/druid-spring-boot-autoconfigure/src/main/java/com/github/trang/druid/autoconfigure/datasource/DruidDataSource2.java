@@ -1,7 +1,7 @@
 package com.github.trang.druid.autoconfigure.datasource;
 
 /**
- * Druid 数据源，会继承 `spring.datasource.druid` 配置，并注入 `spring.datasource.druid.${name}` 配置
+ * Druid 数据源，会继承 DruidDataSource2Support 的配置，并注入 'spring.datasource.druid.data-source.${name}' 的配置
  *
  * @author trang
  */

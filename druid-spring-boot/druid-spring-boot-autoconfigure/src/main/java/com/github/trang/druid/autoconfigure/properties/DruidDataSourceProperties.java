@@ -28,11 +28,8 @@ public class DruidDataSourceProperties {
     public static final String DRUID_LOG4J_FILTER_PREFIX = "spring.datasource.druid.log4j";
     public static final String DRUID_LOG4J2_FILTER_PREFIX = "spring.datasource.druid.log4j2";
     public static final String DRUID_COMMONS_LOG_FILTER_PREFIX = "spring.datasource.druid.commons-log";
-
     public static final String DRUID_CONFIG_FILTER_PREFIX = "spring.datasource.druid.config";
-
     public static final String DRUID_STAT_VIEW_SERVLET_PREFIX = "spring.datasource.druid.stat-view-servlet";
-
     public static final String DRUID_WEB_STAT_PREFIX = "spring.datasource.druid.web-stat";
     public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
 

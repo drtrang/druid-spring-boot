@@ -29,9 +29,7 @@ import javax.sql.DataSource;
 public class DruidDataSourceInitializerAutoConfiguration {
 
     @Bean
-    @ConditionalOnMissingBean(
-            type = "org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer",
-            value = DruidDataSourceInitializer.class)
+    @ConditionalOnMissingBean(value = DruidDataSourceInitializer.class, name = "dataSourceInitializer")
     public DruidDataSourceInitializer dataSourceInitializer(DataSourceProperties properties,
                                                             ApplicationContext applicationContext) {
         return new DruidDataSourceInitializer(properties, applicationContext);

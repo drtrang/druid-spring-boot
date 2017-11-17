@@ -3,6 +3,7 @@ package com.github.trang.druid.test;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,6 +12,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author trang
  */
+@ActiveProfiles("default")
 public class SingleDataSourceTests extends BaseTest {
 
     @Autowired
