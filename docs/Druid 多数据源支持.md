@@ -1,6 +1,7 @@
 # Druid 多数据源支持
 
 1.0.2 版本新增了支持多数据源的 **DruidDataSource2**，可以将 `spring.datasource` 和 `spring.datasource.druid` 开头的配置注入到数据源，解决各数据源之间的相同配置问题。
+
 1.1.2 版本改进了多数据源的注册方式，由 Starter 自动发现配置并注册到 Spring Context，用户只需在配置文件中声明即可。
 
 
