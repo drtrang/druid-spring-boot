@@ -7,39 +7,42 @@
 
 ## 使用方式
 
-1. 编辑配置文件，Starter 会将 `spring.datasource.druid.data-sources` 开头的的属性注入到 Map<String, DruidDataSource2> 中，从而构建多数据源。
+编辑配置文件，Starter 会将 `spring.datasource.druid.data-sources` 开头的的属性注入到 Map<String, DruidDataSource2> 中，从而构建多数据源。
+    
+```yaml
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: root
+    password: 123456
+    druid:
+      # 多数据源的标识，若该属性存在则为多数据源环境
+      data-sources:
+        ## master 数据源的配置，以下为 master 数据源独有的配置
+        master:
+          url: jdbc:h2:file:./master
+        ## slave 数据源的配置，以下为 slave 数据源独有的配置
+        slave:
+          url: jdbc:h2:file:./slave
+```
+
+注： 排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration` 有两种方式，以下方式任选其一即可：
+    
+```yaml
+1. 在 `@SpringBootApplication` 注解中排除
+    ```java
+    @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+    ```
+2. 在 `application.yml` 中排除
     ```yaml
     spring:
       autoconfigure:
         exclude:
           - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-      datasource:
-        driver-class-name: org.h2.Driver
-        username: root
-        password: 123456
-        druid:
-          # 多数据源的标识，若该属性存在则为多数据源环境
-          data-sources:
-            ## master 数据源的配置，以下为 master 数据源独有的配置
-            master:
-              url: jdbc:h2:file:./master
-            ## slave 数据源的配置，以下为 slave 数据源独有的配置
-            slave:
-              url: jdbc:h2:file:./slave
     ```
-
-注： 排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration` 有两种方式，以下方式任选其一即可：
-    1. 在 `@SpringBootApplication` 注解中排除
-        ```java
-        @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-        ```
-    2. 在 `application.yml` 中排除
-        ```yaml
-        spring:
-          autoconfigure:
-            exclude:
-              - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-        ```
 
 ## 原理
 
@@ -47,6 +50,8 @@ DruidDataSource2Support 类存在的目的是为了注入 `spring.datasource` �
 基于 Spring4 的特性，DruidDataSource2 在继承 DruidDataSource2Support 的同时，也会继承这些配置，由此解决多数据源场景下相同配置重复定义的问题。
 
 也就是说，以下两种方式是等价的：
+
+方式一：
 ```yaml
 spring:
   datasource:
@@ -61,6 +66,7 @@ spring:
           url: jdbc:h2:file:./slave
 ```
 
+方式二：
 ```yaml
 spring:
   datasource:
