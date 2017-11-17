@@ -154,10 +154,10 @@ spring:
     druid:
       ### 子数据源也可以自定义配置，与 `spring.datasource` 相同的属性会覆盖 `spring.datasource` 的配置
       ### 不同的属性只会注入到当前数据源，不会对其它数据源造成影响
-      ### 最终该数据源的配置为 `spring.datasource` + `spring.datasource.druid`
-      order-master:
-        name: orderMaster
-        ### 会覆盖 `spring.datasource.url`，但是因为二者的值相同，所以可以不写
-        url: jdbc:h2:file:./samples
-      order-slave:
-        name: orderSlave
+      ### 最终该数据源的配置为 `spring.datasource.*` + `spring.datasource.druid.*` + `spring.datasource.druid.${name}.*`
+      data-sources:
+        order-master:
+          ### 会覆盖 `spring.datasource.url`
+          url: jdbc:h2:file:./order_master
+        order-slave:
+          url: jdbc:h2:file:./order_slave

@@ -3,88 +3,71 @@
     {
       "name": "spring.datasource.druid.stat.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid stat-filter are enabled.",
+      "description": "是否开启 StatFilter.",
       "defaultValue": true
     },
     {
       "name": "spring.datasource.druid.wall.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid wall-filter are enabled.",
+      "description": "是否开启 WallFilter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.config.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid config-filter are enabled.",
+      "description": "是否开启 ConfigFilter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.slf4j.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid slf4j-filter are enabled.",
+      "description": "是否开启 Slf4jLogFilter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.log4j.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid log4j-filter are enabled.",
+      "description": "是否开启 Log4jFilter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.log4j2.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid log4j2-filter are enabled.",
+      "description": "是否开启 Log4j2Filter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.commons-log.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not druid commons-log-filter are enabled.",
-      "defaultValue": false
-    },
-    {
-      "name": "spring.datasource.druid.aop-stat.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether or not druid aop-stat are enabled.",
-      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidAopStatProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "spring.datasource.druid.web-stat.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether or not druid web-stat are enabled.",
-      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidWebStatProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "spring.datasource.druid.stat-view-servlet.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether or not druid stat-view-servlet are enabled.",
-      "sourceType": "com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties$DruidStatViewServletProperties",
+      "description": "是否开启 CommonsLogFilter.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.slf4j.statement-sql-format-option.upp-case",
       "type": "java.lang.Boolean",
       "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "description": "是否开启关键字大写.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.slf4j.statement-sql-format-option.pretty-format",
       "type": "java.lang.Boolean",
       "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "description": "是否开启 SQL 格式化.",
       "defaultValue": true
     },
     {
       "name": "spring.datasource.druid.slf4j.statement-sql-format-option.desensitize",
       "type": "java.lang.Boolean",
       "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "description": "是否开启不敏感表名.",
       "defaultValue": false
     },
     {
       "name": "spring.datasource.druid.slf4j.statement-sql-format-option.parameterized",
       "type": "java.lang.Boolean",
       "sourceType": "com.alibaba.druid.sql.SQLUtils$FormatOption",
+      "description": "是否开启 SQL 参数化.",
       "defaultValue": false
     }
   ],

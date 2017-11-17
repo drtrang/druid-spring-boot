@@ -154,8 +154,12 @@ public class DruidAutoConfiguration implements BeanFactoryAware, EnvironmentAwar
                     .getBeanDefinition();
             // 注册 BeanDefinition
             beanFactory.registerBeanDefinition(dataSourceName, beanDefinition);
-            // 注册 Alias
-            beanFactory.registerAlias(dataSourceName, dataSourceName + "DataSource");
+            String lowerCaseName = dataSourceName.toLowerCase();
+            // 当 beanName 不是以 datasource 结尾时，增加别名
+            if (!lowerCaseName.endsWith("datasource") && !lowerCaseName.endsWith("data-source")) {
+                // 注册 Alias
+                beanFactory.registerAlias(dataSourceName, dataSourceName + "DataSource");
+            }
             // 将 'spring.datasource.druid.data-sources.$dataSourceName' 的配置绑定到 Bean
             DruidDataSource2 dataSource = beanFactory.getBean(dataSourceName, DruidDataSource2.class);
             PropertySourcesBinder propertySourcesBinder = new PropertySourcesBinder(environment);

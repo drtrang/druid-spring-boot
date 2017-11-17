@@ -14,16 +14,14 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 <dependency>
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot-starter</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 </dependency>
 ```
 
 ## NEW !
-1. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/druid.yml)
-1. 新增 `statement-sql-format-option` 的代码提示
+1. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 Spring Context，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)。
+1. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/druid.yml)
 2. 新增 `druid-spring-boot-actuator-starter`
-3. 新增 ConfigFilter 的自动配置，替换 Druid 默认的 `connectionProperties` 方式
-4. 完美支持多数据源 [ISSUE #2](https://github.com/drtrang/druid-spring-boot/issues/2)
 
 
 ## 配置
@@ -45,6 +43,10 @@ Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置
 ```yaml
 spring:
   datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./samples
+    username: root
+    password: 123456
     druid:
       initial-size: 1
       min-idle: 1
@@ -91,13 +93,24 @@ spring:
 ```
 
 ### 多数据源
-1.0.2 版本新增多数据源支持，使用方式请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)。
+1.1.2 版本改进了多数据源的声明方式，由 Starter 自动发现配置并注册到 Spring Context，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)。
+
+```yaml
+spring:
+  datasource:
+    druid:
+      data-sources:
+        first:
+          url: jdbc:h2:file:./first
+        second:
+          url: jdbc:h2:file:./second
+```
 
 ### 配置示例
-[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/application.yml)
+[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/application.yml)
 
 ### 全配置说明
-[druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-samples/src/main/resources/druid.yml)
+[druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/druid.yml)
 
 
 ## 自动提示
@@ -114,7 +127,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 
 ## 演示
-[druid-spring-boot-samples](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-samples) 演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。 
+[druid-spring-boot-example](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-example) 演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。 
 
 
 ## Change Log
