@@ -1,6 +1,6 @@
-package com.github.trang.druid;
+package com.github.trang.druid.example;
 
-import com.github.trang.druid.mapper.CityMapper;
+import com.github.trang.druid.example.mapper.CityMapper;
 import com.google.gson.Gson;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import org.springframework.context.ApplicationContext;
  *
  * @author trang
  */
-@SpringBootApplication
-@MapperScan("com.github.trang.druid.mapper")
+@SpringBootApplication(scanBasePackages = "com.github.trang.druid.example")
+@MapperScan("com.github.trang.druid.example.mapper")
 public class DruidSpringBootStarterApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

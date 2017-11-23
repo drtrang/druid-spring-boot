@@ -73,7 +73,7 @@ spring:
       preferred-json-mapper: jackson
 
 mybatis:
-  type-aliases-package: com.github.trang.druid.model
+  type-aliases-package: com.github.trang.druid.example.model
 
 ---
 

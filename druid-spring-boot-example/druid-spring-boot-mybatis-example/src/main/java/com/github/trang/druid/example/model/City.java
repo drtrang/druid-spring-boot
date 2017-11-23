@@ -1,4 +1,4 @@
-package com.github.trang.druid.model;
+package com.github.trang.druid.example.model;
 
 import java.io.Serializable;
 

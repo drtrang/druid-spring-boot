@@ -1,8 +1,8 @@
-package com.github.trang.druid.test;
+package com.github.trang.druid.example.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
-import com.github.trang.druid.config.DynamicDataSource;
+import com.github.trang.druid.example.config.DynamicDataSource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

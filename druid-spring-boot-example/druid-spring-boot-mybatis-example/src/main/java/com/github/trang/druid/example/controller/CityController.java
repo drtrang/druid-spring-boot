@@ -1,7 +1,7 @@
-package com.github.trang.druid.controller;
+package com.github.trang.druid.example.controller;
 
-import com.github.trang.druid.mapper.CityMapper;
-import com.github.trang.druid.model.City;
+import com.github.trang.druid.example.mapper.CityMapper;
+import com.github.trang.druid.example.model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

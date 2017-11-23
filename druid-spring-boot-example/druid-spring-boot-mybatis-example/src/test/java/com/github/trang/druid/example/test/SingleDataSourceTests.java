@@ -1,4 +1,4 @@
-package com.github.trang.druid.test;
+package com.github.trang.druid.example.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.junit.Test;
