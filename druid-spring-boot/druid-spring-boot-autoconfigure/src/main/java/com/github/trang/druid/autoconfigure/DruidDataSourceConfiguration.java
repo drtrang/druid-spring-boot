@@ -75,21 +75,19 @@ public class DruidDataSourceConfiguration {
                                 .setDestroyMethodName("close")
                                 .getBeanDefinition();
                         // 注册 BeanDefinition
-                        registry.registerBeanDefinition(dataSourceName, beanDefinition);
-                        // 注册驼峰别名
-                        String camelAlias = CharMatcher.separatedToCamel().apply(dataSourceName);
-                        registry.registerAlias(dataSourceName, camelAlias);
+                        String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
+                        registry.registerBeanDefinition(camelName, beanDefinition);
                         // 注册以 DataSource 为后缀的别名
                         String otherAlias;
-                        if (camelAlias.toLowerCase().endsWith(BEAN_SUFFIX.toLowerCase())) {
-                            if (!camelAlias.endsWith(BEAN_SUFFIX)) {
-                                otherAlias = camelAlias.substring(0, camelAlias.toLowerCase().indexOf(BEAN_SUFFIX.toLowerCase()));
+                        if (camelName.toLowerCase().endsWith(BEAN_SUFFIX.toLowerCase())) {
+                            if (!camelName.endsWith(BEAN_SUFFIX)) {
+                                otherAlias = camelName.substring(0, camelName.toLowerCase().indexOf(BEAN_SUFFIX.toLowerCase()));
                                 otherAlias = otherAlias + BEAN_SUFFIX;
-                                registry.registerAlias(dataSourceName, otherAlias);
+                                registry.registerAlias(camelName, otherAlias);
                             }
                         } else {
-                            otherAlias = camelAlias + BEAN_SUFFIX;
-                            registry.registerAlias(dataSourceName, otherAlias);
+                            otherAlias = camelName + BEAN_SUFFIX;
+                            registry.registerAlias(camelName, otherAlias);
                         }
                         log.debug("druid {}-data-source init...", dataSourceName);
                     });
@@ -132,7 +130,7 @@ public class DruidDataSourceConfiguration {
     }
 
     /**
-     * DataSource Bean 处理器
+     * DataSource Bean 处理器，将各数据源的自定义配置绑定到 Spring Bean
      *
      * @author trang
      */

@@ -1,6 +1,6 @@
 package com.github.trang.druid.autoconfigure.properties;
 
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -36,7 +36,7 @@ public class DruidDataSourceProperties {
     DruidStatViewServletProperties statViewServlet = new DruidStatViewServletProperties();
     DruidWebStatProperties webStat = new DruidWebStatProperties();
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
-    Map<String, DruidDataSource2> dataSources = new HashMap<>(16);
+    Map<String, DruidDataSource> dataSources = new HashMap<>(16);
 
     @Getter
     @Setter
