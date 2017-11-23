@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
  *
  * @author trang
  */
-@SpringBootApplication(scanBasePackages = "com.github.trang.druid.example")
+@SpringBootApplication
 @MapperScan("com.github.trang.druid.example.mapper")
 public class DruidSpringBootStarterApplication implements CommandLineRunner {
 
