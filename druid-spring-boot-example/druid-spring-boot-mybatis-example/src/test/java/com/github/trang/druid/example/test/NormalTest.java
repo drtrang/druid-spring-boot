@@ -56,23 +56,9 @@ public class NormalTest {
 
     @Test
     public void hashcode() {
-        Hash hash = new Hash();
-        Hash hash2 = new Hash();
-        System.out.println(hash == hash2);
-        System.out.println(hash.equals(hash2));
+        String camelAlias = "XxXDatasource";
+        String alias = camelAlias.substring(0, camelAlias.toLowerCase().indexOf("DataSource".toLowerCase()));
+        System.out.println(alias);
     }
-
-    class Hash {
-        @Override
-        public int hashCode() {
-            return 1;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return true;
-        }
-    }
-
 
 }

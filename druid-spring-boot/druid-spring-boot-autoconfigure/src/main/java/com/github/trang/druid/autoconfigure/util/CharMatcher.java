@@ -18,6 +18,10 @@ public final class CharMatcher {
         return Manipulation.SEPARATED_TO_CAMELCASE;
     }
 
+    public static Manipulation camelToHyphen() {
+        return Manipulation.CAMELCASE_TO_HYPHEN;
+    }
+
     public static enum Manipulation {
 
         NONE {
