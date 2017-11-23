@@ -98,4 +98,4 @@ Starter 判断是否多数据源的条件是 application 文件中是否存在 `
 
 
 ## 演示
-将 [druid-spring-boot-example](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。
+将 [druid-spring-boot-mybatis-example](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/application.yml) 的 `spring.profiles.active` 配置改为 `dynamic` 即可。

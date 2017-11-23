@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.3
+1. 修复多数据源环境下的注册失败问题
+
+### 1.1.2
+1. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 ApplicationContext
+
 ### 1.1.1
 1. 新增 `statement-sql-format-option` 的代码提示
 
