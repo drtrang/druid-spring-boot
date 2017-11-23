@@ -9,12 +9,9 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
 import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -23,13 +20,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.*;
 
@@ -108,26 +99,6 @@ public class DruidAutoConfiguration {
     public CommonsLogFilter commonsLogFilter() {
         log.debug("druid commons-log-filter init...");
         return new CommonsLogFilter();
-    }
-
-    @Bean
-    @ConditionalOnBean(DruidDataSource.class)
-    public Map<String, DruidDataSource> dataSourceMap(ConfigurableListableBeanFactory beanFactory) {
-        return new HashMap<>(beanFactory.getBeansOfType(DruidDataSource2.class));
-    }
-
-    /**
-     * 为了便于使用，增加数据源集合，可直接注入使用
-     * 如需使用 Set、Array 请注入 Set<DruidDataSource2> 或 DruidDataSource2[]
-     *
-     * @param dataSourceMap 多数据源
-     * @return List<DruidDataSource> dataSourceList
-     */
-    @Bean
-    @ConditionalOnBean(name = "dataSourceMap")
-    @DependsOn("dataSourceMap")
-    public List<DruidDataSource> dataSourceList(Map<String, DruidDataSource> dataSourceMap) {
-        return new ArrayList<>(dataSourceMap.values());
     }
 
 }
