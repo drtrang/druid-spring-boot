@@ -1,7 +1,7 @@
 package com.github.trang.druid.actuate.autoconfigure;
 
-import com.github.trang.druid.actuate.DruidDataSourceEndpoint;
 import com.github.trang.druid.actuate.DruidDataSourceMvcEndpoint;
+import com.github.trang.druid.actuate.DruidDataSourceEndpoint;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
