@@ -4,7 +4,6 @@ import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,17 +32,14 @@ public class DruidDataSourceProperties {
     public static final String DRUID_WEB_STAT_PREFIX = "spring.datasource.druid.web-stat";
     public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
 
-    @NestedConfigurationProperty
     DruidConfigFilterProperties config = new DruidConfigFilterProperties();
-    @NestedConfigurationProperty
     DruidStatViewServletProperties statViewServlet = new DruidStatViewServletProperties();
-    @NestedConfigurationProperty
     DruidWebStatProperties webStat = new DruidWebStatProperties();
-    @NestedConfigurationProperty
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
     Map<String, DruidDataSource2> dataSources = new HashMap<>(16);
 
-    @Getter@Setter
+    @Getter
+    @Setter
     public static class DruidConfigFilterProperties {
         /** 是否开启 druid config-filter，默认否 */
         private boolean enabled;

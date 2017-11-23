@@ -1,6 +1,6 @@
-package com.github.trang.druid.test;
+package com.github.trang.druid.example.test;
 
-import com.github.trang.druid.mapper.CityMapper;
+import com.github.trang.druid.example.mapper.CityMapper;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -73,7 +73,7 @@ spring:
       preferred-json-mapper: jackson
 
 mybatis:
-  type-aliases-package: com.github.trang.druid.model
+  type-aliases-package: com.github.trang.druid.example.model
 
 ---
 
@@ -97,10 +97,10 @@ spring:
     druid:
       # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
       data-sources:
-        master:
+        master-data-source:
           max-active: 50
           max-open-prepared-statements: 50
-        slave:
+        slave-data-source:
           max-active: 25
           max-open-prepared-statements: 25
 

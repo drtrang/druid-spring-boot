@@ -1,6 +1,6 @@
-package com.github.trang.druid.test;
+package com.github.trang.druid.example.test;
 
-import com.github.trang.druid.model.City;
+import com.github.trang.druid.example.model.City;
 import org.junit.Assert;
 import org.junit.Test;
 

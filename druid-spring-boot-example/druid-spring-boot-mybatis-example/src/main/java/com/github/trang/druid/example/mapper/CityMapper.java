@@ -1,6 +1,6 @@
-package com.github.trang.druid.mapper;
+package com.github.trang.druid.example.mapper;
 
-import com.github.trang.druid.model.City;
+import com.github.trang.druid.example.model.City;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

@@ -1,4 +1,4 @@
-package com.github.trang.druid.config;
+package com.github.trang.druid.example.config;
 
 import lombok.Getter;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
