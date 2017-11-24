@@ -7,4 +7,4 @@ cache:
   directories:
     - $HOME/.m2/repository
 after_success:
-  - cd druid-spring-boot-example && mvn clean -Pcoveralls cobertura:cobertura coveralls:report
+  - cd druid-spring-boot-example/druid-spring-boot-mybatis-example && mvn clean -Pcoveralls cobertura:cobertura coveralls:report
