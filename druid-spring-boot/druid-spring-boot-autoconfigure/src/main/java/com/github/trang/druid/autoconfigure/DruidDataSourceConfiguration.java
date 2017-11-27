@@ -1,14 +1,15 @@
 package com.github.trang.druid.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DataSourceImportSelector;
+import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
 import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
 import com.github.trang.druid.autoconfigure.util.CharMatcher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.bind.PropertySourcesBinder;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -20,37 +21,42 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
+
+import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
 
 /**
  * Druid 数据源配置
  *
  * @author trang
  */
-@Import(DataSourceImportSelector.class)
+@Import(DruidDataSourceImportSelector.class)
 @Slf4j
 public class DruidDataSourceConfiguration {
+
+    static final String BEAN_NAME = "dataSource";
+    static final String BEAN_SUFFIX = "DataSource";
+    static final String EMPTY = "";
+    static final String POINT = ".";
+    static final String PREFIX = "spring.datasource.druid.data-sources.";
 
     /**
      * 单数据源注册
      *
      * @author trang
      */
-    static class SingleDataSourceRegister implements ImportBeanDefinitionRegistrar {
-
-        static final String BEAN_NAME = "dataSource";
+    static class SingleDataSourceRegistrar implements ImportBeanDefinitionRegistrar {
 
         @Override
         public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
             if (!registry.containsBeanDefinition(BEAN_NAME)) {
-                BeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource2.class)
-                        .setInitMethodName("init")
-                        .setDestroyMethodName("close")
-                        .getBeanDefinition();
-                registry.registerBeanDefinition(BEAN_NAME, beanDefinition);
-                log.debug("druid data-source init...");
+                registry.registerBeanDefinition(BEAN_NAME, genericDruidBeanDefinition());
             }
         }
+
     }
 
     /**
@@ -58,44 +64,89 @@ public class DruidDataSourceConfiguration {
      *
      * @author trang
      */
-    static class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar, EnvironmentAware {
+    static class DynamicDataSourceRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
-        private static final String BEAN_SUFFIX = "DataSource";
         private RelaxedPropertyResolver resolver;
 
         @Override
-        public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-            resolver.getSubProperties("").keySet().stream()
-                    .map(key -> key.substring(0, key.indexOf(".")))
-                    .distinct()
-                    .forEach(dataSourceName -> {
-                        // 构造 BeanDefinition，通过 DruidDataSource2 实现继承 'spring.datasource.druid' 的配置
-                        BeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource2.class)
-                                .setInitMethodName("init")
-                                .setDestroyMethodName("close")
-                                .getBeanDefinition();
-                        // 注册 BeanDefinition
-                        String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
-                        registry.registerBeanDefinition(camelName, beanDefinition);
-                        // 注册以 DataSource 为后缀的别名
-                        String otherAlias;
-                        if (camelName.toLowerCase().endsWith(BEAN_SUFFIX.toLowerCase())) {
-                            if (!camelName.endsWith(BEAN_SUFFIX)) {
-                                otherAlias = camelName.substring(0, camelName.toLowerCase().indexOf(BEAN_SUFFIX.toLowerCase()));
-                                otherAlias = otherAlias + BEAN_SUFFIX;
-                                registry.registerAlias(camelName, otherAlias);
-                            }
-                        } else {
-                            otherAlias = camelName + BEAN_SUFFIX;
-                            registry.registerAlias(camelName, otherAlias);
-                        }
-                        log.debug("druid {}-data-source init...", dataSourceName);
-                    });
+        public void setEnvironment(Environment environment) {
+            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
         }
 
         @Override
+        public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
+            resolver.getSubProperties(EMPTY).keySet().stream()
+                    .map(key -> key.substring(0, key.indexOf(POINT)))
+                    .distinct()
+                    .forEach(dataSourceName -> {
+                        // 注册 BeanDefinition
+                        String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
+                        registry.registerBeanDefinition(camelName, genericDruidBeanDefinition());
+                        // 注册以 DataSource 为后缀的别名
+                        if (!camelName.toLowerCase().endsWith(BEAN_SUFFIX.toLowerCase())) {
+                            registry.registerAlias(camelName, camelName + BEAN_SUFFIX);
+                        }
+                    });
+        }
+
+    }
+
+    /**
+     * 构造 BeanDefinition，通过 DruidDataSource2 实现继承 'spring.datasource.druid' 的配置
+     *
+     * @return BeanDefinition druidBeanDefinition
+     */
+    static BeanDefinition genericDruidBeanDefinition() {
+        return genericBeanDefinition(DruidDataSource2.class)
+                .setInitMethodName("init")
+                .setDestroyMethodName("close")
+                .getBeanDefinition();
+    }
+
+    /**
+     * DruidDataSource 的 Bean 处理器，将各数据源的自定义配置绑定到 Bean
+     *
+     * @author trang
+     */
+    static class DruidDataSourceBeanPostProcessor implements BeanPostProcessor, EnvironmentAware {
+
+        private ConfigurableEnvironment environment;
+        private RelaxedPropertyResolver resolver;
+        private List<DruidDataSourceCustomizer> customizers;
+
+        @Override
         public void setEnvironment(Environment environment) {
-            this.resolver = new RelaxedPropertyResolver(environment, "spring.datasource.druid.data-sources.");
+            this.environment = (ConfigurableEnvironment) environment;
+            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
+        }
+
+        @Autowired
+        public void setCustomizers(ObjectProvider<List<DruidDataSourceCustomizer>> customizersProvider) {
+            this.customizers = customizersProvider.getIfAvailable();
+        }
+
+        @Override
+        public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+            if (bean instanceof DruidDataSource) {
+                // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
+                if (!resolver.getSubProperties(EMPTY).isEmpty()) {
+                    PropertySourcesBinder binder = new PropertySourcesBinder(environment);
+                    binder.bindTo(PREFIX + beanName, bean);
+                }
+                // 用户自定义配置
+                if (customizers != null && !customizers.isEmpty()) {
+                    for (DruidDataSourceCustomizer customizer : customizers) {
+                        customizer.customize((DruidDataSource) bean);
+                    }
+                }
+                log.debug("druid {}-data-source init...", beanName);
+            }
+            return bean;
+        }
+
+        @Override
+        public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+            return bean;
         }
 
     }
@@ -107,55 +158,21 @@ public class DruidDataSourceConfiguration {
      *
      * @author trang
      */
-    static class DataSourceImportSelector implements ImportSelector, EnvironmentAware {
+    static class DruidDataSourceImportSelector implements ImportSelector, EnvironmentAware {
 
-        private ConfigurableEnvironment environment;
+        private RelaxedPropertyResolver resolver;
+
+        @Override
+        public void setEnvironment(Environment environment) {
+            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
+        }
 
         @Override
         public String[] selectImports(AnnotationMetadata metadata) {
-            RelaxedPropertyResolver resolver = new RelaxedPropertyResolver(environment, "spring.datasource.druid.");
-            Map<String, Object> properties = resolver.getSubProperties("data-sources");
-            if (properties.isEmpty()) {
-                return new String[]{SingleDataSourceRegister.class.getName()};
-            }
-            return new String[]{DynamicDataSourceRegister.class.getName(),
-                    DataSourceBeanPostProcessor.class.getName()};
-        }
-
-        @Override
-        public void setEnvironment(Environment environment) {
-            this.environment = (ConfigurableEnvironment) environment;
-        }
-
-    }
-
-    /**
-     * DataSource Bean 处理器，将各数据源的自定义配置绑定到 Spring Bean
-     *
-     * @author trang
-     */
-    static class DataSourceBeanPostProcessor implements BeanPostProcessor, EnvironmentAware {
-
-        private ConfigurableEnvironment environment;
-
-        @Override
-        public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-            if (bean instanceof DruidDataSource) {
-                // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
-                PropertySourcesBinder binder = new PropertySourcesBinder(environment);
-                binder.bindTo("spring.datasource.druid.data-sources." + beanName, bean);
-            }
-            return bean;
-        }
-
-        @Override
-        public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-            return bean;
-        }
-
-        @Override
-        public void setEnvironment(Environment environment) {
-            this.environment = (ConfigurableEnvironment) environment;
+            Map<String, Object> properties = resolver.getSubProperties(EMPTY);
+            Builder<Class<?>> imposts = Stream.<Class<?>>builder().add(DruidDataSourceBeanPostProcessor.class);
+            imposts.add(properties.isEmpty() ? SingleDataSourceRegistrar.class : DynamicDataSourceRegistrar.class);
+            return imposts.build().map(Class::getName).toArray(String[]::new);
         }
 
     }
