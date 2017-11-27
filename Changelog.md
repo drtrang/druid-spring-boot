@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.1.4
+1. 新增 DruidDataSourceCustomizer，支持定制化数据源配置
+2. 优化 DruidDataSource 初始化的日志打印时机
+3. 优化 DruidDataSource 的别名，当 BeanName 的后缀不为 'DataSource' 时增加别名 
+
 ### 1.1.3
 1. 修复多数据源环境下的注册失败问题
 
