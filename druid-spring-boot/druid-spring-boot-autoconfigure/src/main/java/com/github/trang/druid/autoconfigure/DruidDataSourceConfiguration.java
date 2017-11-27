@@ -128,6 +128,8 @@ public class DruidDataSourceConfiguration {
         @Override
         public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
             if (bean instanceof DruidDataSource) {
+                // 设置 Druid 名称
+                ((DruidDataSource) bean).setName(beanName);
                 // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
                 if (!resolver.getSubProperties(EMPTY).isEmpty()) {
                     PropertySourcesBinder binder = new PropertySourcesBinder(environment);
@@ -139,7 +141,12 @@ public class DruidDataSourceConfiguration {
                         customizer.customize((DruidDataSource) bean);
                     }
                 }
-                log.debug("druid {}-data-source init...", beanName);
+                boolean isSingle = BEAN_NAME.equals(beanName);
+                if (isSingle) {
+                    log.debug("druid data-source init...");
+                } else {
+                    log.debug("druid {}-data-source init...", beanName);
+                }
             }
             return bean;
         }
