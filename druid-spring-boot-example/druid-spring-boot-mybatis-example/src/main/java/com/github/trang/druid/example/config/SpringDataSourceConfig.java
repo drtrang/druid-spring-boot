@@ -1,7 +1,6 @@
 package com.github.trang.druid.example.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.DruidDataSourceCustomizer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +22,10 @@ import java.util.Map;
 public class SpringDataSourceConfig {
 
 //    @Bean
-    public DruidDataSourceCustomizer druidDataSourceCustomizer() {
-        System.out.println("DruidDataSourceCustomizer...");
-        return (dataSource) -> dataSource.setMaxActive(66);
-    }
+//    public DruidDataSourceCustomizer druidDataSourceCustomizer() {
+//        System.out.println("DruidDataSourceCustomizer...");
+//        return (dataSource) -> dataSource.setMaxActive(66);
+//    }
 
     @Bean
     @Primary

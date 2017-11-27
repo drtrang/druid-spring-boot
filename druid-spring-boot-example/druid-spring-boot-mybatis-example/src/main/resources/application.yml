@@ -41,7 +41,6 @@ spring:
         db-type: h2
         log-slow-sql: true
         slow-sql-millis: 1000
-        merge-sql: true
       slf4j:
         enabled: true
         connection-log-enabled: false
