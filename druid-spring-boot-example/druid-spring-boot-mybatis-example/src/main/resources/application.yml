@@ -16,10 +16,9 @@ spring:
     ansi:
       enabled: detect
   datasource:
-    driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./samples
     username: root
-    password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+    password: 123456
     schema: classpath:/import.sql
     druid:
       # spring.datasource.druid 前缀的配置将注入到 DruidDataSource2Support，作为公共参数
@@ -37,10 +36,11 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 20
       use-global-data-source-stat: true
+      # 默认开启，当前已开启
       stat:
-        db-type: h2
         log-slow-sql: true
         slow-sql-millis: 1000
+      # 默认关闭，需手动开启，当前已开启
       slf4j:
         enabled: true
         connection-log-enabled: false
@@ -49,17 +49,25 @@ spring:
           pretty-format: false
         statement-executable-sql-log-enable: true
         result-set-log-enabled: false
+      # 默认关闭，需手动开启，当前已开启
       wall:
         enabled: true
-        db-type: h2
         log-violation: true
         throw-exception: false
         config:
           delete-where-none-check: true
+      # 默认关闭，需手动开启，当前已关闭
       config:
-        enabled: true
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      web-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      aop-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
       stat-view-servlet:
-        enabled: true
+        enabled: false
   transaction:
     rollback-on-commit-failure: true
   aop:
@@ -103,6 +111,64 @@ spring:
           max-active: 25
           max-open-prepared-statements: 25
 
+---
+
+spring:
+  profiles: config
+  datasource:
+    url: jdbc:h2:file:./samples
+    username: root
+    password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+    schema: classpath:/import.sql
+    druid:
+      config:
+        enabled: true
+
+---
+
+spring:
+  profiles: features
+  datasource:
+    url: jdbc:h2:file:./samples
+    username: root
+    password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+    schema: classpath:/import.sql
+    druid:
+      # 默认开启，当前已开启
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+      # 默认关闭，需手动开启，当前已开启
+      slf4j:
+        enabled: true
+        connection-log-enabled: false
+        statement-sql-format-option:
+          upp-case: true
+          pretty-format: false
+        statement-executable-sql-log-enable: true
+        result-set-log-enabled: false
+      # 默认关闭，需手动开启，当前已开启
+      wall:
+        enabled: true
+        log-violation: true
+        throw-exception: false
+        config:
+          delete-where-none-check: true
+      # 默认关闭，需手动开启，当前已开启
+      config:
+        enabled: true
+      # 默认关闭，需手动开启，当前已开启
+      web-stat:
+        enabled: true
+      # 默认关闭，需手动开启，当前已开启
+      aop-stat:
+        enabled: true
+        patterns:
+          - com.github.trang.*
+      # 默认关闭，需手动开启，当前已开启
+      stat-view-servlet:
+        enabled: true
+        reset-enable: true
 ---
 
 debug: false

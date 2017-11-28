@@ -1,3 +1,5 @@
+# 此文件为 druid 的全自动配置说明，只供参考，不会加载到 spring environment，可随意删除
+
 # 单数据源，多数据源的配置请看下方
 spring:
   datasource:
