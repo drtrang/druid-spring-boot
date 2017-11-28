@@ -31,7 +31,7 @@ public class SpringDataSourceConfig {
     @Primary
     public DynamicDataSource dataSource(Map<String, DruidDataSource> druidDataSourceMap) {
         Map<String, DataSource> dataSourceMap = new HashMap<>(druidDataSourceMap);
-        return new DynamicDataSource(dataSourceMap.get("master"), dataSourceMap);
+        return new DynamicDataSource(dataSourceMap);
     }
 
 }

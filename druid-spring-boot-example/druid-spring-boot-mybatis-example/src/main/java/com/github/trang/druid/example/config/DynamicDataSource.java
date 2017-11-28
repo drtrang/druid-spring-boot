@@ -18,11 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private AtomicInteger count = new AtomicInteger();
-    private DataSource defaultTargetDataSource;
     @Getter private Map<String, DataSource> targetDataSources;
 
-    public DynamicDataSource(DataSource defaultTargetDataSource, Map<String, DataSource> targetDataSources) {
-        this.defaultTargetDataSource = defaultTargetDataSource;
+    public DynamicDataSource(Map<String, DataSource> targetDataSources) {
         this.targetDataSources = targetDataSources;
     }
 
@@ -35,7 +33,6 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     public void afterPropertiesSet() {
-        super.setDefaultTargetDataSource(defaultTargetDataSource);
         super.setTargetDataSources(new HashMap<>(targetDataSources));
         super.afterPropertiesSet();
     }
