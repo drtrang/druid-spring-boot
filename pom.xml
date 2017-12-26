@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.github.drtrang</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
 
     <artifactId>druid-spring-boot-parent</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
     <packaging>pom</packaging>
 
     <name>Druid Spring Boot Starter</name>

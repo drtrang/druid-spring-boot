@@ -14,7 +14,7 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 <dependency>
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot-starter</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 </dependency>
 ```
 
