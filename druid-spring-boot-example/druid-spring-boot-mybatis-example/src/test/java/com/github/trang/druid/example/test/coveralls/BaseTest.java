@@ -1,4 +1,4 @@
-package com.github.trang.druid.example.test;
+package com.github.trang.druid.example.test.coveralls;
 
 import com.github.trang.druid.example.DruidSpringBootStarterApplication;
 import com.github.trang.druid.example.mapper.CityMapper;

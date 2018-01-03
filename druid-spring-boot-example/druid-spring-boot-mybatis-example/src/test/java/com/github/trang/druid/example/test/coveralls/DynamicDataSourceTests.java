@@ -1,4 +1,4 @@
-package com.github.trang.druid.example.test;
+package com.github.trang.druid.example.test.coveralls;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
