@@ -39,7 +39,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    @ConfigurationProperties(DRUID_STAT_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_STAT_FILTER_PREFIX)
     public StatFilter statFilter() {
         log.debug("druid stat-filter init...");
         return new StatFilter();
@@ -47,14 +47,14 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_WALL_CONFIG_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_WALL_CONFIG_PREFIX)
     public WallConfig wallConfig() {
         return new WallConfig();
     }
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_WALL_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_WALL_FILTER_PREFIX)
     public WallFilter wallFilter(WallConfig wallConfig) {
         log.debug("druid wall-filter init...");
         WallFilter filter = new WallFilter();
@@ -71,7 +71,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_SLF4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_SLF4J_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_SLF4J_FILTER_PREFIX)
     public Slf4jLogFilter slf4jLogFilter() {
         log.debug("druid slf4j-filter init...");
         return new Slf4jLogFilter();
@@ -79,7 +79,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_LOG4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_LOG4J_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_LOG4J_FILTER_PREFIX)
     public Log4jFilter log4jFilter() {
         log.debug("druid log4j-filter init...");
         return new Log4jFilter();
@@ -87,7 +87,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_LOG4J2_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_LOG4J2_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_LOG4J2_FILTER_PREFIX)
     public Log4j2Filter log4j2Filter() {
         log.debug("druid log4j2-filter init...");
         return new Log4j2Filter();
@@ -95,7 +95,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX, name = "enabled", havingValue = "true")
-    @ConfigurationProperties(DRUID_COMMONS_LOG_FILTER_PREFIX)
+    @ConfigurationProperties(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX)
     public CommonsLogFilter commonsLogFilter() {
         log.debug("druid commons-log-filter init...");
         return new CommonsLogFilter();

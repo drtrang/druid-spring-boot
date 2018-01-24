@@ -23,7 +23,7 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
  *
  * @author trang
  */
-@ConfigurationProperties(DRUID_DATA_SOURCE_PREFIX)
+@ConfigurationProperties(prefix = DRUID_DATA_SOURCE_PREFIX)
 public abstract class DruidDataSource2Support extends DruidDataSource {
 
     @Autowired

@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
  *
  * @author trang
  */
-@ConfigurationProperties(DRUID_DATA_SOURCE_PREFIX)
+@ConfigurationProperties(prefix = DRUID_DATA_SOURCE_PREFIX)
 @Getter @Setter
 public class DruidDataSourceProperties {
 
@@ -32,10 +33,19 @@ public class DruidDataSourceProperties {
     public static final String DRUID_WEB_STAT_PREFIX = "spring.datasource.druid.web-stat";
     public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
 
+    /** druid config-filter 配置 */
+    @NestedConfigurationProperty
     DruidConfigFilterProperties config = new DruidConfigFilterProperties();
+    /** druid stat-view-servlet 配置 */
+    @NestedConfigurationProperty
     DruidStatViewServletProperties statViewServlet = new DruidStatViewServletProperties();
+    /** druid web-stat 配置 */
+    @NestedConfigurationProperty
     DruidWebStatProperties webStat = new DruidWebStatProperties();
+    /** druid aop-stat 配置 */
+    @NestedConfigurationProperty
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
+
     Map<String, DruidDataSource> dataSources = new HashMap<>(16);
 
     @Getter
