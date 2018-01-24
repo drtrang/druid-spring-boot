@@ -5,7 +5,7 @@
 * 新增 `Health Indicator`
 * 新增 `Faliure Analyzer`
 * 新增 `Endpoints`
-
+* 兼容 SpringBoot 2.0
 
 ## Bug
 * ~~`spring.datasource.schema` 会执行两次~~
