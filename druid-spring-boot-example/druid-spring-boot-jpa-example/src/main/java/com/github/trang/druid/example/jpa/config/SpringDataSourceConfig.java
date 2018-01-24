@@ -1,4 +1,4 @@
-package com.github.trang.druid.example.config;
+package com.github.trang.druid.example.jpa.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;

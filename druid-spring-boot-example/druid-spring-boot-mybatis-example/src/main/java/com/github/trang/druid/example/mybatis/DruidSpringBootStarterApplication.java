@@ -1,6 +1,6 @@
-package com.github.trang.druid.example;
+package com.github.trang.druid.example.mybatis;
 
-import com.github.trang.druid.example.mapper.CityMapper;
+import com.github.trang.druid.example.mybatis.mapper.CityMapper;
 import com.google.gson.Gson;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class DruidSpringBootStarterApplication implements CommandLineRunner {
     private CityMapper cityMapper;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Gson gson = new Gson();
         cityMapper.findAll().stream()
                 .map(gson::toJson)

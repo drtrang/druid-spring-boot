@@ -15,6 +15,7 @@
 
     <modules>
         <module>druid-spring-boot-mybatis-example</module>
+        <module>druid-spring-boot-jpa-example</module>
     </modules>
 
 </project>

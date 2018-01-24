@@ -1,6 +1,6 @@
-package com.github.trang.druid.example.test.coveralls;
+package com.github.trang.druid.example.jpa.test.coveralls;
 
-import com.github.trang.druid.example.model.City;
+import com.github.trang.druid.example.jpa.model.City;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,17 +11,17 @@ import java.util.List;
  *
  * @author trang
  */
-public class MyBatisTests extends BaseTest {
+public class JpaTests extends BaseTest {
 
     @Test
     public void testOne() {
-        City city = cityMapper.findById(1L);
+        City city = cityRepository.findOne(1L);
         System.out.println(city);
     }
 
     @Test
     public void testAll() {
-        List<City> cities = cityMapper.findAll();
+        List<City> cities = cityRepository.findAll();
         System.out.println(cities);
         Assert.assertEquals(5, cities.size());
     }

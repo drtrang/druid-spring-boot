@@ -68,6 +68,9 @@ spring:
       # 默认关闭，需手动开启，当前已关闭
       stat-view-servlet:
         enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
   transaction:
     rollback-on-commit-failure: true
   aop:
@@ -78,9 +81,6 @@ spring:
       force: true
     converters:
       preferred-json-mapper: jackson
-
-mybatis:
-  type-aliases-package: com.github.trang.druid.example.mybatis.model
 
 ---
 
@@ -169,19 +169,3 @@ spring:
       stat-view-servlet:
         enabled: true
         reset-enable: true
----
-
-debug: false
-
-spring:
-  profiles: actuator
-
-management:
-  security:
-    enabled: false
-
-endpoints:
-  actuator:
-    enabled: true
-  druid:
-    enabled: true

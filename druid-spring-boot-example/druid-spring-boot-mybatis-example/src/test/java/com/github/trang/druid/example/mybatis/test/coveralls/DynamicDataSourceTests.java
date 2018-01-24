@@ -1,8 +1,8 @@
-package com.github.trang.druid.example.test.coveralls;
+package com.github.trang.druid.example.mybatis.test.coveralls;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
-import com.github.trang.druid.example.config.DynamicDataSource;
+import com.github.trang.druid.example.mybatis.config.DynamicDataSource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

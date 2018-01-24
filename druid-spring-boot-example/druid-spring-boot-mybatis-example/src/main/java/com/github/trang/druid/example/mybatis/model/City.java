@@ -1,4 +1,4 @@
-package com.github.trang.druid.example.model;
+package com.github.trang.druid.example.mybatis.model;
 
 import java.io.Serializable;
 

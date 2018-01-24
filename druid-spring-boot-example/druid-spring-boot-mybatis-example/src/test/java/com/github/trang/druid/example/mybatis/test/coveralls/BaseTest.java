@@ -1,7 +1,7 @@
-package com.github.trang.druid.example.test.coveralls;
+package com.github.trang.druid.example.mybatis.test.coveralls;
 
-import com.github.trang.druid.example.DruidSpringBootStarterApplication;
-import com.github.trang.druid.example.mapper.CityMapper;
+import com.github.trang.druid.example.mybatis.DruidSpringBootStarterApplication;
+import com.github.trang.druid.example.mybatis.mapper.CityMapper;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
