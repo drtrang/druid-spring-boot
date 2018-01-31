@@ -17,15 +17,9 @@ import java.util.Map;
  * @author trang
  */
 @Configuration
-@Profile({"dynamic", "dynamic-dev-yaml", "dynamic-dev-props"})
+@Profile("dynamic")
 @Slf4j
 public class SpringDataSourceConfig {
-
-//    @Bean
-//    public DruidDataSourceCustomizer druidDataSourceCustomizer() {
-//        System.out.println("DruidDataSourceCustomizer...");
-//        return (dataSource) -> dataSource.setMaxActive(66);
-//    }
 
     @Bean
     @Primary

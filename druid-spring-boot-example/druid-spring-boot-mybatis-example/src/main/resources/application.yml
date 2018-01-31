@@ -81,6 +81,8 @@ spring:
 
 mybatis:
   type-aliases-package: com.github.trang.druid.example.mybatis.model
+  configuration:
+    map-underscore-to-camel-case: true
 
 ---
 
