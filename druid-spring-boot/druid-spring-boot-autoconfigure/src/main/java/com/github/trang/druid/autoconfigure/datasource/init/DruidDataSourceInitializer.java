@@ -1,5 +1,6 @@
 package com.github.trang.druid.autoconfigure.datasource.init;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.DruidDataSourceInitializerAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -37,7 +38,7 @@ public class DruidDataSourceInitializer {
 
     private final ApplicationContext applicationContext;
 
-    private List<DataSource> dataSources = new ArrayList<>();
+    private List<DruidDataSource> dataSources = new ArrayList<>();
 
     public DruidDataSourceInitializer(DataSourceProperties properties, ApplicationContext applicationContext) {
         this.properties = properties;
@@ -50,20 +51,20 @@ public class DruidDataSourceInitializer {
             log.debug("Initialization disabled (not running DDL scripts)");
             return;
         }
-        if (this.applicationContext.getBeanNamesForType(DataSource.class, false, false).length > 0) {
-            Map<String, DataSource> beans = this.applicationContext.getBeansOfType(DataSource.class, false, false);
+        if (this.applicationContext.getBeanNamesForType(DruidDataSource.class, false, false).length > 0) {
+            Map<String, DruidDataSource> beans = this.applicationContext.getBeansOfType(DruidDataSource.class, false, false);
             dataSources.addAll(beans.values());
         }
         if (this.dataSources == null || this.dataSources.isEmpty()) {
             log.debug("No DataSource found so not initializing");
             return;
         }
-        for (DataSource dataSource : dataSources) {
+        for (DruidDataSource dataSource : dataSources) {
             runSchemaScripts(dataSource);
         }
     }
 
-    private void runSchemaScripts(DataSource dataSource) {
+    private void runSchemaScripts(DruidDataSource dataSource) {
         List<Resource> scripts = getScripts("spring.datasource.schema", this.properties.getSchema(), "schema");
         if (!scripts.isEmpty()) {
             String username = this.properties.getSchemaUsername();
@@ -73,7 +74,7 @@ public class DruidDataSourceInitializer {
         }
     }
 
-    private void runDataScripts(DataSource dataSource) {
+    private void runDataScripts(DruidDataSource dataSource) {
         List<Resource> scripts = getScripts("spring.datasource.data", this.properties.getData(), "data");
         if (!scripts.isEmpty()) {
             String username = this.properties.getDataUsername();
@@ -97,7 +98,8 @@ public class DruidDataSourceInitializer {
                     .driverClassName(this.properties.determineDriverClassName())
                     .url(this.properties.determineUrl())
                     .username(username)
-                    .password(password).build();
+                    .password(password)
+                    .build();
         }
         DatabasePopulatorUtils.execute(populator, dataSource);
     }
