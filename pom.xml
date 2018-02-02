@@ -17,26 +17,36 @@
     <description>Spring Boot Starter for Druid</description>
     <url>https://github.com/drtrang/druid-spring-boot</url>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://github.com/drtrang/druid-spring-boot/blob/master/LICENSE</url>
-        </license>
-    </licenses>
+    <inceptionYear>2017</inceptionYear>
 
     <developers>
         <developer>
+            <id>trang</id>
             <name>trang</name>
             <email>donghao.l@hotmail.com</email>
+            <timezone>+8</timezone>
+            <url>http://blog.trang.space/</url>
         </developer>
     </developers>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <scm>
-        <url>https://github.com/drtrang/druid-spring-boot.git</url>
         <connection>scm:git:https://github.com/drtrang/druid-spring-boot.git</connection>
         <developerConnection>scm:git:https://github.com/drtrang</developerConnection>
-        <tag>HEAD</tag>
+        <url>https://github.com/drtrang/druid-spring-boot.git</url>
     </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/drtrang/druid-spring-boot/issues</url>
+    </issueManagement>
 
     <modules>
         <module>druid-spring-boot</module>
