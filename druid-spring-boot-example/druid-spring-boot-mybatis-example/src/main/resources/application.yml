@@ -6,11 +6,15 @@ logging:
     org.springframework: info
     org.springframework.jdbc: debug
     org.mybatis: debug
+    com.alibaba.druid: debug
     com.github.trang: debug
 
 spring:
+  application:
+    name: druid-spring-boot-mybatis-example
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
+#     active: dynamic
     active: default
   output:
     ansi:
@@ -19,7 +23,7 @@ spring:
     url: jdbc:h2:mem:example
     username: root
     password: 123456
-    schema: classpath:/import.sql
+    schema: classpath:import.sql
     druid:
       # spring.datasource.druid 前缀的配置将注入到 DruidDataSource2Support，作为公共参数
       initial-size: 1
@@ -68,6 +72,11 @@ spring:
       # 默认关闭，需手动开启，当前已关闭
       stat-view-servlet:
         enabled: false
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: true
   transaction:
     rollback-on-commit-failure: true
   aop:
@@ -75,14 +84,30 @@ spring:
     proxy-target-class: true
   http:
     encoding:
+      enabled: true
       force: true
+      charset: utf-8
     converters:
       preferred-json-mapper: jackson
-
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+      write_null_map_values: true
+      write_dates_as_timestamps: false
+    deserialization:
+      fail_on_unknown_properties: false
+    parser:
+      allow_unquoted_control_chars: true
+      allow_single_quotes: true
 mybatis:
   type-aliases-package: com.github.trang.druid.example.mybatis.model
   configuration:
+    cache-enabled: false
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 ---
 
@@ -103,13 +128,16 @@ spring:
       # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
+    schema: classpath:import.sql
     druid:
       # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
       data-sources:
         master:
+          url: jdbc:h2:mem:master
           max-active: 50
           max-open-prepared-statements: 50
         slave:
+          url: jdbc:h2:mem:slave
           max-active: 25
           max-open-prepared-statements: 25
 
@@ -121,7 +149,7 @@ spring:
     url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
-    schema: classpath:/import.sql
+    schema: classpath:import.sql
     druid:
       config:
         enabled: true
@@ -134,7 +162,7 @@ spring:
     url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
-    schema: classpath:/import.sql
+    schema: classpath:import.sql
     druid:
       # 默认开启，当前已开启
       stat:

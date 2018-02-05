@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 /**
  * DruidSpringBootStarterApplication
@@ -16,15 +15,13 @@ import org.springframework.context.ApplicationContext;
  */
 @SpringBootApplication
 @MapperScan("com.github.trang.druid.example.mapper")
-public class DruidSpringBootStarterApplication implements CommandLineRunner {
+public class DruidMybatisApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         System.setProperty("druid.logType", "slf4j");
-        SpringApplication.run(DruidSpringBootStarterApplication.class, args);
+        SpringApplication.run(DruidMybatisApplication.class, args);
     }
 
-    @Autowired
-    private ApplicationContext applicationContext;
     @Autowired
     private CityMapper cityMapper;
 

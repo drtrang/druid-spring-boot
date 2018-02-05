@@ -13,11 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author trang
  */
 @SpringBootApplication
-public class DruidSpringBootStarterApplication implements CommandLineRunner {
+public class DruidJpaApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         System.setProperty("druid.logType", "slf4j");
-        SpringApplication.run(DruidSpringBootStarterApplication.class, args);
+        SpringApplication.run(DruidJpaApplication.class, args);
     }
 
     @Autowired
