@@ -39,7 +39,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/drtrang/druid-spring-boot.git</connection>
-        <developerConnection>scm:git:https://github.com/drtrang</developerConnection>
+        <developerConnection>scm:git:git@github.com:drtrang/druid-spring-boot.git</developerConnection>
         <url>https://github.com/drtrang/druid-spring-boot.git</url>
     </scm>
 

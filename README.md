@@ -37,7 +37,7 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: 123456
 ```
@@ -49,7 +49,7 @@ Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: 123456
     druid:

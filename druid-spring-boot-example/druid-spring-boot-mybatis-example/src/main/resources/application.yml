@@ -16,7 +16,7 @@ spring:
     ansi:
       enabled: detect
   datasource:
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: 123456
     schema: classpath:/import.sql
@@ -118,7 +118,7 @@ spring:
 spring:
   profiles: config
   datasource:
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:/import.sql
@@ -131,7 +131,7 @@ spring:
 spring:
   profiles: features
   datasource:
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:/import.sql

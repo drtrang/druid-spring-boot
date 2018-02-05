@@ -4,7 +4,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:/import.sql
@@ -149,7 +149,7 @@ spring:
   datasource:
     ### 所有数据源都会继承这些属性
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./samples
+    url: jdbc:h2:mem:example
     username: root
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:/import.sql
