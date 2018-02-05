@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>druid-spring-boot-parent</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
     <packaging>pom</packaging>
 
     <name>Druid Spring Boot Starter</name>
@@ -53,6 +53,10 @@
         <module>druid-spring-boot-actuator</module>
         <module>druid-spring-boot-example</module>
     </modules>
+
+    <properties>
+        <druid.version>1.1.7</druid.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
