@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.6
+## 1.1.7
 ### Enhancements
 1. 升级 druid 到 1.1.7，以后版本号与 druid 保持一致
 
