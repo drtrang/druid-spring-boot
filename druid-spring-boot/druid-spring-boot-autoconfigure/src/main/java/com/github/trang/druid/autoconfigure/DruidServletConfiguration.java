@@ -15,8 +15,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.Servlet;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_STAT_VIEW_SERVLET_PREFIX;
-
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
 
 /**
  * Druid Servlet 配置
@@ -40,9 +39,7 @@ public class DruidServletConfiguration {
     public ServletRegistrationBean servletRegistrationBean(DruidDataSourceProperties druidDataSourceProperties) {
         log.debug("druid stat-view-servlet init...");
         DruidStatViewServletProperties properties = druidDataSourceProperties.getStatViewServlet();
-        ServletRegistrationBean registration = new ServletRegistrationBean();
-        StatViewServlet statViewServlet = new StatViewServlet();
-        registration.setServlet(statViewServlet);
+        ServletRegistrationBean<StatViewServlet> registration = new ServletRegistrationBean<>(new StatViewServlet());
         registration.addUrlMappings(properties.getUrlMappings());
         if (!StringUtils.isEmpty(properties.getLoginUsername())) {
             registration.addInitParameter("loginUsername", properties.getLoginUsername());

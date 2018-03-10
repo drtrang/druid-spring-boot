@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_DATA_SOURCE_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
 
 /**
  * Druid 自定义配置
@@ -20,33 +20,38 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
 @Getter @Setter
 public class DruidDataSourceProperties {
 
-    public static final String DRUID_DATA_SOURCE_PREFIX = "spring.datasource.druid";
-    public static final String DRUID_STAT_FILTER_PREFIX = "spring.datasource.druid.stat";
-    public static final String DRUID_WALL_FILTER_PREFIX = "spring.datasource.druid.wall";
-    public static final String DRUID_WALL_CONFIG_PREFIX = "spring.datasource.druid.wall.config";
-    public static final String DRUID_SLF4J_FILTER_PREFIX = "spring.datasource.druid.slf4j";
-    public static final String DRUID_LOG4J_FILTER_PREFIX = "spring.datasource.druid.log4j";
-    public static final String DRUID_LOG4J2_FILTER_PREFIX = "spring.datasource.druid.log4j2";
-    public static final String DRUID_COMMONS_LOG_FILTER_PREFIX = "spring.datasource.druid.commons-log";
-    public static final String DRUID_CONFIG_FILTER_PREFIX = "spring.datasource.druid.config";
-    public static final String DRUID_STAT_VIEW_SERVLET_PREFIX = "spring.datasource.druid.stat-view-servlet";
-    public static final String DRUID_WEB_STAT_PREFIX = "spring.datasource.druid.web-stat";
-    public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
+    Map<String, DruidDataSource> dataSources = new HashMap<>(16);
 
     /** druid config-filter 配置 */
     @NestedConfigurationProperty
     DruidConfigFilterProperties config = new DruidConfigFilterProperties();
+
     /** druid stat-view-servlet 配置 */
     @NestedConfigurationProperty
     DruidStatViewServletProperties statViewServlet = new DruidStatViewServletProperties();
+
     /** druid web-stat 配置 */
     @NestedConfigurationProperty
     DruidWebStatProperties webStat = new DruidWebStatProperties();
+
     /** druid aop-stat 配置 */
     @NestedConfigurationProperty
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
 
-    Map<String, DruidDataSource> dataSources = new HashMap<>(16);
+    public static class DruidConstants {
+        public static final String DRUID_DATA_SOURCE_PREFIX = "spring.datasource.druid";
+        public static final String DRUID_STAT_FILTER_PREFIX = "spring.datasource.druid.stat";
+        public static final String DRUID_WALL_FILTER_PREFIX = "spring.datasource.druid.wall";
+        public static final String DRUID_WALL_CONFIG_PREFIX = "spring.datasource.druid.wall.config";
+        public static final String DRUID_SLF4J_FILTER_PREFIX = "spring.datasource.druid.slf4j";
+        public static final String DRUID_LOG4J_FILTER_PREFIX = "spring.datasource.druid.log4j";
+        public static final String DRUID_LOG4J2_FILTER_PREFIX = "spring.datasource.druid.log4j2";
+        public static final String DRUID_COMMONS_LOG_FILTER_PREFIX = "spring.datasource.druid.commons-log";
+        public static final String DRUID_CONFIG_FILTER_PREFIX = "spring.datasource.druid.config";
+        public static final String DRUID_STAT_VIEW_SERVLET_PREFIX = "spring.datasource.druid.stat-view-servlet";
+        public static final String DRUID_WEB_STAT_PREFIX = "spring.datasource.druid.web-stat";
+        public static final String DRUID_AOP_STAT_PREFIX = "spring.datasource.druid.aop-stat";
+    }
 
     @Getter
     @Setter

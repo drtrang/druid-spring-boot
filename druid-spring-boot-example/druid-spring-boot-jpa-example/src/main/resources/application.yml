@@ -25,7 +25,7 @@ spring:
     password: 123456
     schema: classpath:import.sql
     druid:
-      # spring.datasource.druid 前缀的配置将注入到 DruidDataSource2Support，作为公共参数
+      # spring.datasource.druid 前缀的配置将注入到 AbstractDruidDataSource2，作为公共参数
       initial-size: 1
       min-idle: 1
       max-active: 10

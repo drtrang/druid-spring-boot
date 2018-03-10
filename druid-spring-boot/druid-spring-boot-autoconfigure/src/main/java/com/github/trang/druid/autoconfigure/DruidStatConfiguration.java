@@ -20,8 +20,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_AOP_STAT_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_WEB_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
 
 /**
  * Druid 监控配置
@@ -78,9 +77,7 @@ public class DruidStatConfiguration {
         public FilterRegistrationBean filterRegistrationBean(DruidDataSourceProperties druidDataSourceProperties) {
             log.debug("druid web-stat-filter init...");
             DruidWebStatProperties properties = druidDataSourceProperties.getWebStat();
-            FilterRegistrationBean registration = new FilterRegistrationBean();
-            WebStatFilter filter = new WebStatFilter();
-            registration.setFilter(filter);
+            FilterRegistrationBean<WebStatFilter> registration = new FilterRegistrationBean<>(new WebStatFilter());
             registration.addUrlPatterns(properties.getUrlPatterns());
             registration.addInitParameter("exclusions", properties.getExclusions());
             registration.addInitParameter("sessionStatEnable", Boolean.toString(properties.isSessionStatEnable()));

@@ -6,6 +6,7 @@ import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
 import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConfigFilterProperties;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DRUID_DATA_SOURCE_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_DATA_SOURCE_PREFIX;
 
 /**
  * Druid 多数据源支持，会自动注入 'spring.datasource' 和 'spring.datasource.druid' 配置
@@ -24,14 +25,16 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
  * @author trang
  */
 @ConfigurationProperties(prefix = DRUID_DATA_SOURCE_PREFIX)
-public abstract class DruidDataSource2Support extends DruidDataSource {
+public abstract class AbstractDruidDataSource2 extends DruidDataSource {
+
+    private static final long serialVersionUID = -5155027912840793367L;
 
     @Autowired
     private DataSourceProperties dataSourceProperties;
     @Autowired
     private DruidDataSourceProperties druidDataSourceProperties;
-    @Autowired(required = false)
-    private List<FilterAdapter> druidFilters;
+    @Autowired
+    private ObjectProvider<List<FilterAdapter>> druidFilters;
 
     @PostConstruct
     public void initDruidParentProperties() {
@@ -73,13 +76,12 @@ public abstract class DruidDataSource2Support extends DruidDataSource {
 
     private void initFilters() {
         List<Filter> proxyFilters = super.getProxyFilters();
-        Optional.ofNullable(druidFilters)
+        Optional.of(druidFilters.getIfAvailable())
                 .filter(filters -> !filters.isEmpty())
                 .ifPresent(filters -> filters.stream()
                         .filter(Objects::nonNull)
                         .filter(filter -> !proxyFilters.contains(filter))
-                        .forEach(proxyFilters::add)
-                );
+                        .forEach(proxyFilters::add));
     }
 
 }

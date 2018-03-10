@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.*;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
 
 /**
  * Druid 连接池的自动配置

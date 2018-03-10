@@ -17,10 +17,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author trang
  */
 @Slf4j
+@Getter
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    private AtomicInteger count = new AtomicInteger();
-    @Getter private Map<String, DataSource> targetDataSources;
+    private final AtomicInteger count = new AtomicInteger();
+    private final Map<String, DataSource> targetDataSources;
 
     public DynamicDataSource(Map<String, DataSource> targetDataSources) {
         this.targetDataSources = targetDataSources;

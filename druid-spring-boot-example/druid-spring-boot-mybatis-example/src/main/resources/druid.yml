@@ -9,99 +9,107 @@ spring:
     password: Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
     schema: classpath:import.sql
     druid:
-      initial-size: 1
-      min-idle: 1
-      max-active: 10
-      max-wait: 30000
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 1800000
-      max-evictable-idle-time-millis: 25200000
+      initial-size: 0
+      max-active: 8
+      min-idle: 0
+      max-wait: -1
+      not-full-timeout-retry-count: 0
       validation-query: SELECT 1
+      validation-query-timeout: -1
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
-      use-global-data-source-stat: true
+      time-between-eviction-runs-millis: 60000
+      time-between-connect-error-millis: 500
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 25200000
+      phy-timeout-millis: -1
+      pool-prepared-statements: false
+      share-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 10
+      use-global-data-source-stat: false
       stat:
         ## 是否开启 StatFilter，默认 true，可以不写（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter）
         enabled: true
         ## 数据库类型
-        db-type: h2
+        db-type:
         ## 是否开启慢查询统计
-        log-slow-sql: true
+        log-slow-sql: false
         ## 慢查询的定义
-        slow-sql-millis: 1000
+        slow-sql-millis: 3000
         ## 是否开启合并参数化 SQL
-        merge-sql: true
+        merge-sql: false
+        ## 是否开启连接的堆栈信息
+        connection-stack-trace-enable: false
       slf4j:
         ## 是否开启 StatFilter，默认 false（https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter）
         enabled: true
-        ## datasource log 的总开关
-        ## 无调用者，Slf4jLogFilter#isDataSourceLogEnabled
+        ## datasource log 的总开关，前置条件：druid.sql.DataSource 的日志级别为 debug
+        ## 无调用者
         data-source-log-enabled: true
-        ## connection log 的总开关
-        connection-log-enabled: false
-        ### 无调用者，LogFilter#isConnectionConnectBeforeLogEnabled
-        connection-connect-before-log-enabled: false
+        ## connection log 的总开关，前置条件：druid.sql.Connection 的日志级别为 debug
+        connection-log-enabled: true
+        ## connection error log 的总开关，前置条件：druid.sql.Connection 的日志级别为 debug
+        ## 无调用者
+        connection-log-error-enabled: true
+        ### 无调用者
+        connection-connect-before-log-enabled: true
         ### {conn-410001} connected
         ### {conn-410001} pool-connect
-        connection-connect-after-log-enabled: false
-        ### 无调用者，LogFilter#isConnectionCommitAfterLogEnabled
-        connection-commit-after-log-enabled: false
-        ### 无调用者，LogFilter#isConnectionRollbackAfterLogEnabled
-        connection-rollback-after-log-enabled: false
+        connection-connect-after-log-enabled: true
         ### {conn-410001} pool-recycle
-        connection-close-after-log-enabled: false
-        ## statement log 的总开关
+        ### {conn-410001} closed
+        connection-close-after-log-enabled: true
+        ### 无调用者
+        connection-commit-after-log-enabled: true
+        ### 无调用者
+        connection-rollback-after-log-enabled: true
+        ## statement log 的总开关，前置条件：druid.sql.Statement 的日志级别为 debug
         statement-log-enabled: true
         ## statement sql 输出选项，可以开启多个
         statement-sql-format-option:
           ### 关键字大写
-          upp-case: true
+          upp-case: false
           ### 表名不敏感
           desensitize: false
           ### 格式化
-          pretty-format: false
+          pretty-format: true
           ### 参数化，column=?
           parameterized: false
         ## statement sql 格式化选项
-        statement-sql-pretty-format: false
-        ### {conn-410001, pstmt-420002} created.
-        statement-create-after-log-enabled: false
-        ### 无调用者，LogFilter#isStatementPrepareAfterLogEnabled
-        statement-prepare-after-log-enabled: false
-        ### 无调用者，LogFilter#isStatementPrepareCallAfterLogEnabled
-        statement-prepare-call-after-log-enabled: false
-        ### {conn-410001, pstmt-420002} executed.
-        statement-execute-after-log-enabled: false
-        ### 无调用者，LogFilter#isStatementExecuteQueryAfterLogEnabled
-        statement-execute-query-after-log-enabled: false
-        ### 无调用者，LogFilter#isStatementExecuteUpdateAfterLogEnabled
-        statement-execute-update-after-log-enabled: false
-        ### 无调用者，LogFilter#isStatementExecuteBatchAfterLogEnabled
-        statement-execute-batch-after-log-enabled: false
-        ### {conn-410001, pstmt-420002} executed. $sql
+        statement-sql-pretty-format: true
+        ### {conn-410001, pstmt-420002} created. $sql
+        statement-create-after-log-enabled: true
+        ### {conn-410001, pstmt-420002} Parameters :[]
+        ### {conn-410001, pstmt-420002} Types :[]
+        statement-parameter-set-log-enabled: true
+        ### {conn-410001, pstmt-420002} executed. $executable-sql
         statement-executable-sql-log-enable: false
+        ### {conn-410001, pstmt-420002} executed. 2.073044 millis. $sql
+        statement-execute-after-log-enabled: true
         ### {conn-410001, pstmt-420002} closed
-        statement-close-after-log-enabled: false
+        statement-close-after-log-enabled: true
+        ### 无调用者，LogFilter#isStatementPrepareAfterLogEnabled
+        statement-prepare-after-log-enabled: true
+        ### 无调用者，LogFilter#isStatementPrepareCallAfterLogEnabled
+        statement-prepare-call-after-log-enabled: true
+        ### 无调用者，LogFilter#isStatementExecuteQueryAfterLogEnabled
+        statement-execute-query-after-log-enabled: true
+        ### 无调用者，LogFilter#isStatementExecuteUpdateAfterLogEnabled
+        statement-execute-update-after-log-enabled: true
+        ### 无调用者，LogFilter#isStatementExecuteBatchAfterLogEnabled
+        statement-execute-batch-after-log-enabled: true
         ### {conn-410001, pstmt-420002} clearParameters.
-        statement-parameter-clear-log-enable: false
-        ### {conn-410001, pstmt-420002} Parameters :
-        ### {conn-410001, pstmt-420002} Types :
-        statement-parameter-set-log-enabled: false
-        ## result-set log 的总开关
-        result-set-log-enabled: false
+        statement-parameter-clear-log-enable: true
+        ## result-set log 的总开关，前置条件：druid.sql.ResultSet 的日志级别为 debug
+        result-set-log-enabled: true
         ### {conn-410001, pstmt-420000, rs-450000} open
-        ### {conn-410001, pstmt-420000, rs-450000} Header:
-        result-set-open-after-log-enabled: false
-        ### {conn-410001, pstmt-420000, rs-450000} Result:
-        result-set-next-after-log-enabled: false
+        ### {conn-410001, pstmt-420000, rs-450000} Header: []
+        result-set-open-after-log-enabled: true
+        ### {conn-410001, pstmt-420000, rs-450000} Result: []
+        result-set-next-after-log-enabled: true
         ### {conn-410001, pstmt-420000, rs-450000} closed
-        result-set-close-after-log-enabled: false
-        ## connection error log 的总开关
-        ## 无调用者，Slf4jLogFilter#isConnectionLogErrorEnabled
-        connection-log-error-enabled: true
+        result-set-close-after-log-enabled: true
         ## statement error log 的总开关
         ## {conn-410001, pstmt-420002} executed error.
         statement-log-error-enabled: true
