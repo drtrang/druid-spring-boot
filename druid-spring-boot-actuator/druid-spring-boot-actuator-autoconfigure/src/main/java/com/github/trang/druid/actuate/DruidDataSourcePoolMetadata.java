@@ -1,7 +1,7 @@
 package com.github.trang.druid.actuate;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.boot.autoconfigure.jdbc.metadata.AbstractDataSourcePoolMetadata;
+import org.springframework.boot.jdbc.metadata.AbstractDataSourcePoolMetadata;
 
 /**
  * Druid 的基础元数据
@@ -32,6 +32,11 @@ public class DruidDataSourcePoolMetadata extends AbstractDataSourcePoolMetadata<
     @Override
     public String getValidationQuery() {
         return getDataSource().getValidationQuery();
+    }
+
+    @Override
+    public Boolean getDefaultAutoCommit() {
+        return getDataSource().isDefaultAutoCommit();
     }
 
 }
