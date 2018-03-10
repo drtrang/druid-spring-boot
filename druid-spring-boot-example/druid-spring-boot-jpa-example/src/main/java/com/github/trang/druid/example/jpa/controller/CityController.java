@@ -22,7 +22,7 @@ public class CityController {
 
     @GetMapping("/get/{id}")
     public City get(@PathVariable Long id) {
-        return cityRepository.getOne(id);
+        return cityRepository.findById(id).orElse(null);
     }
 
 }

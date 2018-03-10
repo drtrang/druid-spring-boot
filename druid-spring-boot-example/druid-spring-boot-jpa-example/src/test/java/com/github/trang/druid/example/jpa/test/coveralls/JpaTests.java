@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * MyBatis 测试
@@ -16,7 +15,7 @@ public class JpaTests extends BaseTest {
 
     @Test
     public void testOne() {
-        Optional.ofNullable(cityRepository.getOne(1L))
+        cityRepository.findById(1L)
                 .ifPresent(gson::toJson);
     }
 
