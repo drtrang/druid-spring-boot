@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * MyBatis 测试
@@ -15,14 +16,16 @@ public class JpaTests extends BaseTest {
 
     @Test
     public void testOne() {
-        City city = cityRepository.findOne(1L);
-        System.out.println(city);
+        Optional.ofNullable(cityRepository.getOne(1L))
+                .ifPresent(gson::toJson);
     }
 
     @Test
     public void testAll() {
         List<City> cities = cityRepository.findAll();
-        System.out.println(cities);
+        cities.stream()
+                .map(gson::toJson)
+                .forEach(log::info);
         Assert.assertEquals(5, cities.size());
     }
 

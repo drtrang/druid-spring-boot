@@ -20,9 +20,9 @@ public class SingleDataSourceTests extends BaseTest {
 
     @Test
     public void testSingleDataSource() {
-        assertEquals(1, dataSource.getInitialSize());
-        assertEquals(1, dataSource.getMinIdle());
-        assertEquals(10, dataSource.getMaxActive());
+        assertEquals(0, dataSource.getInitialSize());
+        assertEquals(0, dataSource.getMinIdle());
+        assertEquals(8, dataSource.getMaxActive());
         assertEquals(30000, dataSource.getMaxWait());
         assertEquals(60000, dataSource.getTimeBetweenEvictionRunsMillis());
         assertEquals(1800000, dataSource.getMinEvictableIdleTimeMillis());
@@ -31,7 +31,7 @@ public class SingleDataSourceTests extends BaseTest {
         assertEquals(true, dataSource.isTestWhileIdle());
         assertEquals(false, dataSource.isTestOnBorrow());
         assertEquals(false, dataSource.isTestOnReturn());
-        assertEquals(20, dataSource.getMaxPoolPreparedStatementPerConnectionSize());
+        assertEquals(10, dataSource.getMaxPoolPreparedStatementPerConnectionSize());
         assertEquals(true, dataSource.isUseGlobalDataSourceStat());
     }
 
