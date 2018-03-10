@@ -11,16 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.boot.bind.PropertySourcesBinder;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.boot.context.properties.bind.Bindable;
+import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.context.annotation.ImportSelector;
-import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -39,9 +39,8 @@ public class DruidDataSourceConfiguration {
 
     static final String BEAN_NAME = "dataSource";
     static final String BEAN_SUFFIX = "DataSource";
-    static final String EMPTY = "";
     static final String POINT = ".";
-    static final String PREFIX = "spring.datasource.druid.data-sources.";
+    static final String PREFIX = "spring.datasource.druid.data-sources";
 
     /**
      * 单数据源注册
@@ -66,19 +65,18 @@ public class DruidDataSourceConfiguration {
      */
     static class DynamicDataSourceRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
-        private RelaxedPropertyResolver resolver;
+        private Map<String, Object> dataSources;
 
         @Override
         public void setEnvironment(Environment environment) {
-            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
+            this.dataSources = Binder.get(environment)
+                    .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
+                    .orElseGet(HashMap::new);
         }
 
         @Override
         public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-            resolver.getSubProperties(EMPTY).keySet().stream()
-                    .map(key -> key.substring(0, key.indexOf(POINT)))
-                    .distinct()
-                    .forEach(dataSourceName -> {
+            this.dataSources.keySet().forEach(dataSourceName -> {
                         // 注册 BeanDefinition
                         String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
                         registry.registerBeanDefinition(camelName, genericDruidBeanDefinition());
@@ -108,16 +106,18 @@ public class DruidDataSourceConfiguration {
      *
      * @author trang
      */
-    static class DruidDataSourceBeanPostProcessor implements BeanPostProcessor, EnvironmentAware {
+    static class DruidDataSourceBeanPostProcessor implements EnvironmentAware, BeanPostProcessor {
 
-        private ConfigurableEnvironment environment;
-        private RelaxedPropertyResolver resolver;
+        private Environment environment;
+        private Map<String, Object> dataSources;
         private List<DruidDataSourceCustomizer> customizers;
 
         @Override
         public void setEnvironment(Environment environment) {
-            this.environment = (ConfigurableEnvironment) environment;
-            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
+            this.environment = environment;
+            this.dataSources = Binder.get(environment)
+                    .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
+                    .orElseGet(HashMap::new);
         }
 
         @Autowired
@@ -131,9 +131,8 @@ public class DruidDataSourceConfiguration {
                 // 设置 Druid 名称
                 ((DruidDataSource) bean).setName(beanName);
                 // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
-                if (!resolver.getSubProperties(EMPTY).isEmpty()) {
-                    PropertySourcesBinder binder = new PropertySourcesBinder(environment);
-                    binder.bindTo(PREFIX + beanName, bean);
+                if (!dataSources.isEmpty()) {
+                    Binder.get(environment).bind(PREFIX + POINT + beanName, Bindable.ofInstance(bean));
                 }
                 // 用户自定义配置
                 if (customizers != null && !customizers.isEmpty()) {
@@ -167,18 +166,19 @@ public class DruidDataSourceConfiguration {
      */
     static class DruidDataSourceImportSelector implements ImportSelector, EnvironmentAware {
 
-        private RelaxedPropertyResolver resolver;
+        private Map<String, Object> dataSources;
 
         @Override
         public void setEnvironment(Environment environment) {
-            this.resolver = new RelaxedPropertyResolver(environment, PREFIX);
+            this.dataSources = Binder.get(environment)
+                    .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
+                    .orElseGet(HashMap::new);
         }
 
         @Override
         public String[] selectImports(AnnotationMetadata metadata) {
-            Map<String, Object> properties = resolver.getSubProperties(EMPTY);
             Builder<Class<?>> imposts = Stream.<Class<?>>builder().add(DruidDataSourceBeanPostProcessor.class);
-            imposts.add(properties.isEmpty() ? SingleDataSourceRegistrar.class : DynamicDataSourceRegistrar.class);
+            imposts.add(dataSources.isEmpty() ? SingleDataSourceRegistrar.class : DynamicDataSourceRegistrar.class);
             return imposts.build().map(Class::getName).toArray(String[]::new);
         }
 
