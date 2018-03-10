@@ -13,6 +13,7 @@ import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -38,6 +39,7 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
 public class DruidAutoConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
     @ConfigurationProperties(prefix = DRUID_STAT_FILTER_PREFIX)
     public StatFilter statFilter() {
@@ -46,6 +48,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_WALL_CONFIG_PREFIX)
     public WallConfig wallConfig() {
@@ -53,6 +56,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_WALL_FILTER_PREFIX)
     public WallFilter wallFilter(WallConfig wallConfig) {
@@ -63,6 +67,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     public ConfigFilter configFilter() {
         log.debug("druid config-filter init...");
@@ -70,6 +75,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_SLF4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_SLF4J_FILTER_PREFIX)
     public Slf4jLogFilter slf4jLogFilter() {
@@ -78,6 +84,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_LOG4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_LOG4J_FILTER_PREFIX)
     public Log4jFilter log4jFilter() {
@@ -86,6 +93,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_LOG4J2_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_LOG4J2_FILTER_PREFIX)
     public Log4j2Filter log4j2Filter() {
@@ -94,6 +102,7 @@ public class DruidAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX, name = "enabled", havingValue = "true")
     @ConfigurationProperties(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX)
     public CommonsLogFilter commonsLogFilter() {

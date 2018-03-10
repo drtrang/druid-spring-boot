@@ -48,9 +48,9 @@ public class DruidStatConfiguration {
         }
 
         @Bean
-        public RegexpMethodPointcutAdvisor druidStatAdvisor(DruidDataSourceProperties druidDataSourceProperties,
+        public RegexpMethodPointcutAdvisor druidStatAdvisor(DruidDataSourceProperties druidProperties,
                                                             DruidStatInterceptor druidStatInterceptor) {
-            DruidAopStatProperties properties = druidDataSourceProperties.getAopStat();
+            DruidAopStatProperties properties = druidProperties.getAopStat();
             return new RegexpMethodPointcutAdvisor(properties.getPatterns(), druidStatInterceptor);
         }
 
@@ -74,9 +74,9 @@ public class DruidStatConfiguration {
     public static class DruidWebStatConfiguration {
 
         @Bean
-        public FilterRegistrationBean filterRegistrationBean(DruidDataSourceProperties druidDataSourceProperties) {
+        public FilterRegistrationBean filterRegistrationBean(DruidDataSourceProperties druidProperties) {
             log.debug("druid web-stat-filter init...");
-            DruidWebStatProperties properties = druidDataSourceProperties.getWebStat();
+            DruidWebStatProperties properties = druidProperties.getWebStat();
             FilterRegistrationBean<WebStatFilter> registration = new FilterRegistrationBean<>(new WebStatFilter());
             registration.addUrlPatterns(properties.getUrlPatterns());
             registration.addInitParameter("exclusions", properties.getExclusions());

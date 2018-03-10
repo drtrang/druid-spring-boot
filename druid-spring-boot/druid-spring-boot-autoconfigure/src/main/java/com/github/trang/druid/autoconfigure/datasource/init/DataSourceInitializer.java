@@ -22,8 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Initialize a {@link DataSource} based on a matching {@link DataSourceProperties}
- * config.
+ * Initialize {@link DataSource} List based on a matching {@link DataSourceProperties} config.
  *
  * @author Dave Syer
  * @author Phillip Webb

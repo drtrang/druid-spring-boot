@@ -13,11 +13,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_DATA_SOURCE_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
 
 /**
  * Druid 多数据源支持，会自动注入 'spring.datasource' 和 'spring.datasource.druid' 配置
@@ -32,7 +32,7 @@ public abstract class AbstractDruidDataSource2 extends DruidDataSource {
     @Autowired
     private DataSourceProperties dataSourceProperties;
     @Autowired
-    private DruidDataSourceProperties druidDataSourceProperties;
+    private DruidDataSourceProperties druidProperties;
     @Autowired
     private ObjectProvider<List<FilterAdapter>> druidFilters;
 
@@ -59,7 +59,7 @@ public abstract class AbstractDruidDataSource2 extends DruidDataSource {
     }
 
     private void initConfigFilterProperties() {
-        DruidConfigFilterProperties configFilterProperties = druidDataSourceProperties.getConfig();
+        DruidConfigFilterProperties configFilterProperties = druidProperties.getConfig();
         if (configFilterProperties.isEnabled()) {
             StringBuilder builder = new StringBuilder();
             builder.append(ConfigFilter.CONFIG_DECRYPT).append("=").append("true").append(";");
@@ -76,12 +76,10 @@ public abstract class AbstractDruidDataSource2 extends DruidDataSource {
 
     private void initFilters() {
         List<Filter> proxyFilters = super.getProxyFilters();
-        Optional.of(druidFilters.getIfAvailable())
-                .filter(filters -> !filters.isEmpty())
-                .ifPresent(filters -> filters.stream()
+        druidFilters.getIfAvailable(ArrayList::new).stream()
                         .filter(Objects::nonNull)
                         .filter(filter -> !proxyFilters.contains(filter))
-                        .forEach(proxyFilters::add));
+                        .forEach(proxyFilters::add);
     }
 
 }
