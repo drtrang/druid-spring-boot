@@ -1,6 +1,7 @@
 package com.github.trang.druid.example.mybatis.config;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
@@ -18,14 +19,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 @Getter
+@RequiredArgsConstructor
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private final AtomicInteger count = new AtomicInteger();
     private final Map<String, DataSource> targetDataSources;
-
-    public DynamicDataSource(Map<String, DataSource> targetDataSources) {
-        this.targetDataSources = targetDataSources;
-    }
 
     /**
      * 基于轮询算法指定实际的数据源
