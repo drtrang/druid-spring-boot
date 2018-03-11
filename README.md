@@ -11,10 +11,18 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
 ## 依赖
 ```xml
+<!-- spring boot 1.x -->
 <dependency>
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot-starter</artifactId>
-    <version>1.1.7</version>
+    <version>1.1.8</version>
+</dependency>
+
+<!-- spring boot 2.x -->
+<dependency>
+    <groupId>com.github.drtrang</groupId>
+    <artifactId>druid-spring-boot2-starter</artifactId>
+    <version>1.1.8</version>
 </dependency>
 ```
 
@@ -25,7 +33,7 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
 ## NEW !
 1. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 ApplicationContext，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)
-1. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/druid.yml)
+1. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot2-example/druid-spring-boot2-mybatis-example/src/main/resources/druid.yml)
 2. 新增 `druid-spring-boot-actuator-starter`
 
 
@@ -112,10 +120,10 @@ spring:
 ```
 
 ### 配置示例
-[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/application.yml)
+[application.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot2-example/druid-spring-boot2-mybatis-example/src/main/resources/application.yml)
 
 ### 全配置说明
-[druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/druid.yml)
+[druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot2-example/druid-spring-boot2-mybatis-example/src/main/resources/druid.yml)
 
 
 ## 自动提示
@@ -132,7 +140,7 @@ Druid Spring Boot Starter 基于 `spring-boot-configuration-processor` 模块，
 
 
 ## 演示
-[druid-spring-boot-example](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot-example) 中演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。 
+[druid-spring-boot2-example](https://github.com/drtrang/druid-spring-boot/tree/master/druid-spring-boot2-example) 中演示了 Druid Spring Boot Starter 的使用方式，可以作为参考。 
 
 
 ## Change Log

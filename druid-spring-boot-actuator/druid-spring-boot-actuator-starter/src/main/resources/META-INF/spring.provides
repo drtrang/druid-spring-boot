@@ -1,1 +1,0 @@
-provides: druid,druid-spring-boot-actuator,druid-spring-boot-actuator-autoconfigure,slf4j-api

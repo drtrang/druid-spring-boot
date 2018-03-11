@@ -8,7 +8,7 @@
 ### Enhancements
 1. 新增基于 JPA 的代码示例
 2. 改进 DruidDataSourceInitializer，支持多数据源的 SQL 初始化
-3. 改进自动提示，新增大量精准提示，详情见 [additional-spring-configuration-metadata.json](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot/druid-spring-boot-autoconfigure/src/main/resources/META-INF/additional-spring-configuration-metadata.json)
+3. 改进自动提示，新增大量精准提示，详情见 [additional-spring-configuration-metadata.json](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot2/druid-spring-boot2-autoconfigure/src/main/resources/META-INF/additional-spring-configuration-metadata.json)
 
 ### Bug Fixes
 1. 修复代码覆盖率显示异常的 bug

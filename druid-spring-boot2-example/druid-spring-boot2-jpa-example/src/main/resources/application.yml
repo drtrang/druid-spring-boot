@@ -1,0 +1,118 @@
+logging:
+  level:
+    root: info
+    org.springframework: info
+    org.springframework.jdbc: debug
+    org.springframework.boot: info
+    org.mybatis: debug
+    com.alibaba.druid: debug
+    com.github.trang: debug
+
+spring:
+  application:
+    name: druid-spring-boot2-jpa-example
+  profiles:
+    # 默认环境为 default，多数据源演示请改为 dynamic
+    # active: dynamic
+    active: default
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: true
+  datasource:
+    url: jdbc:h2:mem:example
+    username: root
+    password: 123456
+    schema: classpath:import.sql
+    druid:
+      max-wait: 30000
+      query-timeout: 10
+      validation-query: SELECT 1
+      use-global-data-source-stat: true
+      # 默认开启，当前已开启
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+      # 默认关闭，需手动开启，当前已开启
+      slf4j:
+        enabled: true
+        data-source-log-enabled: false
+        connection-log-enabled: false
+        statement-log-enabled: false
+        result-set-log-enabled: false
+      # 默认关闭，需手动开启，当前已开启
+      wall:
+        enabled: true
+        log-violation: true
+        throw-exception: false
+        config:
+          delete-where-none-check: true
+      # 默认关闭，需手动开启，当前已关闭
+      config:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      web-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      aop-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      stat-view-servlet:
+        enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+  transaction:
+    rollback-on-commit-failure: true
+  mvc:
+    servlet:
+      load-on-startup: 1
+  aop:
+    auto: true
+    proxy-target-class: true
+  http:
+    encoding:
+      enabled: true
+      force: true
+      charset: utf-8
+    converters:
+      preferred-json-mapper: jackson
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+      write_null_map_values: true
+      write_dates_as_timestamps: false
+    deserialization:
+      fail_on_unknown_properties: false
+    parser:
+      allow_unquoted_control_chars: true
+      allow_single_quotes: true
+
+---
+
+debug: true
+
+spring:
+  profiles: dynamic
+  autoconfigure:
+    exclude:
+      # 多数据源场景会导致 `javax.sql.DataSource` 和 `org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`
+      # 循环依赖，所以需要手动排除 `org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration`
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    schema: classpath:import.sql
+    druid:
+      # 继承 spring.datasource.druid 前缀的配置，同时可以自定义配置，若名称相同则覆盖父配置
+      data-sources:
+        master:
+          url: jdbc:h2:mem:master
+          max-active: 50
+          max-open-prepared-statements: 50
+        slave:
+          url: jdbc:h2:mem:slave
+          max-active: 25
+          max-open-prepared-statements: 25

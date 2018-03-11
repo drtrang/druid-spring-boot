@@ -5,13 +5,13 @@
 
     <parent>
         <groupId>com.github.drtrang</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <artifactId>parent2</artifactId>
+        <version>1.1.1</version>
     </parent>
 
     <groupId>com.github.drtrang</groupId>
-    <artifactId>druid-spring-boot-parent</artifactId>
-    <version>1.1.8-SNAPSHOT</version>
+    <artifactId>druid-spring-boot2-parent</artifactId>
+    <version>1.1.8</version>
     <packaging>pom</packaging>
 
     <name>Druid Spring Boot Starter</name>
@@ -50,9 +50,9 @@
     </issueManagement>
 
     <modules>
-        <module>druid-spring-boot</module>
-        <module>druid-spring-boot-actuator</module>
-        <module>druid-spring-boot-example</module>
+        <module>druid-spring-boot2</module>
+        <module>druid-spring-boot2-actuator</module>
+        <module>druid-spring-boot2-example</module>
     </modules>
 
     <properties>
@@ -63,22 +63,22 @@
         <dependencies>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
-                <artifactId>druid-spring-boot-autoconfigure</artifactId>
+                <artifactId>druid-spring-boot2-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
+                <artifactId>druid-spring-boot2-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
-                <artifactId>druid-spring-boot-actuator-autoconfigure</artifactId>
+                <artifactId>druid-spring-boot2-actuator-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
-                <artifactId>druid-spring-boot-actuator-starter</artifactId>
+                <artifactId>druid-spring-boot2-actuator-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
