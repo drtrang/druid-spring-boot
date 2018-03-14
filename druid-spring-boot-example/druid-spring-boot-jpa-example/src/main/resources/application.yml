@@ -1,10 +1,9 @@
-debug: false
-
 logging:
   level:
     root: info
     org.springframework: info
     org.springframework.jdbc: debug
+    org.springframework.boot: info
     org.mybatis: debug
     com.alibaba.druid: debug
     com.github.trang: debug
@@ -16,29 +15,20 @@ spring:
     # 默认环境为 default，多数据源演示请改为 dynamic
     # active: dynamic
     active: default
-  output:
-    ansi:
-      enabled: detect
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: true
   datasource:
     url: jdbc:h2:mem:example
     username: root
     password: 123456
     schema: classpath:import.sql
     druid:
-      # spring.datasource.druid 前缀的配置将注入到 AbstractDruidDataSource2，作为公共参数
-      initial-size: 1
-      min-idle: 1
-      max-active: 10
       max-wait: 30000
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 1800000
-      max-evictable-idle-time-millis: 25200000
+      query-timeout: 10
       validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
       use-global-data-source-stat: true
       # 默认开启，当前已开启
       stat:
@@ -47,11 +37,9 @@ spring:
       # 默认关闭，需手动开启，当前已开启
       slf4j:
         enabled: true
+        data-source-log-enabled: false
         connection-log-enabled: false
-        statement-sql-format-option:
-          upp-case: true
-          pretty-format: false
-        statement-executable-sql-log-enable: true
+        statement-log-enabled: false
         result-set-log-enabled: false
       # 默认关闭，需手动开启，当前已开启
       wall:
@@ -72,16 +60,14 @@ spring:
       # 默认关闭，需手动开启，当前已关闭
       stat-view-servlet:
         enabled: false
-  h2:
-    console:
-      enabled: true
-      settings:
-        trace: true
   jpa:
     hibernate:
       ddl-auto: update
   transaction:
     rollback-on-commit-failure: true
+  mvc:
+    servlet:
+      load-on-startup: 1
   aop:
     auto: true
     proxy-target-class: true

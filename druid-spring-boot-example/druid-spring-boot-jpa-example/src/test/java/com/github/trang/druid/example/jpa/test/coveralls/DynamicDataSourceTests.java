@@ -32,8 +32,8 @@ public class DynamicDataSourceTests extends BaseTest {
 
     @Test
     public void testMasterDataSource() {
-        assertEquals(1, masterDataSource.getInitialSize());
-        assertEquals(1, masterDataSource.getMinIdle());
+        assertEquals(0, masterDataSource.getInitialSize());
+        assertEquals(0, masterDataSource.getMinIdle());
         assertEquals(50, masterDataSource.getMaxActive());
         assertEquals(30000, masterDataSource.getMaxWait());
         assertEquals(60000, masterDataSource.getTimeBetweenEvictionRunsMillis());
@@ -49,8 +49,8 @@ public class DynamicDataSourceTests extends BaseTest {
 
     @Test
     public void testSlaveDataSource() {
-        assertEquals(1, slaveDataSource.getInitialSize());
-        assertEquals(1, slaveDataSource.getMinIdle());
+        assertEquals(0, slaveDataSource.getInitialSize());
+        assertEquals(0, slaveDataSource.getMinIdle());
         assertEquals(25, slaveDataSource.getMaxActive());
         assertEquals(30000, slaveDataSource.getMaxWait());
         assertEquals(60000, slaveDataSource.getTimeBetweenEvictionRunsMillis());

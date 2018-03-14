@@ -2,6 +2,7 @@ package com.github.trang.druid.example.jpa;
 
 import com.github.trang.druid.example.jpa.repository.CityRepository;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author trang
  */
 @SpringBootApplication
+@Slf4j
 public class DruidJpaApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -28,7 +30,7 @@ public class DruidJpaApplication implements CommandLineRunner {
         Gson gson = new Gson();
         cityRepository.findAll().stream()
                 .map(gson::toJson)
-                .forEach(System.out::println);
+                .forEach(log::info);
     }
 
 }

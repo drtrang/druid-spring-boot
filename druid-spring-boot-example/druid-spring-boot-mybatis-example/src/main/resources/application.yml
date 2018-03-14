@@ -2,10 +2,11 @@ logging:
   level:
     root: info
     org.springframework: info
-    org.springframework.jdbc: info
-    org.mybatis: info
-    com.alibaba.druid: info
-    com.github.trang: info
+    org.springframework.jdbc: debug
+    org.springframework.boot: info
+    org.mybatis: debug
+    com.alibaba.druid: debug
+    com.github.trang: debug
     executableSql: debug
 
 spring:
@@ -26,6 +27,7 @@ spring:
     password: 123456
     schema: classpath:import.sql
     druid:
+      max-wait: 30000
       query-timeout: 10
       validation-query: SELECT 1
       use-global-data-source-stat: true

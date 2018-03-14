@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * MyBatis 测试
@@ -15,14 +16,17 @@ public class MyBatisTests extends BaseTest {
 
     @Test
     public void testOne() {
-        City city = cityMapper.findById(1L);
-        System.out.println(city);
+        Optional.ofNullable(cityMapper.findById(1L))
+                .map(gson::toJson)
+                .ifPresent(city -> log.info("{}", city));
     }
 
     @Test
     public void testAll() {
         List<City> cities = cityMapper.findAll();
-        System.out.println(cities);
+        cities.stream()
+                .map(gson::toJson)
+                .forEach(log::info);
         Assert.assertEquals(5, cities.size());
     }
 
