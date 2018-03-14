@@ -17,7 +17,8 @@ public class MyBatisTests extends BaseTest {
     @Test
     public void testOne() {
         Optional.ofNullable(cityMapper.findById(1L))
-                .ifPresent(gson::toJson);
+                .map(gson::toJson)
+                .ifPresent(city -> log.info("{}", city));
     }
 
     @Test

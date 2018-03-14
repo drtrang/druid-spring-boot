@@ -16,7 +16,8 @@ public class JpaTests extends BaseTest {
     @Test
     public void testOne() {
         cityRepository.findById(1L)
-                .ifPresent(gson::toJson);
+                .map(gson::toJson)
+                .ifPresent(city -> log.info("{}", city));
     }
 
     @Test
