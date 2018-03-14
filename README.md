@@ -17,11 +17,21 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
     <artifactId>druid-spring-boot-starter</artifactId>
     <version>1.1.8</version>
 </dependency>
+<dependency>
+    <groupId>com.github.drtrang</groupId>
+    <artifactId>druid-spring-boot-actuator-starter</artifactId>
+    <version>1.1.8</version>
+</dependency>
 
 <!-- spring boot 2.x -->
 <dependency>
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot2-starter</artifactId>
+    <version>1.1.8</version>
+</dependency>
+<dependency>
+    <groupId>com.github.drtrang</groupId>
+    <artifactId>druid-spring-boot2-actuator-starter</artifactId>
     <version>1.1.8</version>
 </dependency>
 ```
@@ -32,9 +42,9 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
 
 ## NEW !
-1. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 ApplicationContext，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)
-1. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot-example/druid-spring-boot-mybatis-example/src/main/resources/druid.yml)
-2. 新增 `druid-spring-boot-actuator-starter`
+1. 基于 Spring Boot 2 开发的全新 starter，与之前功能完全一致
+2. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 ApplicationContext，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/master/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)
+3. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/master/druid-spring-boot2-example/druid-spring-boot2-mybatis-example/src/main/resources/druid.yml)
 
 
 ## 配置
@@ -44,7 +54,6 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 ```yaml
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:example
     username: root
     password: 123456
@@ -56,20 +65,13 @@ Druid Spring Boot Starter 会将以 `spring.datasource.druid` 为前缀的配置
 ```yaml
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:example
     username: root
     password: 123456
     druid:
-      initial-size: 1
-      min-idle: 1
-      max-active: 10
+      max-wait: 30000
+      query-timeout: 10
       validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
       use-global-data-source-stat: true
 ```
 
@@ -82,26 +84,37 @@ Druid Spring Boot Starter 添加了 Druid 的大部分特性，如 StatFilter、
 spring:
   datasource:
     druid:
+      # 开启 StatFilter，默认开启，可通过 'enabled: false' 关闭
+      stat:
+        enabled: true
+        log-slow-sql: true
+        slow-sql-millis: 1000
+      # 开启 Slf4jFilter
       slf4j:
-        # 开启 Slf4jFilter
         enabled: true
+        data-source-log-enabled: false
+        connection-log-enabled: false
+        statement-log-enabled: false
+        result-set-log-enabled: false
+      # 开启 WallFilter
       wall:
-        # 开启 WallFilter
         enabled: true
+        log-violation: true
+        throw-exception: false
+        ## WallConfig 配置
         config:
-          ## WallConfig 配置
-          select-all-column-allow: false
+          delete-where-none-check: true
+      # 开启 ConfigFilter
       config:
-        # 开启 ConfigFilter
         enabled: true
+      # 开启 Web 监控
       web-stat:
-        # 开启 Web 监控
         enabled: true
+      # 开启 Aop 监控
       aop-stat:
-        # 开启 Aop 监控
         enabled: true
+      # 开启监控页面
       stat-view-servlet:
-        # 开启监控页面
         enabled: true
 ```
 
