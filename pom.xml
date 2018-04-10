@@ -6,15 +6,15 @@
     <parent>
         <groupId>com.github.drtrang</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
     </parent>
 
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot-parent</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <packaging>pom</packaging>
 
-    <name>Druid Spring Boot Starter</name>
+    <name>druid-spring-boot-parent</name>
     <description>Spring Boot Starter for Druid</description>
     <url>https://github.com/drtrang/druid-spring-boot</url>
 
@@ -56,7 +56,7 @@
     </modules>
 
     <properties>
-        <druid.version>1.1.8</druid.version>
+        <druid.version>1.1.9</druid.version>
     </properties>
 
     <dependencyManagement>

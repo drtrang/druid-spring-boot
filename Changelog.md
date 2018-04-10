@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.9
+### Enhancements
+1. 升级 druid 到 1.1.9
+
 ## 1.1.8
 ### Enhancements
 1. 升级 druid 到 1.1.8
