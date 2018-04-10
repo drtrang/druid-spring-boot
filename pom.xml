@@ -14,7 +14,7 @@
     <version>1.1.9</version>
     <packaging>pom</packaging>
 
-    <name>Druid Spring Boot Starter</name>
+    <name>druid-spring-boot2-parent</name>
     <description>Spring Boot Starter for Druid</description>
     <url>https://github.com/drtrang/druid-spring-boot</url>
 
@@ -50,9 +50,9 @@
     </issueManagement>
 
     <modules>
-        <module>druid-spring-boot2</module>
-        <module>druid-spring-boot2-actuator</module>
-        <module>druid-spring-boot2-example</module>
+        <module>druid-spring-boot</module>
+        <module>druid-spring-boot-actuator</module>
+        <module>druid-spring-boot-example</module>
     </modules>
 
     <properties>

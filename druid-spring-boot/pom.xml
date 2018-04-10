@@ -10,12 +10,12 @@
         <version>1.1.9</version>
     </parent>
 
-    <artifactId>druid-spring-boot2-actuator</artifactId>
+    <artifactId>druid-spring-boot2</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>druid-spring-boot2-actuator-autoconfigure</module>
-        <module>druid-spring-boot2-actuator-starter</module>
+        <module>druid-spring-boot-autoconfigure</module>
+        <module>druid-spring-boot-starter</module>
     </modules>
 
 </project>
