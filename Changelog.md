@@ -3,11 +3,12 @@
 ## 1.1.9
 ### Enhancements
 1. 升级 druid 到 1.1.9
+2. 升级 Spring Boot 版本到 2.0.1.RELEASE
 
 ## 1.1.8
 ### Enhancements
 1. 升级 druid 到 1.1.8
-2. 升级 Spring Boot 版本到 2.0.0.RELEASE 
+2. 升级 Spring Boot 版本到 2.0.0.RELEASE
 2. 精简代码，完善测试用例，完善最佳实践
 
 ## 1.1.7
