@@ -1,11 +1,12 @@
 package com.github.trang.druid.actuate;
 
-import com.alibaba.druid.stat.DruidStatManagerFacade;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.boot.actuate.endpoint.AbstractEndpoint;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.List;
-import java.util.Map;
+import com.alibaba.druid.stat.DruidStatManagerFacade;
 
 /**
  * 将 Druid 的信息暴露出来

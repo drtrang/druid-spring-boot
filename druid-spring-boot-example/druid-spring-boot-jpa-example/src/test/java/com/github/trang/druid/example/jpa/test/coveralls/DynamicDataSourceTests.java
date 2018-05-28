@@ -1,19 +1,20 @@
 package com.github.trang.druid.example.jpa.test.coveralls;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
-import com.github.trang.druid.example.jpa.config.DynamicDataSource;
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+
+import com.alibaba.druid.pool.DruidDataSource;
+import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import com.github.trang.druid.example.jpa.config.DynamicDataSource;
 
 /**
  * 动态数据源测试

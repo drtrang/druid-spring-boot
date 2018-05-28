@@ -1,11 +1,12 @@
 package com.github.trang.druid.example.jpa.test.coveralls;
 
-import com.github.trang.druid.example.jpa.model.City;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Optional;
+import com.github.trang.druid.example.jpa.model.City;
 
 /**
  * MyBatis 测试

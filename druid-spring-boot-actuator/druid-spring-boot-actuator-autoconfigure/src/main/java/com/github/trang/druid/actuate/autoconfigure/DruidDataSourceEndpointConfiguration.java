@@ -1,11 +1,12 @@
 package com.github.trang.druid.actuate.autoconfigure;
 
-import com.github.trang.druid.actuate.DruidDataSourceEndpoint;
-import com.github.trang.druid.actuate.DruidDataSourceMvcEndpoint;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.github.trang.druid.actuate.DruidDataSourceEndpoint;
+import com.github.trang.druid.actuate.DruidDataSourceMvcEndpoint;
 
 /**
  * Druid Endpoint & Druid MvcEndpoint 自动配置，默认开启

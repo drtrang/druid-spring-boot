@@ -1,14 +1,15 @@
 package com.github.trang.druid.example.jpa.test.coveralls;
 
-import com.github.trang.druid.example.jpa.DruidJpaApplication;
-import com.github.trang.druid.example.jpa.repository.CityRepository;
-import com.google.gson.Gson;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.github.trang.druid.example.jpa.DruidJpaApplication;
+import com.github.trang.druid.example.jpa.repository.CityRepository;
+import com.google.gson.Gson;
 
 /**
  * BaseTest

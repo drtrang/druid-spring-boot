@@ -1,8 +1,13 @@
 package com.github.trang.druid.autoconfigure.datasource.init;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.DruidDataSourceInitializerAutoConfiguration;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.config.ResourceNotFoundException;
@@ -13,12 +18,10 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.github.trang.druid.autoconfigure.DruidDataSourceInitializerAutoConfiguration;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Bean to handle {@link DataSource} initialization by running {@literal schema-*.sql} on {@link PostConstruct}.

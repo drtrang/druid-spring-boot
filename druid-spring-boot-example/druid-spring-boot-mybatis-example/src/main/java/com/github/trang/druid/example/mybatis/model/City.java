@@ -1,8 +1,8 @@
 package com.github.trang.druid.example.mybatis.model;
 
-import lombok.Data;
-
 import java.io.Serializable;
+
+import lombok.Data;
 
 /**
  * City

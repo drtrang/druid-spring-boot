@@ -1,16 +1,18 @@
 package com.github.trang.druid.example.mybatis.config;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 动态数据源，基于简单的轮询算法

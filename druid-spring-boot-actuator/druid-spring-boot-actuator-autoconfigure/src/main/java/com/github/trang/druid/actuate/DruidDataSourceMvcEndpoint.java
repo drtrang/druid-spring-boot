@@ -1,6 +1,9 @@
 package com.github.trang.druid.actuate;
 
-import com.alibaba.druid.stat.DruidStatService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.springframework.boot.actuate.endpoint.mvc.ActuatorMediaTypes;
 import org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter;
 import org.springframework.boot.actuate.endpoint.mvc.HypermediaDisabled;
@@ -11,9 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import com.alibaba.druid.stat.DruidStatService;
 
 /**
  * 将 {@link DruidDataSourceEndpoint} 适配成 {@link MvcEndpoint}

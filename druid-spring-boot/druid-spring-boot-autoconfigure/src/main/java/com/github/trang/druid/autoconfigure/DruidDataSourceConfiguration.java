@@ -1,10 +1,12 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
-import com.github.trang.druid.autoconfigure.util.CharMatcher;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,12 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-import java.util.stream.Stream.Builder;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
+import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import com.github.trang.druid.autoconfigure.util.CharMatcher;
 
-import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Druid 数据源配置

@@ -1,11 +1,10 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.alibaba.druid.support.http.WebStatFilter;
-import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
-import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
-import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidAopStatProperties;
-import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidWebStatProperties;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_AOP_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_WEB_STAT_PREFIX;
+
+import javax.servlet.Filter;
+
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.aop.support.RegexpMethodPointcutAdvisor;
@@ -18,9 +17,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.Filter;
+import com.alibaba.druid.support.http.WebStatFilter;
+import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidAopStatProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidWebStatProperties;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Druid 监控配置

@@ -1,6 +1,7 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.github.trang.druid.autoconfigure.datasource.init.DruidDataSourceInitializer;
+import javax.sql.DataSource;
+
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -10,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
+import com.github.trang.druid.autoconfigure.datasource.init.DruidDataSourceInitializer;
 
 /**
  * 支持数据源初始化时执行 SQL

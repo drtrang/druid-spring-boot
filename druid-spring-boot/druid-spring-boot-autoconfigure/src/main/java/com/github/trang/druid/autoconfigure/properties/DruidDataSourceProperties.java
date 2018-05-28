@@ -1,15 +1,17 @@
 package com.github.trang.druid.autoconfigure.properties;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_DATA_SOURCE_PREFIX;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+
+import com.alibaba.druid.pool.DruidDataSource;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Druid 自定义配置
@@ -17,7 +19,8 @@ import static com.github.trang.druid.autoconfigure.properties.DruidDataSourcePro
  * @author trang
  */
 @ConfigurationProperties(prefix = DRUID_DATA_SOURCE_PREFIX)
-@Getter @Setter
+@Getter
+@Setter
 public class DruidDataSourceProperties {
 
     Map<String, DruidDataSource> dataSources = new HashMap<>(16);
