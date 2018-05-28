@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import com.github.trang.druid.autoconfigure.datasource.init.DruidDataSourceInitializer;
 
@@ -30,6 +31,7 @@ import com.github.trang.druid.autoconfigure.datasource.init.DruidDataSourceIniti
 public class DruidDataSourceInitializerAutoConfiguration {
 
     @Bean
+    @Primary
     @ConditionalOnMissingBean(value = DruidDataSourceInitializer.class, name = "dataSourceInitializer")
     public DruidDataSourceInitializer dataSourceInitializer(DataSourceProperties properties,
                                                             ApplicationContext applicationContext) {

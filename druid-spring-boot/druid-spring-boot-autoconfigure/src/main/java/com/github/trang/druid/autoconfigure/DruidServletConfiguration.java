@@ -37,7 +37,7 @@ public class DruidServletConfiguration {
      *   2. 提供监控信息的 JSON API
      */
     @Bean
-    public ServletRegistrationBean servletRegistrationBean(DruidDataSourceProperties druidProperties) {
+    public ServletRegistrationBean druidStatViewServlet(DruidDataSourceProperties druidProperties) {
         log.debug("druid stat-view-servlet init...");
         DruidStatViewServletProperties properties = druidProperties.getStatViewServlet();
         ServletRegistrationBean registration = new ServletRegistrationBean(new StatViewServlet());
