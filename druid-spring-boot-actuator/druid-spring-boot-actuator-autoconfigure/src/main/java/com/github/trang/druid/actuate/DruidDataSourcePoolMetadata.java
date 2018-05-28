@@ -1,7 +1,8 @@
 package com.github.trang.druid.actuate;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.jdbc.metadata.AbstractDataSourcePoolMetadata;
+
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * Druid 的基础元数据

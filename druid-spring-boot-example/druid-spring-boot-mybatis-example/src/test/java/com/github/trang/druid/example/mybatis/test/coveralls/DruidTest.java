@@ -1,13 +1,15 @@
 package com.github.trang.druid.example.mybatis.test.coveralls;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.SQLUtils.FormatOption;
 import com.alibaba.druid.sql.visitor.VisitorFeature;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * DruidTest

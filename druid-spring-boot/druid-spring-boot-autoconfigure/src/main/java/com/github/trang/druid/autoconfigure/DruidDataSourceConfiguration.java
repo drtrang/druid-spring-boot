@@ -1,10 +1,13 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
-import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
-import com.github.trang.druid.autoconfigure.util.CharMatcher;
-import lombok.extern.slf4j.Slf4j;
+import static java.util.Collections.emptyMap;
+import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +23,12 @@ import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-import java.util.stream.Stream.Builder;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
+import com.github.trang.druid.autoconfigure.datasource.DruidDataSource2;
+import com.github.trang.druid.autoconfigure.util.CharMatcher;
 
-import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Druid 数据源配置
@@ -71,7 +73,7 @@ public class DruidDataSourceConfiguration {
         public void setEnvironment(Environment environment) {
             this.dataSources = Binder.get(environment)
                     .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
-                    .orElseGet(HashMap::new);
+                    .orElse(emptyMap());
         }
 
         @Override
@@ -117,7 +119,7 @@ public class DruidDataSourceConfiguration {
             this.environment = environment;
             this.dataSources = Binder.get(environment)
                     .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
-                    .orElseGet(HashMap::new);
+                    .orElse(emptyMap());
         }
 
         @Autowired
@@ -172,7 +174,7 @@ public class DruidDataSourceConfiguration {
         public void setEnvironment(Environment environment) {
             this.dataSources = Binder.get(environment)
                     .bind(PREFIX, Bindable.mapOf(String.class, Object.class))
-                    .orElseGet(HashMap::new);
+                    .orElse(emptyMap());
         }
 
         @Override

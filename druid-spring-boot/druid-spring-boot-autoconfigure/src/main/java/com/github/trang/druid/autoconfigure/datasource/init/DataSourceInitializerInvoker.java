@@ -1,6 +1,10 @@
 package com.github.trang.druid.autoconfigure.datasource.init;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -10,9 +14,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceSchemaCreatedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * Bean to handle {@link DataSource} initialization by running {@literal schema-*.sql} on

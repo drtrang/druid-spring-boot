@@ -1,14 +1,15 @@
 package com.github.trang.druid.actuate;
 
-import com.alibaba.druid.stat.DruidStatService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.web.annotation.EndpointWebExtension;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import com.alibaba.druid.stat.DruidStatService;
 
 /**
  * 将 {@link DruidDataSourceEndpoint} 适配成 {@link MvcEndpoint}

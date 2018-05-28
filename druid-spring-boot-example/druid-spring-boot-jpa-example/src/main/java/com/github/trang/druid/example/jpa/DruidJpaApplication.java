@@ -1,12 +1,14 @@
 package com.github.trang.druid.example.jpa;
 
-import com.github.trang.druid.example.jpa.repository.CityRepository;
-import com.google.gson.Gson;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.github.trang.druid.example.jpa.repository.CityRepository;
+import com.google.gson.Gson;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * DruidSpringBootStarterApplication

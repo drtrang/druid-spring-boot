@@ -1,11 +1,12 @@
 package com.github.trang.druid.example.jpa.test.coveralls;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.Assert.assertEquals;
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * 单数据源测试

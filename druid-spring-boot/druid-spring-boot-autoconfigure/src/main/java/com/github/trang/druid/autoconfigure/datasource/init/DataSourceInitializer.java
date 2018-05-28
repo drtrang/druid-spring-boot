@@ -1,6 +1,11 @@
 package com.github.trang.druid.autoconfigure.datasource.init;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -16,10 +21,7 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.util.StringUtils;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * Initialize {@link DataSource} List based on a matching {@link DataSourceProperties} config.

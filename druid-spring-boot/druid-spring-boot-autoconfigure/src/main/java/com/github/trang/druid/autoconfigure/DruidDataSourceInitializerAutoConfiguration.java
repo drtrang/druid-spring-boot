@@ -1,12 +1,13 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.github.trang.druid.autoconfigure.datasource.init.DataSourceInitializerInvoker;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
+import com.alibaba.druid.pool.DruidDataSource;
+import com.github.trang.druid.autoconfigure.datasource.init.DataSourceInitializerInvoker;
 
 /**
  * 支持数据源初始化时执行 SQL

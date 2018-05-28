@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.10
+### Enhancements
+1. 升级 parent 版本到 1.2.2
+2. 升级 druid 到 1.1.10
+
 ## 1.1.9
 ### Enhancements
 1. 升级 druid 到 1.1.9

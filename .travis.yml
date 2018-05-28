@@ -6,6 +6,9 @@ install: false
 cache:
   directories:
     - $HOME/.m2/repository
+addons:
+  apt:
+    update: true
 after_success:
   - cd druid-spring-boot2-example/druid-spring-boot2-mybatis-example
   - mvn clean test -Pcoveralls jacoco:report coveralls:report

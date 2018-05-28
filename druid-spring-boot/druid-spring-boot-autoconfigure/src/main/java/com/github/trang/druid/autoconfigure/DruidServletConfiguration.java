@@ -1,10 +1,9 @@
 package com.github.trang.druid.autoconfigure;
 
-import com.alibaba.druid.support.http.StatViewServlet;
-import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
-import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidStatViewServletProperties;
+import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_STAT_VIEW_SERVLET_PREFIX;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.Servlet;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -13,9 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.Servlet;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties;
+import com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidStatViewServletProperties;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.*;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Druid Servlet 配置
@@ -36,7 +37,7 @@ public class DruidServletConfiguration {
      *   2. 提供监控信息的 JSON API
      */
     @Bean
-    public ServletRegistrationBean servletRegistrationBean(DruidDataSourceProperties druidProperties) {
+    public ServletRegistrationBean druidStatViewServlet(DruidDataSourceProperties druidProperties) {
         log.debug("druid stat-view-servlet init...");
         DruidStatViewServletProperties properties = druidProperties.getStatViewServlet();
         ServletRegistrationBean<StatViewServlet> registration = new ServletRegistrationBean<>(new StatViewServlet());

@@ -1,9 +1,9 @@
 package com.github.trang.druid.autoconfigure.util;
 
-import org.springframework.util.StringUtils;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.util.StringUtils;
 
 /**
  * @author trang
