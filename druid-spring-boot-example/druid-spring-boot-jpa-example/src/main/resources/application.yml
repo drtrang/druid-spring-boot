@@ -13,7 +13,7 @@ spring:
     name: druid-spring-boot2-jpa-example
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
-    # active: dynamic
+#     active: dynamic
     active: default
   h2:
     console:
@@ -41,13 +41,9 @@ spring:
         connection-log-enabled: false
         statement-log-enabled: false
         result-set-log-enabled: false
-      # 默认关闭，需手动开启，当前已开启
+      # 默认关闭，需手动开启，当前已关闭
       wall:
-        enabled: true
-        log-violation: true
-        throw-exception: false
-        config:
-          delete-where-none-check: true
+        enabled: false
       # 默认关闭，需手动开启，当前已关闭
       config:
         enabled: false
@@ -63,6 +59,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: false
   transaction:
     rollback-on-commit-failure: true
   mvc:

@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import org.springframework.util.StringUtils;
 
 /**
+ * 变量名转换工具
+ *
  * @author trang
  */
 public final class CharMatcher {
@@ -22,7 +24,7 @@ public final class CharMatcher {
         return Manipulation.CAMELCASE_TO_HYPHEN;
     }
 
-    public static enum Manipulation {
+    public enum Manipulation {
 
         NONE {
             @Override

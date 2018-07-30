@@ -1,7 +1,7 @@
 package com.github.trang.druid.autoconfigure;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_AOP_STAT_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_WEB_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_AOP_STAT_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_WEB_STAT_PREFIX;
 
 import javax.servlet.Filter;
 
@@ -69,6 +69,8 @@ public class DruidStatConfiguration {
 
     /**
      * 用于采集 Web 和 JDBC 关联监控的数据
+     * <p>
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
      */
     @Configuration
     @ConditionalOnWebApplication
@@ -85,7 +87,7 @@ public class DruidStatConfiguration {
             registration.addInitParameter("exclusions", properties.getExclusions());
             registration.addInitParameter("sessionStatEnable", Boolean.toString(properties.isSessionStatEnable()));
             if (!StringUtils.isEmpty(properties.getSessionStatMaxCount())) {
-                registration.addInitParameter("sessionStatMaxCount",Integer.toString(properties.getSessionStatMaxCount()));
+                registration.addInitParameter("sessionStatMaxCount", Integer.toString(properties.getSessionStatMaxCount()));
             }
             if (!StringUtils.isEmpty(properties.getPrincipalSessionName())) {
                 registration.addInitParameter("principalSessionName", properties.getPrincipalSessionName());

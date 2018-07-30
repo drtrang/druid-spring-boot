@@ -42,13 +42,9 @@ spring:
         connection-log-enabled: false
         statement-log-enabled: false
         result-set-log-enabled: false
-      # 默认关闭，需手动开启，当前已开启
+      # 默认关闭，需手动开启，当前已关闭
       wall:
-        enabled: true
-        log-violation: true
-        throw-exception: false
-        config:
-          delete-where-none-check: true
+        enabled: false
       # 默认关闭，需手动开启，当前已关闭
       config:
         enabled: false

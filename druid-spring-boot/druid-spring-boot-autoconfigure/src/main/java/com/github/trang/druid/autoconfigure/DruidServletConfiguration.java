@@ -1,6 +1,6 @@
 package com.github.trang.druid.autoconfigure;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_STAT_VIEW_SERVLET_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_STAT_VIEW_SERVLET_PREFIX;
 
 import javax.servlet.Servlet;
 

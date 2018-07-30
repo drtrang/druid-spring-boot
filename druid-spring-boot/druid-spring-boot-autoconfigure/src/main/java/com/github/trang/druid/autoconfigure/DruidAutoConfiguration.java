@@ -1,13 +1,14 @@
 package com.github.trang.druid.autoconfigure;
 
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_COMMONS_LOG_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_CONFIG_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_LOG4J2_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_LOG4J_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_SLF4J_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_STAT_FILTER_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_WALL_CONFIG_PREFIX;
-import static com.github.trang.druid.autoconfigure.properties.DruidDataSourceProperties.DruidConstants.DRUID_WALL_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_COMMONS_LOG_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_CONFIG_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_ENCODING_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_LOG4J2_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_LOG4J_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_SLF4J_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_STAT_FILTER_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_WALL_CONFIG_PREFIX;
+import static com.github.trang.druid.autoconfigure.properties.DruidConstants.DRUID_WALL_FILTER_PREFIX;
 
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.alibaba.druid.filter.config.ConfigFilter;
+import com.alibaba.druid.filter.encoding.EncodingConvertFilter;
 import com.alibaba.druid.filter.logging.CommonsLogFilter;
 import com.alibaba.druid.filter.logging.Log4j2Filter;
 import com.alibaba.druid.filter.logging.Log4jFilter;
@@ -47,6 +49,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DruidAutoConfiguration {
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter
+     *
+     * @return statFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_STAT_FILTER_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -56,6 +63,11 @@ public class DruidAutoConfiguration {
         return new StatFilter();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE-wallfilter
+     *
+     * @return wallConfig
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -64,6 +76,12 @@ public class DruidAutoConfiguration {
         return new WallConfig();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E7%AE%80%E4%BB%8B_WallFilter
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE-wallfilter
+     *
+     * @return wallFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_WALL_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -75,6 +93,11 @@ public class DruidAutoConfiguration {
         return filter;
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter
+     *
+     * @return configFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_CONFIG_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -83,6 +106,11 @@ public class DruidAutoConfiguration {
         return new ConfigFilter();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter
+     *
+     * @return slf4jLogFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_SLF4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -92,6 +120,11 @@ public class DruidAutoConfiguration {
         return new Slf4jLogFilter();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter
+     *
+     * @return log4jFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_LOG4J_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -101,6 +134,11 @@ public class DruidAutoConfiguration {
         return new Log4jFilter();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter
+     *
+     * @return log4j2Filter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_LOG4J2_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -110,6 +148,11 @@ public class DruidAutoConfiguration {
         return new Log4j2Filter();
     }
 
+    /**
+     * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter
+     *
+     * @return commonsLogFilter
+     */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = DRUID_COMMONS_LOG_FILTER_PREFIX, name = "enabled", havingValue = "true")
@@ -117,6 +160,22 @@ public class DruidAutoConfiguration {
     public CommonsLogFilter commonsLogFilter() {
         log.debug("druid commons-log-filter init...");
         return new CommonsLogFilter();
+    }
+
+    /**
+     * https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8EncodingConvertFilter
+     * <p>
+     * 需要配合 connectionProperties 使用，clientEncoding=UTF-8;serverEncoding=ISO-8859-1
+     *
+     * @return encodingConvertFilter
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = DRUID_ENCODING_FILTER_PREFIX, name = "enabled", havingValue = "true")
+    @ConfigurationProperties(prefix = DRUID_ENCODING_FILTER_PREFIX)
+    public EncodingConvertFilter encodingConvertFilter() {
+        log.debug("druid encoding-convert-filter init...");
+        return new EncodingConvertFilter();
     }
 
 }

@@ -1,8 +1,8 @@
 package com.github.trang.druid.autoconfigure;
 
 import static java.util.Collections.emptyMap;
-import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -10,9 +10,9 @@ import java.util.stream.Stream.Builder;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
@@ -22,6 +22,7 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.StringUtils;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.trang.druid.autoconfigure.DruidDataSourceConfiguration.DruidDataSourceImportSelector;
@@ -39,10 +40,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DruidDataSourceConfiguration {
 
-    static final String BEAN_NAME = "dataSource";
-    static final String BEAN_SUFFIX = "DataSource";
-    static final String POINT = ".";
-    static final String PREFIX = "spring.datasource.druid.data-sources";
+    private static final String BEAN_NAME = "dataSource";
+    private static final String BEAN_SUFFIX = "DataSource";
+    private static final String PREFIX = "spring.datasource.druid.data-sources";
 
     /**
      * 单数据源注册
@@ -79,14 +79,14 @@ public class DruidDataSourceConfiguration {
         @Override
         public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
             this.dataSources.keySet().forEach(dataSourceName -> {
-                        // 注册 BeanDefinition
-                        String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
-                        registry.registerBeanDefinition(camelName, genericDruidBeanDefinition());
-                        // 注册以 DataSource 为后缀的别名
-                        if (!camelName.toLowerCase().endsWith(BEAN_SUFFIX.toLowerCase())) {
-                            registry.registerAlias(camelName, camelName + BEAN_SUFFIX);
-                        }
-                    });
+                // 注册 BeanDefinition
+                String camelName = CharMatcher.separatedToCamel().apply(dataSourceName);
+                registry.registerBeanDefinition(camelName, genericDruidBeanDefinition());
+                // 注册以 DataSource 为后缀的别名
+                if (!StringUtils.endsWithIgnoreCase(camelName, BEAN_SUFFIX)) {
+                    registry.registerAlias(camelName, camelName + BEAN_SUFFIX);
+                }
+            });
         }
 
     }
@@ -96,8 +96,8 @@ public class DruidDataSourceConfiguration {
      *
      * @return BeanDefinition druidBeanDefinition
      */
-    static BeanDefinition genericDruidBeanDefinition() {
-        return genericBeanDefinition(DruidDataSource2.class)
+    private static BeanDefinition genericDruidBeanDefinition() {
+        return BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource2.class)
                 .setInitMethodName("init")
                 .setDestroyMethodName("close")
                 .getBeanDefinition();
@@ -110,9 +110,13 @@ public class DruidDataSourceConfiguration {
      */
     static class DruidDataSourceBeanPostProcessor implements EnvironmentAware, BeanPostProcessor {
 
+        private final List<DruidDataSourceCustomizer> customizers;
         private Environment environment;
         private Map<String, Object> dataSources;
-        private List<DruidDataSourceCustomizer> customizers;
+
+        public DruidDataSourceBeanPostProcessor(ObjectProvider<List<DruidDataSourceCustomizer>> customizers) {
+            this.customizers = customizers.getIfAvailable(ArrayList::new);
+        }
 
         @Override
         public void setEnvironment(Environment environment) {
@@ -122,11 +126,6 @@ public class DruidDataSourceConfiguration {
                     .orElse(emptyMap());
         }
 
-        @Autowired
-        public void setCustomizers(ObjectProvider<List<DruidDataSourceCustomizer>> customizersProvider) {
-            this.customizers = customizersProvider.getIfAvailable();
-        }
-
         @Override
         public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
             if (bean instanceof DruidDataSource) {
@@ -134,19 +133,16 @@ public class DruidDataSourceConfiguration {
                 ((DruidDataSource) bean).setName(beanName);
                 // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
                 if (!dataSources.isEmpty()) {
-                    Binder.get(environment).bind(PREFIX + POINT + beanName, Bindable.ofInstance(bean));
+                    Binder.get(environment).bind(PREFIX + "." + beanName, Bindable.ofInstance(bean));
                 }
-                // 用户自定义配置
-                if (customizers != null && !customizers.isEmpty()) {
-                    for (DruidDataSourceCustomizer customizer : customizers) {
-                        customizer.customize((DruidDataSource) bean);
-                    }
+                // 用户自定义配置，拥有最高优先级
+                for (DruidDataSourceCustomizer customizer : customizers) {
+                    customizer.customize((DruidDataSource) bean);
                 }
-                boolean isSingle = BEAN_NAME.equals(beanName);
-                if (isSingle) {
-                    log.debug("druid data-source init...");
+                if (dataSources.isEmpty()) {
+                    log.debug("druid single data-source({}) init...", beanName);
                 } else {
-                    log.debug("druid {}-data-source init...", beanName);
+                    log.debug("druid dynamic data-source({}) init...", beanName);
                 }
             }
             return bean;
