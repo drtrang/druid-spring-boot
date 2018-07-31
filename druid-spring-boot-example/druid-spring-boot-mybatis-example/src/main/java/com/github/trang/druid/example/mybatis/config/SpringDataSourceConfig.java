@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SpringDataSourceConfig {
 
     /**
-     * 自定义 DruidDataSource，所有的数据源都会生效
+     * 定制化 DruidDataSource，所有的数据源都会生效
      *
      * @return druidDataSourceCustomizer
      */

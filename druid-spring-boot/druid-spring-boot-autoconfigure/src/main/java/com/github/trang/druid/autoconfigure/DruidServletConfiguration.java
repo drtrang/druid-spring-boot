@@ -38,7 +38,7 @@ public class DruidServletConfiguration {
      */
     @Bean
     public ServletRegistrationBean druidStatViewServlet(DruidDataSourceProperties druidProperties) {
-        log.debug("druid stat-view-servlet init...");
+        log.info("druid stat-view-servlet init...");
         DruidStatViewServletProperties properties = druidProperties.getStatViewServlet();
         ServletRegistrationBean<StatViewServlet> registration = new ServletRegistrationBean<>(new StatViewServlet());
         registration.addUrlMappings(properties.getUrlMappings());

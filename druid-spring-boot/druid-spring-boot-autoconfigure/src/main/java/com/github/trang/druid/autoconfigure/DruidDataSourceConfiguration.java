@@ -129,21 +129,20 @@ public class DruidDataSourceConfiguration {
         @Override
         public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
             if (bean instanceof DruidDataSource) {
+                if (dataSources.isEmpty()) {
+                    log.info("druid single data-source({}) init...", beanName);
+                } else {
+                    log.info("druid dynamic data-source({}) init...", beanName);
+                }
                 // 设置 Druid 名称
-                ((DruidDataSource) bean).setName(beanName);
+                DruidDataSource druidDataSource = (DruidDataSource) bean;
+                druidDataSource.setName(beanName);
                 // 将 'spring.datasource.druid.data-sources.${name}' 的配置绑定到 Bean
                 if (!dataSources.isEmpty()) {
-                    Binder.get(environment).bind(PREFIX + "." + beanName, Bindable.ofInstance(bean));
+                    Binder.get(environment).bind(PREFIX + "." + beanName, Bindable.ofInstance(druidDataSource));
                 }
-                // 用户自定义配置，拥有最高优先级
-                for (DruidDataSourceCustomizer customizer : customizers) {
-                    customizer.customize((DruidDataSource) bean);
-                }
-                if (dataSources.isEmpty()) {
-                    log.debug("druid single data-source({}) init...", beanName);
-                } else {
-                    log.debug("druid dynamic data-source({}) init...", beanName);
-                }
+                // 定制化配置，拥有最高优先级，会覆盖之前已有的配置
+                customizers.forEach(customizer -> customizer.customize(druidDataSource));
             }
             return bean;
         }

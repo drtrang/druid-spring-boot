@@ -59,7 +59,7 @@ public class DruidStatConfiguration {
 
         @Bean
         public DefaultAdvisorAutoProxyCreator druidStatProxy() {
-            log.debug("druid aop-stat init...");
+            log.info("druid aop-stat init...");
             DefaultAdvisorAutoProxyCreator druidStatProxyCreator = new DefaultAdvisorAutoProxyCreator();
             druidStatProxyCreator.setProxyTargetClass(proxyTargetClass);
             return druidStatProxyCreator;
@@ -80,7 +80,7 @@ public class DruidStatConfiguration {
 
         @Bean
         public FilterRegistrationBean druidWebStatFilter(DruidDataSourceProperties druidProperties) {
-            log.debug("druid web-stat-filter init...");
+            log.info("druid web-stat-filter init...");
             DruidWebStatProperties properties = druidProperties.getWebStat();
             FilterRegistrationBean<WebStatFilter> registration = new FilterRegistrationBean<>(new WebStatFilter());
             registration.addUrlPatterns(properties.getUrlPatterns());
