@@ -11,7 +11,7 @@
 
     <groupId>com.github.drtrang</groupId>
     <artifactId>druid-spring-boot2-parent</artifactId>
-    <version>1.1.10.2</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>druid-spring-boot2-parent</name>
@@ -22,8 +22,8 @@
 
     <developers>
         <developer>
-            <id>trang</id>
-            <name>trang</name>
+            <id>Trang</id>
+            <name>donghaoliang</name>
             <email>donghao.l@hotmail.com</email>
             <timezone>+8</timezone>
             <url>http://blog.trang.space/</url>
@@ -56,27 +56,37 @@
         <module>druid-spring-boot-example</module>
     </modules>
 
+    <properties>
+        <revision>1.1.20</revision>
+        <druid.version>1.1.20</druid.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
                 <artifactId>druid-spring-boot2-autoconfigure</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
                 <artifactId>druid-spring-boot2-starter</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
                 <artifactId>druid-spring-boot2-actuator-autoconfigure</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.drtrang</groupId>
                 <artifactId>druid-spring-boot2-actuator-starter</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
