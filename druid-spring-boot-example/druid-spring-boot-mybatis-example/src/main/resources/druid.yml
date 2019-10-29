@@ -14,7 +14,7 @@ spring:
       min-idle: 0
       max-wait: -1
       not-full-timeout-retry-count: 0
-      validation-query: SELECT 1
+      validation-query: SELECT 'x'
       validation-query-timeout: -1
       test-while-idle: true
       test-on-borrow: false

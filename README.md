@@ -71,7 +71,7 @@ spring:
     druid:
       max-wait: 30000
       query-timeout: 10
-      validation-query: SELECT 1
+      validation-query: SELECT 'x'
       use-global-data-source-stat: true
 ```
 

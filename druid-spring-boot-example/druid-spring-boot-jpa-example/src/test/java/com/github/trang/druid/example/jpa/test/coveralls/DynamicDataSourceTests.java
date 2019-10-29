@@ -40,7 +40,7 @@ public class DynamicDataSourceTests extends BaseTest {
         assertEquals(60000, masterDataSource.getTimeBetweenEvictionRunsMillis());
         assertEquals(1800000, masterDataSource.getMinEvictableIdleTimeMillis());
         assertEquals(25200000, masterDataSource.getMaxEvictableIdleTimeMillis());
-        assertEquals("SELECT 1", masterDataSource.getValidationQuery());
+        assertEquals("SELECT 'x'", masterDataSource.getValidationQuery());
         assertEquals(true, masterDataSource.isTestWhileIdle());
         assertEquals(false, masterDataSource.isTestOnBorrow());
         assertEquals(false, masterDataSource.isTestOnReturn());
@@ -57,7 +57,7 @@ public class DynamicDataSourceTests extends BaseTest {
         assertEquals(60000, slaveDataSource.getTimeBetweenEvictionRunsMillis());
         assertEquals(1800000, slaveDataSource.getMinEvictableIdleTimeMillis());
         assertEquals(25200000, slaveDataSource.getMaxEvictableIdleTimeMillis());
-        assertEquals("SELECT 1", slaveDataSource.getValidationQuery());
+        assertEquals("SELECT 'x'", slaveDataSource.getValidationQuery());
         assertEquals(true, slaveDataSource.isTestWhileIdle());
         assertEquals(false, slaveDataSource.isTestOnBorrow());
         assertEquals(false, slaveDataSource.isTestOnReturn());

@@ -28,7 +28,7 @@ public class SingleDataSourceTests extends BaseTest {
         assertEquals(60000, dataSource.getTimeBetweenEvictionRunsMillis());
         assertEquals(1800000, dataSource.getMinEvictableIdleTimeMillis());
         assertEquals(25200000, dataSource.getMaxEvictableIdleTimeMillis());
-        assertEquals("SELECT 1", dataSource.getValidationQuery());
+        assertEquals("SELECT 'x'", dataSource.getValidationQuery());
         assertEquals(true, dataSource.isTestWhileIdle());
         assertEquals(false, dataSource.isTestOnBorrow());
         assertEquals(false, dataSource.isTestOnReturn());
