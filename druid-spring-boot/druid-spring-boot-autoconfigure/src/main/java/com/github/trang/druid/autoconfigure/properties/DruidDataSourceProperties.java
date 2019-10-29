@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
@@ -27,23 +26,18 @@ public class DruidDataSourceProperties {
     Map<String, DruidDataSource> dataSources = new HashMap<>();
 
     /** druid encoding-filter 配置 */
-    @NestedConfigurationProperty
     DruidEncodingFilterProperties encoding = new DruidEncodingFilterProperties();
 
     /** druid config-filter 配置 */
-    @NestedConfigurationProperty
     DruidConfigFilterProperties config = new DruidConfigFilterProperties();
 
     /** druid stat-view-servlet 配置 */
-    @NestedConfigurationProperty
     DruidStatViewServletProperties statViewServlet = new DruidStatViewServletProperties();
 
     /** druid web-stat 配置 */
-    @NestedConfigurationProperty
     DruidWebStatProperties webStat = new DruidWebStatProperties();
 
     /** druid aop-stat 配置 */
-    @NestedConfigurationProperty
     DruidAopStatProperties aopStat = new DruidAopStatProperties();
 
     @Getter
