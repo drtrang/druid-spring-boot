@@ -2,7 +2,6 @@ language: java
 dist: trusty
 jdk:
   - oraclejdk8
-  - openjdk11
 sudo: false
 install: false
 cache:
