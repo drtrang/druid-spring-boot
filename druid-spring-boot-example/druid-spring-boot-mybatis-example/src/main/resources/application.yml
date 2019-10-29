@@ -14,7 +14,7 @@ spring:
     name: druid-spring-boot2-mybatis-example
   profiles:
     # 默认环境为 default，多数据源演示请改为 dynamic
-#     active: dynamic
+    # active: dynamic
     active: default
   h2:
     console:
@@ -93,13 +93,6 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     log-prefix: executableSql.
-
----
-
-debug: false
-
-spring:
-  profiles: default
 
 ---
 
