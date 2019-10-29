@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/drtrang/druid-spring-boot/boot2.svg?style=flat-square)](https://www.travis-ci.org/drtrang/druid-spring-boot)
 [![Coverage Status](https://img.shields.io/coveralls/drtrang/druid-spring-boot/boot2.svg?style=flat-square)](https://coveralls.io/github/drtrang/druid-spring-boot?branch=boot2)
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.drtrang/druid-spring-boot.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.github.drtrang/druid-spring-boot)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.drtrang/druid-spring-boot2.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.github.drtrang/druid-spring-boot2)
 [![GitHub Release](https://img.shields.io/github/release/drtrang/druid-spring-boot.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/releases)
 [![License](http://img.shields.io/badge/license-apache%202-blue.svg?style=flat-square)](https://github.com/drtrang/druid-spring-boot/blob/boot2/LICENSE)
 
