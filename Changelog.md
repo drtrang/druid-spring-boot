@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.20
+### Breaking changes and deprecations
+* spring-boot 依赖作为可选项，不再传递到下游，以避免依赖冲突
+
+### New features and improvements
+* druid 更新到 1.1.20
+* 代码示例中用 `SELECT 'x'` 代替 `SELECT 1`
+* 移除无用的 `default` profile
+* [用 `revision` 来表示 project.version](https://maven.apache.org/maven-ci-friendly.html)，依赖 maven 3.5.0+
+
+
 ## 1.1.10
 ### Enhancements
 1. 升级 parent 版本到 1.2.2
