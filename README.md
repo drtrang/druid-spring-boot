@@ -11,18 +11,6 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
 ## 依赖
 ```xml
-<!-- spring boot 1.x -->
-<dependency>
-    <groupId>com.github.drtrang</groupId>
-    <artifactId>druid-spring-boot-starter</artifactId>
-    <version>1.1.20</version>
-</dependency>
-<dependency>
-    <groupId>com.github.drtrang</groupId>
-    <artifactId>druid-spring-boot-actuator-starter</artifactId>
-    <version>1.1.20</version>
-</dependency>
-
 <!-- spring boot 2.x -->
 <dependency>
     <groupId>com.github.drtrang</groupId>
@@ -42,7 +30,8 @@ Druid Spring Boot Starter 将帮助你在 Spring Boot 中使用 Druid。
 
 
 ## NEW !
-1. 基于 Spring Boot 2 开发的全新 starter，与之前功能完全一致
+1. *基于 Spring Boot 1.x 的 druid starter 已停止维护*
+1. 基于 Spring Boot 2.x 开发的全新 starter，与之前功能完全一致
 2. 改进多数据源的声明方式，由 Starter 自动发现配置并注册到 ApplicationContext，详情请查看 [Druid 多数据源支持.md](https://github.com/drtrang/druid-spring-boot/tree/boot2/docs/Druid%20%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%94%AF%E6%8C%81.md)
 3. 新增全配置说明 [druid.yml](https://github.com/drtrang/druid-spring-boot/blob/boot2/druid-spring-boot2-example/druid-spring-boot2-mybatis-example/src/main/resources/druid.yml)
 
